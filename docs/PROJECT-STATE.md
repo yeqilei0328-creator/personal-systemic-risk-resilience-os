@@ -109,7 +109,7 @@ Current aggregate checkpoint:
 - private Energy baseline exists and remains `stated`; field evidence pending;
 - no Water/Energy autonomy claim is permitted yet;
 - Preparedness remains fail-closed until required domains and critical capabilities are sufficiently verified;
-- next engineering domain: **Communications / Network / Offline Compute Resilience**.
+- current engineering node: **Phase 3C-03 Communications / Network / Offline Compute Resilience Method v0.1**.
 
 The public repository remains method-only. Real operational values stay in the separate private state layer.
 
