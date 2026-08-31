@@ -104,14 +104,26 @@ Principle:
 
 The existing news-push conversation remains the user-facing presentation layer. The current priority is to upgrade the backend World Intelligence Engine from conceptual Draft 0.2 into a stateful, precise systemic-risk radar before continuing deeper physical-capability audits.
 
-Priority focus:
-- source/evidence precision;
-- event fingerprinting and dedup;
-- behavior vs rhetoric;
-- counterevidence/falsification;
-- A/B/C/D edge and coupling deltas;
+Phase 3R-00 and 3R-00A are complete.
+
+The canonical operational baseline is now the reconciled China Intelligence / Physical AI / Global Risk Resonance V0.3 specification. Phase 3R is explicitly an engineering upgrade around that working logic, not a redesign.
+
+Next node: **R1 — Source / Evidence Persistence**.
+
+Priority sequence:
+- Source Registry + Source Reputation Ledger;
+- source independence / derivative lineage / access failures;
+- Event + Claim durable state;
+- Material Change and event fingerprints;
+- Behavior/System structural deltas;
 - alert suppression/hysteresis;
+- Judgment Ledger / posterior learning;
 - first Chain Watch: climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation.
+
+Namespace rule:
+- `Claim Grade A-D` = epistemic confidence;
+- `Risk Variable A-D` = systemic first-order variables;
+- bare A/B/C/D is prohibited where ambiguous.
 
 ### Phase 3C — Capability Verification & Baseline Completion — PAUSED AFTER CLEAN CHECKPOINT
 

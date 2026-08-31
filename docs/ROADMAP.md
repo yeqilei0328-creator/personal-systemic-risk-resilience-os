@@ -40,15 +40,64 @@ Separate private operational-state layer established, pinned to public method ve
 
 ### Phase 3R — Radar Precision Upgrade v0.1 — CURRENT PRIORITY
 
-- [ ] Source registry / source quality / provenance
+#### R00 — Preserve existing radar — COMPLETE
+- [x] Existing news-push conversation retained as presentation layer
+- [x] Existing implicit radar baseline captured
+- [x] Physical AI Radar / Technology Radar handoff contract established
+
+#### R00A — Reconcile original V0.3 runtime specification — COMPLETE
+- [x] V0.3 source artifact imported
+- [x] T0/T1/T2, Claim types, Claim Grade A-D, Material Change, Source Reputation Ledger preserved
+- [x] Costly Signal / Rhetoric–Action Gap / Narrative Gap / Counter-evidence preserved
+- [x] Judgment Ledger / Posterior Revision preserved
+- [x] Physical AI maturity/evidence/action-tag semantics reconciled
+- [x] Five Global Risk signals mapped as observation channels
+- [x] Legacy Global Systemic Risk Index reconciled with Stage/Coupling/Buffer architecture
+- [x] P0-P3 restored as canonical news-importance axis
+
+#### R1 — Source / Evidence Persistence — NEXT
+- [ ] Source Registry schema/store
+- [ ] Source Reputation Ledger schema/store
+- [ ] source independence / derivative lineage
+- [ ] Access Failure state
+- [ ] Source Concentration Gate
+- [ ] claim-level provenance
+- [ ] Claim Grade namespace hardening
+
+#### R2 — Event / Claim State
+- [ ] Event Store
+- [ ] Claim Store
 - [ ] Event fingerprint / clustering / dedup
-- [ ] Behavior vs rhetoric / directionality
+- [ ] Material Change detector
+- [ ] dynamic-number timestamp discipline
+
+#### R3 — Behavior / System Delta
+- [ ] Costly Signal state
+- [ ] Rhetoric–Action Gap
+- [ ] Narrative Gap
 - [ ] Counterevidence / falsification
-- [ ] Edge / Coupling / Buffer / Scenario delta tracking
-- [ ] Alert gate / suppression / hysteresis
-- [ ] Chain Watch: climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation
+- [ ] Risk Variable / Edge / Coupling / Buffer / Scenario delta tracking
+
+#### R4 — Precision Alert Gate
+- [ ] P0-P3 gate implementation
+- [ ] Trigger A/B/C compatibility rules
+- [ ] duplicate suppression / cooldown / hysteresis
+- [ ] "no substantive change = no notification"
+
+#### R5 — Judgment Memory / Learning
+- [ ] Judgment Ledger
+- [ ] Alert History
+- [ ] Posterior Revision
+- [ ] source + judgment calibration
+
+#### R6 — Chain Watch
+- [ ] climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation
+- [ ] chain-state persistence
+- [ ] fact / forecast / correlation / causality / counterevidence per link
+
+#### R7 — Replay / Red Team
 - [ ] Synthetic replay tests for duplicate, worsening, improvement, falsification
-- [ ] Existing news-push conversation retained as presentation layer
+- [ ] false-positive / false-negative review
 
 ### Phase 3C — Capability Verification & Baseline Completion — PAUSED AFTER CLEAN CHECKPOINT
 

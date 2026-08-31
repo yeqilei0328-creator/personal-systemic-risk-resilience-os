@@ -1,77 +1,179 @@
-# World Intelligence Engine — Radar Precision Upgrade v0.1
+# World Intelligence Engine — Phase 3R
 
-## Objective
+## Status
 
-精准捕捉“改变判断”的全球事件，而不是制造坏消息流。
+**Operational baseline preserved and reconciled.**
 
-现有新闻推送对话继续作为用户前台。升级重点放在后台判断、状态记忆、去重、耦合变化与精准告警。
+Canonical baseline:
+- `docs/reference/CHINA_INTELLIGENCE_PUSH_AND_RUNTIME_ARCHITECTURE_V0.3.md`
+- `docs/NEWS-RADAR-BASELINE.md`
+- `docs/NEWS-RADAR-V0.3-RECONCILIATION.md`
 
-## Preserve
+The existing news-push conversation remains the user-facing product.
 
-- P0 / P1 / P2
-- Physical AI Radar
-- 前台简洁结论
-- 后台 Evidence · Behavior · Systems
-- “没有改变判断的新闻，不应该打扰用户”
+Phase 3R does **not** redesign the recommendation logic. It turns the already-working V0.3 logic into a stateful, replayable Intelligence OS.
 
-## Input domains
+## Preserved V0.3 operating logic
 
-- 地缘政治与军事冲突
-- 能源、粮食、水与航运
-- 财政、主权债务、利率、房地产、银行与资本流动
-- 气候、厄尔尼诺、自然灾害
-- AI CapEx、估值、融资、技术周期
-- 全球贸易、供应链、资本体系
-- 社会动荡、治理变化
-- Physical AI Radar
+- Multi-source Discovery
+- Candidate Event Pool
+- Cluster / Deduplicate
+- Atomic Claim Split
+- Evidence Acquisition
+- Independence / Provenance
+- Claim Grade A-D
+- Evidence · Behavior · Systems
+- Costly Signal
+- Rhetoric–Action Gap
+- Narrative Gap
+- Counter-evidence
+- Material Change
+- P0-P3
+- Physical AI engineering relevance
+- Global Risk Resonance
+- Judgment Ledger
+- Posterior Revision
+- No-push discipline
 
-## Target pipeline
+## Canonical runtime pipeline
 
-Discovery
-→ Event Fingerprint / Dedup
-→ Source Quality / Provenance
-→ Claim Split
-→ Fact / Forecast / Correlation / Causality / Opinion
-→ Behavior vs Rhetoric
-→ Counterevidence / Falsification
-→ Four-Source Mapping (A/B/C/D)
-→ Edge Delta
-→ Coupling Delta
-→ Buffer Delta
-→ Scenario Delta
-→ Personal Exposure / Lead-Time Delta
-→ Alert Gate
-→ Existing news-push conversation
+`Discovery`
+→ `Candidate Event Pool`
+→ `Event Fingerprint / Cluster / Dedup`
+→ `Atomic Claims`
+→ `Evidence / Provenance / Source Lineage`
+→ `Claim Grade`
+→ `Evidence · Behavior · Systems`
+→ `Material Change`
+→ `Risk / Engineering Relevance`
+→ `Structural Delta`
+→ `Alert Gate`
+→ `Front-end Compression`
+→ `Judgment Ledger`
+→ `Posterior Revision`
 
-## Precision alert gate
+## Time windows
 
-默认只在以下条件之一成立时通知：
-- P0 must-know 事件；
-- 多环节同步恶化；
-- 新的或更强 validated edge；
-- Coupling Density 有实质改变；
-- feedback-loop candidate 强化/削弱；
-- Buffer 明显耗尽或恢复；
-- Scenario probability / velocity / Lead Time 有实质变化；
-- Global Stage / Personal R-Level 改变；
-- 关键假设被证伪；
-- Action Playbook 需要改变。
+- T0: 0-24h
+- T1: 3-15d
+- T2: 30-90d
 
-其余更新进入状态存储，不主动打扰。
+The system must compare across windows rather than treating every 24h headline as new.
 
-## Alert suppression
+## Namespace discipline
 
-必须具备：
-- duplicate suppression
-- update-vs-new-event detection
-- cooldown
-- material-change threshold
-- hysteresis around thresholds
-- explicit “no substantive change = no notification”
+Two unrelated A/B/C/D systems exist:
 
-## Chain Watch v0.1
+### Claim Grade A-D
+Epistemic confidence.
 
-第一条显式共振链：
+### Risk Variable A-D
+- A Geopolitical Competition
+- B Resource & Climate Constraints
+- C Debt & Financial Cycle
+- D Technology & Capital Cycle
+
+Never write bare A/B/C/D where the namespace is ambiguous.
+
+## Persistent objects
+
+Phase 3R should build, in order:
+
+1. Source Registry
+2. Source Reputation Ledger
+3. Event Store
+4. Claim Store
+5. Evidence Graph
+6. Judgment Ledger
+7. Alert History
+8. System State Graph
+9. Risk Coupling Graph
+
+Physical AI Tech Radar remains authoritative inside the Physical AI project.
+
+## R1 — Source / Evidence Persistence
+
+First implementation node.
+
+Must support:
+- source identity;
+- source class/tier;
+- domain × claim-type reputation;
+- primary/secondary/derivative lineage;
+- independent-source grouping;
+- access status/paywall/robots/partial-read;
+- correction history;
+- anonymous-source dependence;
+- claim-level provenance;
+- source concentration;
+- timestamps and freshness.
+
+Low-reputation sources are not globally banned; they may still serve narrative/anomaly discovery while being unable to independently upgrade facts.
+
+## R2 — Event / Claim State
+
+Persist:
+- stable event fingerprint;
+- first_seen / last_updated;
+- cluster identity;
+- atomic claims;
+- claim type;
+- dynamic-number timestamp/source/confidence;
+- Material Change;
+- update-vs-new-event relation.
+
+## R3 — Behavior / System Delta
+
+Persist:
+- observable behavior;
+- costly-signal dimensions;
+- rhetoric-action gap;
+- narrative gap;
+- counterevidence;
+- omitted-variable candidates;
+- Risk Variable mapping;
+- Edge delta;
+- Coupling delta;
+- Buffer delta;
+- Scenario delta.
+
+The five V0.3 Global Risk signals remain observation channels, not five independent causal votes.
+
+## R4 — Precision alert gate
+
+Preserve:
+- P0-P3;
+- Trigger A/B/C;
+- no-push discipline.
+
+Add:
+- common-cause correction;
+- model-state delta;
+- cooldown;
+- hysteresis;
+- material-change minimum;
+- duplicate suppression.
+
+Default:
+**no substantive change = no notification**.
+
+## R5 — Judgment memory
+
+The radar must remember:
+- what it believed then;
+- why;
+- source limitations;
+- predicted paths;
+- watch signals;
+- later result;
+- posterior update;
+- error type.
+
+This supports calibration of both sources and the system itself.
+
+## R6 — Chain Watch
+
+First tracked chain:
 
 Climate / El Niño
 → Food & Energy
@@ -80,25 +182,39 @@ Climate / El Niño
 → UST 10Y / 30Y + Financial Conditions / Fiscal Pressure
 → AI CapEx / Tech Valuation / Financing Stress
 
-每一环必须区分：
+Every link tracks:
 - Fact
 - Forecast
 - Correlation
 - Causality
 - Counterevidence
+- Material Delta
 
-输出的是链条状态变化，不是孤立头条。
+## Physical AI branch
 
-## Output contract
+Physical AI remains a fixed module in the user-facing intelligence product.
 
-前台告警回答：
-1. 发生了什么变化？
-2. 哪条边/链发生变化？
-3. 为什么重要？
-4. 哪些关键部分仍未证实？
-5. 有什么反证/缓冲？
-6. Global Stage 是否变化？
-7. Personal action 是否变化？
-8. 下一个升级/降级信号是什么？
+Project-relevant signal flow:
 
-Keep concise.
+`Active discovery | User-supplied observation`
+→ verify / dedup / cluster / compress
+→ news-side Action Tag
+→ project handoff request
+→ TECH-RADAR-04 admission
+→ existing Physical AI Technology Radar governance
+
+News-side Action Tags do not grant engineering authority.
+
+See `docs/PHYSICAL-AI-RADAR-INTEGRATION.md`.
+
+## Front-end contract
+
+Preserve simplicity:
+- max ~3 top judgments;
+- P0-P2 output;
+- event = what happened / judgment / why it matters / next observable;
+- optional dispute/uncertainty;
+- Physical AI only when engineering-relevant;
+- Global Risk condition watch remains normally silent.
+
+Backend complexity is a filtering mechanism, not a UI requirement.
