@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/rhetoric-action-gap.schema.json",
+  "title": "Rhetoric Action Gap",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "gap_id",
+    "event_id",
+    "actor",
+    "rhetoric_claim_ids",
+    "behavior_signal_ids",
+    "rhetoric_direction",
+    "behavior_direction",
+    "gap_direction",
+    "assessment",
+    "limitations",
+    "evidence_ids",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "gap_id": {
+      "type": "string",
+      "pattern": "^rag-[A-Za-z0-9._-]+$"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[A-Za-z0-9._-]+$"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rhetoric_claim_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^clm-[A-Za-z0-9._-]+$"
+      }
+    },
+    "behavior_signal_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^beh-[A-Za-z0-9._-]+$"
+      }
+    },
+    "rhetoric_direction": {
+      "enum": [
+        "easing",
+        "neutral",
+        "intensifying",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "behavior_direction": {
+      "enum": [
+        "easing",
+        "neutral",
+        "intensifying",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "gap_direction": {
+      "enum": [
+        "rhetoric_more_intensifying",
+        "behavior_more_intensifying",
+        "aligned",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "assessment": {
+      "type": "string",
+      "minLength": 1
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
