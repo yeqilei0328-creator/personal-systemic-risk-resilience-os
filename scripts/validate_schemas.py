@@ -40,6 +40,11 @@ PAIRS = {
     "intelligence_output_candidate": ("schemas/intelligence-output-candidate.schema.json", "examples/synthetic/intelligence-output-candidate.json"),
     "intelligence_output_gate_context": ("schemas/intelligence-output-gate-context.schema.json", "examples/synthetic/intelligence-output-gate-context.json"),
     "intelligence_output_decision": ("schemas/intelligence-output-decision.schema.json", "examples/synthetic/intelligence-output-decision.json"),
+    "judgment_ledger_record": ("schemas/judgment-ledger-record.schema.json", "examples/synthetic/judgment-ledger-record.json"),
+    "judgment_outcome_record": ("schemas/judgment-outcome-record.schema.json", "examples/synthetic/judgment-outcome-record.json"),
+    "posterior_revision": ("schemas/posterior-revision.schema.json", "examples/synthetic/posterior-revision.json"),
+    "alert_history_record": ("schemas/alert-history-record.schema.json", "examples/synthetic/alert-history-record.json"),
+    "judgment_calibration_summary": ("schemas/judgment-calibration-summary.schema.json", "examples/synthetic/judgment-calibration-summary.json"),
 }
 
 def load(path):
@@ -177,6 +182,38 @@ def semantic_errors(name, obj):
             errors.append("SUPPRESS decision requires a suppression code")
         if obj["next_eligible_at"] is not None and "COOLDOWN" not in obj["suppression_codes"]:
             errors.append("next_eligible_at is only valid for cooldown suppression")
+    elif name == "judgment_ledger_record":
+        refs = obj["subject_refs"]
+        if not any(refs.values()):
+            errors.append("judgment must reference at least one event/claim/edge/scenario")
+    elif name == "judgment_outcome_record":
+        if obj["outcome_status"] == "resolved" and not obj["later_result"]:
+            errors.append("resolved judgment outcome requires later_result")
+        if "none" in obj["error_types"] and len(obj["error_types"]) > 1:
+            errors.append("error_types=none cannot coexist with other errors")
+        if obj["previous_outcome_id"] == obj["outcome_id"]:
+            errors.append("previous_outcome_id cannot self-reference")
+    elif name == "posterior_revision":
+        if obj["direction"] == "falsified":
+            if not obj["refuting_evidence_ids"] and not obj["counterevidence_assessment_ids"]:
+                errors.append("falsified posterior requires refuting evidence or counterevidence assessment")
+    elif name == "alert_history_record":
+        if obj["outcome"] == "EMIT":
+            if not obj["trigger_codes"]:
+                errors.append("EMIT alert history requires trigger_codes")
+            if obj["suppression_codes"]:
+                errors.append("EMIT alert history cannot contain suppression_codes")
+        else:
+            if not obj["suppression_codes"]:
+                errors.append("SUPPRESS alert history requires suppression_codes")
+    elif name == "judgment_calibration_summary":
+        total = obj["total_count"]
+        if obj["resolved_count"] + obj["partially_resolved_count"] + obj["unresolved_count"] != total:
+            errors.append("calibration outcome counts must sum to total_count")
+        if len(obj["judgment_ids"]) != total:
+            errors.append("calibration must contain one latest judgment_id per total_count")
+        if len(obj["outcome_ids"]) != total:
+            errors.append("calibration must contain one selected outcome_id per total_count")
     elif name == "structural_delta":
         h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
         c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}

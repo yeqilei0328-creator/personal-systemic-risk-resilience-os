@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/judgment-outcome-record.schema.json",
+  "title": "Judgment Outcome Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "outcome_id",
+    "judgment_id",
+    "previous_outcome_id",
+    "evaluated_at",
+    "outcome_status",
+    "later_result",
+    "error_types",
+    "posterior_revision_ids",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "outcome_id": {
+      "type": "string",
+      "pattern": "^jot-[A-Za-z0-9._-]+$"
+    },
+    "judgment_id": {
+      "type": "string",
+      "pattern": "^jdg-[A-Za-z0-9._-]+$"
+    },
+    "previous_outcome_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^jot-[A-Za-z0-9._-]+$"
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "outcome_status": {
+      "enum": [
+        "unresolved",
+        "partially_resolved",
+        "resolved"
+      ]
+    },
+    "later_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "error_types": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "none",
+          "source_error",
+          "overreaction",
+          "underreaction",
+          "timing_error",
+          "omitted_variable",
+          "correlation_as_causality",
+          "rhetoric_overweight",
+          "technology_maturity_overestimate",
+          "execution_delay",
+          "unknown"
+        ]
+      }
+    },
+    "posterior_revision_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^prv-[A-Za-z0-9._-]+$"
+      }
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

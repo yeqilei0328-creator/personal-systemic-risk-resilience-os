@@ -80,18 +80,19 @@ Separate private operational-state layer established, pinned to public method ve
 - [x] Counterevidence / falsification
 - [x] Risk Variable / Edge / Coupling / Buffer / Scenario delta tracking
 
-#### R4 — Precision Alert Gate — CURRENT
-- [~] P0-P3 gate implementation
-- [~] Trigger A/B/C compatibility rules
-- [~] duplicate suppression / cooldown / hysteresis
-- [~] "no substantive change = no notification"
-- [~] scheduled brief vs interrupt alert separation
+#### R4 — Precision Alert Gate — COMPLETE
+- [x] P0-P3 gate implementation
+- [x] Trigger A/B/C compatibility rules
+- [x] duplicate suppression / cooldown / hysteresis
+- [x] "no substantive change = no notification"
+- [x] scheduled brief vs interrupt alert separation
 
-#### R5 — Judgment Memory / Learning
-- [ ] Judgment Ledger
-- [ ] Alert History
-- [ ] Posterior Revision
-- [ ] source + judgment calibration
+#### R5 — Judgment Memory / Learning — CURRENT
+- [~] immutable Judgment Ledger
+- [~] append-only Judgment Outcome history
+- [~] Alert History
+- [~] Posterior Revision
+- [~] source + judgment calibration
 
 #### R6 — Chain Watch
 - [ ] climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation

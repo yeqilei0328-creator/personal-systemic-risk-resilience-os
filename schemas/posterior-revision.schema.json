@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/posterior-revision.schema.json",
+  "title": "Posterior Revision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "revision_id",
+    "judgment_id",
+    "claim_id",
+    "new_evidence_ids",
+    "refuting_evidence_ids",
+    "source_reputation_refs",
+    "counterevidence_assessment_ids",
+    "prior_state",
+    "posterior_state",
+    "direction",
+    "rationale",
+    "created_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^prv-[A-Za-z0-9._-]+$"
+    },
+    "judgment_id": {
+      "type": "string",
+      "pattern": "^jdg-[A-Za-z0-9._-]+$"
+    },
+    "claim_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^clm-[A-Za-z0-9._-]+$"
+    },
+    "new_evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "refuting_evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "source_reputation_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^rep-[A-Za-z0-9._-]+$"
+      }
+    },
+    "counterevidence_assessment_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^hya-[A-Za-z0-9._-]+$"
+      }
+    },
+    "prior_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_grade",
+        "finding_summary"
+      ],
+      "properties": {
+        "claim_grade": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            null
+          ]
+        },
+        "finding_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "posterior_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_grade",
+        "finding_summary"
+      ],
+      "properties": {
+        "claim_grade": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            null
+          ]
+        },
+        "finding_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "direction": {
+      "enum": [
+        "strengthen",
+        "weaken",
+        "unchanged",
+        "falsified",
+        "reclassified",
+        "unknown"
+      ]
+    },
+    "rationale": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

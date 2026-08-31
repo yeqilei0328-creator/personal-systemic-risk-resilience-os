@@ -1,3 +1,8 @@
+from .intelligence_memory import (
+    JudgmentMemoryStore,
+    claim_grade_changed,
+    summarize_judgment_calibration,
+)
 from .intelligence_output import (
     decide_output_gate,
     output_state_signature,
@@ -35,6 +40,9 @@ from .quantification import (
 )
 
 __all__ = [
+    "JudgmentMemoryStore",
+    "claim_grade_changed",
+    "summarize_judgment_calibration",
     "decide_output_gate",
     "output_state_signature",
     "assess_costly_signal",
