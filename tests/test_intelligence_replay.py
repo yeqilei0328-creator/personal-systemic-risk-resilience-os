@@ -420,6 +420,173 @@ class ReplaySummaryTests(unittest.TestCase):
         self.assertEqual(summary["deescalation_falsification_failure_count"], 1)
         self.assertNotIn("accuracy_score", summary)
 
+
+    def test_required_13_case_redteam_suite_matches_exit_fixture(self):
+        results = []
+
+        # 1. Three reposts remain one origin and cannot manufacture transmission.
+        observations = [
+            source_observation("sob-r1", "src-origin", "original", "origin-1"),
+            source_observation("sob-r2", "src-copy-a", "repost", "origin-1", "sob-r1"),
+            source_observation("sob-r3", "src-copy-b", "syndication", "origin-1", "sob-r1"),
+        ]
+        concentration = assess_source_concentration(observations)
+        self.assertEqual(concentration["state"], "SINGLE_ORIGIN")
+        c = worsen_three(base_candidate())
+        c["structural_delta_material"] = True
+        d = decide_output_gate(c, context())
+        results.append(replay_result(d, 101, "derivative_source", False, "NO_TRIGGER"))
+
+        # 2. Three worsening channels without validated transmission remain silent.
+        c = worsen_three(base_candidate())
+        c["structural_delta_material"] = True
+        d = decide_output_gate(c, context())
+        results.append(replay_result(d, 102, "false_resonance", False, "NO_TRIGGER"))
+
+        # 3. Persistent true Trigger-A resonance emits.
+        c = worsen_three(base_candidate())
+        c["structural_delta_material"] = True
+        c["validated_cross_system_transmission"] = True
+        d = decide_output_gate(c, context(applicable=True, count=2, required=2))
+        results.append(replay_result(d, 103, "true_resonance", True, "TRIGGER_A_RESONANCE"))
+
+        # 4. Exact duplicate state suppresses.
+        c = base_candidate(priority="P0")
+        d = decide_output_gate(c, context(previous=output_state_signature(c)))
+        results.append(replay_result(d, 104, "duplicate", False, "DUPLICATE_STATE"))
+
+        # 5. P3 material item remains silent in scheduled brief.
+        d = decide_output_gate(
+            base_candidate(mode="scheduled_brief", priority="P3"),
+            context(),
+        )
+        results.append(replay_result(d, 105, "p3_silent", False, "P3_SILENT"))
+
+        # 6. P2 material item appears in scheduled brief.
+        d = decide_output_gate(
+            base_candidate(mode="scheduled_brief", priority="P2"),
+            context(),
+        )
+        results.append(replay_result(d, 106, "scheduled_brief", True, "SCHEDULED_MATERIAL_ITEM"))
+
+        # 7. Explicit hypothesis falsification emits.
+        c = base_candidate()
+        c["hypothesis_falsified"] = True
+        d = decide_output_gate(c, context())
+        results.append(replay_result(d, 107, "falsification", True, "HYPOTHESIS_FALSIFIED"))
+
+        # 8. Material improvement can emit instead of only reporting deterioration.
+        c = base_candidate()
+        c["global_stage_change"] = True
+        c["global_stage_direction"] = "improve"
+        d = decide_output_gate(c, context())
+        results.append(replay_result(d, 108, "improvement", True, "GLOBAL_STAGE_CHANGE"))
+
+        # 9. Full evidence-backed chain is TRANSMITTING and can support Trigger A.
+        chain = chain_definition()
+        chain_snapshot = build_chain_snapshot(
+            chain,
+            chain_assessments(),
+            snapshot_id="chs-redteam-full",
+        )
+        self.assertEqual(chain_snapshot["chain_state"], "TRANSMITTING")
+        c = worsen_three(base_candidate())
+        c["structural_delta_material"] = True
+        c["validated_cross_system_transmission"] = True
+        d = decide_output_gate(c, context(applicable=True, count=2, required=2))
+        results.append(replay_result(d, 109, "true_resonance", True, "TRIGGER_A_RESONANCE"))
+
+        # 10. Required Hx breaks the chain and follows the falsification alert path.
+        rows = chain_assessments()
+        rows[1]["h_state"] = "Hx"
+        rows[1]["direction"] = "falsified"
+        rows[1]["epistemic_counts"]["causality"] = 0
+        rows[1]["supporting_evidence_ids"] = []
+        broken = build_chain_snapshot(
+            chain,
+            rows,
+            snapshot_id="chs-redteam-broken",
+        )
+        self.assertEqual(broken["chain_state"], "BROKEN")
+        c = base_candidate()
+        c["hypothesis_falsified"] = True
+        d = decide_output_gate(c, context())
+        results.append(replay_result(d, 110, "chain_break", True, "HYPOTHESIS_FALSIFIED"))
+
+        # 11. Previously active chain can relax, and material improvement is surfaced.
+        previous = build_chain_snapshot(
+            chain,
+            chain_assessments(),
+            snapshot_id="chs-redteam-previous",
+        )
+        relaxing_rows = chain_assessments(h="H1", causality=0, direction="weakening")
+        relaxing = build_chain_snapshot(
+            chain,
+            relaxing_rows,
+            snapshot_id="chs-redteam-relaxing",
+            previous_snapshot=previous,
+        )
+        self.assertEqual(relaxing["chain_state"], "RELAXING")
+        c = base_candidate()
+        c["global_stage_change"] = True
+        c["global_stage_direction"] = "improve"
+        d = decide_output_gate(c, context())
+        results.append(replay_result(d, 111, "chain_relaxation", True, "GLOBAL_STAGE_CHANGE"))
+
+        # 12. Title-only event update is non-material and remains silent.
+        basis = {
+            "actors": ["Actor A"],
+            "actions": ["Deploy"],
+            "objects": ["System X"],
+            "locations": ["Region 1"],
+            "time_window_key": "2026-08-31",
+            "consequences": ["Operational change"],
+        }
+        fp = event_fingerprint(basis)
+        previous_event = {
+            "event_id": "evt-redteam-title",
+            "display_title": "Old title",
+            "fingerprint": fp,
+            "intelligence_priority": "P2",
+            "material_markers": [],
+            "lifecycle": "developing",
+            "sensitivity": "public",
+        }
+        current_event = copy.deepcopy(previous_event)
+        current_event["display_title"] = "New wording only"
+        change = detect_material_change(previous_event, current_event)
+        self.assertFalse(change["material"])
+        d = decide_output_gate(
+            base_candidate(mode="scheduled_brief", priority="P2", material=False),
+            context(),
+        )
+        results.append(replay_result(d, 112, "materiality", False, "NO_SUBSTANTIVE_CHANGE"))
+
+        # 13. Metadata-only access cannot claim full-text verification.
+        observation = {
+            "access_status": "metadata_only",
+            "provenance": {"full_text_verified": False},
+        }
+        self.assertFalse(can_claim_full_text_verified(observation))
+        d = decide_output_gate(base_candidate(), context())
+        results.append(replay_result(d, 113, "access_failure", False, "NO_TRIGGER"))
+
+        self.assertEqual(len(results), 13)
+        self.assertTrue(all(result["passed"] for result in results))
+
+        expected = json.loads(
+            (ROOT / "examples" / "synthetic" / "replay-suite-summary.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        actual = summarize_replay_suite(
+            results,
+            suite_id=expected["suite_id"],
+            generated_at=expected["generated_at"],
+            sensitivity=expected["sensitivity"],
+        )
+        self.assertEqual(actual, expected)
+
     def test_all_pass_synthetic_suite_matches_fixture(self):
         # Build a compact deterministic pass suite from gate outcomes.
         cases = []
