@@ -21,6 +21,8 @@ PAIRS = {
     "preparedness_snapshot": ("schemas/preparedness-snapshot.schema.json", "examples/synthetic/preparedness-snapshot.json"),
     "water_resilience_audit": ("schemas/water-resilience-audit.schema.json", "examples/synthetic/water-resilience-audit.json"),
     "water_verification_assessment": ("schemas/water-verification-assessment.schema.json", "examples/synthetic/water-verification-assessment.json"),
+    "energy_resilience_audit": ("schemas/energy-resilience-audit.schema.json", "examples/synthetic/energy-resilience-audit.json"),
+    "energy_verification_assessment": ("schemas/energy-verification-assessment.schema.json", "examples/synthetic/energy-verification-assessment.json"),
 }
 
 def load(path):
@@ -74,6 +76,27 @@ def semantic_errors(name, obj):
         if continuity["outage_test"] == "pass":
             if not continuity.get("field_test_duration_hours") or continuity["field_test_duration_hours"] <= 0:
                 errors.append("passed outage test requires positive field_test_duration_hours")
+    elif name == "energy_resilience_audit":
+        storage = obj["storage"]
+        if storage["nameplate_kwh"] is not None and storage["usable_kwh"] is not None:
+            if storage["usable_kwh"] > storage["nameplate_kwh"]:
+                errors.append("usable battery kWh cannot exceed nameplate kWh")
+        if storage["battery_present"] is False:
+            if any(storage[key] is not None for key in ("nameplate_kwh", "usable_kwh", "max_continuous_output_kw")):
+                errors.append("battery_present=false conflicts with battery capacity values")
+        generation = obj["generation"]
+        if generation["pv_present"] is False and (
+            generation["pv_nameplate_kwp"] is not None or generation["pv_measured_peak_kw"] is not None
+        ):
+            errors.append("pv_present=false conflicts with PV capacity values")
+        if generation["generator_present"] is False and (
+            generation["generator_rated_kw"] is not None or generation["generator_measured_runtime_hours"] is not None
+        ):
+            errors.append("generator_present=false conflicts with generator values")
+        outage = obj["outage_test"]
+        if outage["status"] == "pass":
+            if not outage.get("duration_hours") or outage["duration_hours"] <= 0:
+                errors.append("passed outage test requires positive duration_hours")
     return errors
 
 def main():
