@@ -8,6 +8,7 @@
     "schema_version",
     "summary_id",
     "judgment_ids",
+    "outcome_ids",
     "total_count",
     "resolved_count",
     "partially_resolved_count",
@@ -122,6 +123,14 @@
         "confidential",
         "restricted"
       ]
+    },
+    "outcome_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^jot-[A-Za-z0-9._-]+$"
+      }
     }
   }
 }
