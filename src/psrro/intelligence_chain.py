@@ -27,6 +27,7 @@ def is_chain_supported_link(assessment: Mapping) -> bool:
     return (
         assessment["h_state"] in SUPPORTED_H_STATES
         and assessment["epistemic_counts"]["causality"] > 0
+        and bool(assessment.get("supporting_evidence_ids"))
         and assessment["direction"] != "falsified"
     )
 
@@ -60,6 +61,8 @@ def build_chain_snapshot(
 
     if not definition["links"]:
         raise ValueError("chain definition must contain at least one link")
+    if any(not link["required"] for link in definition["links"]):
+        raise ValueError("v0.1 linear Chain Watch requires every canonical link to be required")
 
     link_ids = [link["link_id"] for link in definition["links"]]
     assessment_map: dict[str, Mapping] = {}
