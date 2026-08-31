@@ -19,6 +19,8 @@ PAIRS = {
     "r_level_assessment": ("schemas/r-level-assessment.schema.json", "examples/synthetic/r-level-assessment.json"),
     "capability_audit": ("schemas/capability-audit.schema.json", "examples/synthetic/capability-audit.json"),
     "preparedness_snapshot": ("schemas/preparedness-snapshot.schema.json", "examples/synthetic/preparedness-snapshot.json"),
+    "water_resilience_audit": ("schemas/water-resilience-audit.schema.json", "examples/synthetic/water-resilience-audit.json"),
+    "water_verification_assessment": ("schemas/water-verification-assessment.schema.json", "examples/synthetic/water-verification-assessment.json"),
 }
 
 def load(path):
@@ -61,6 +63,17 @@ def semantic_errors(name, obj):
             errors.append("coactivation_breadth inconsistent with active variable count")
         if obj["independent_validated_directed_pairs"] > obj["unique_validated_directed_pairs"]:
             errors.append("independent pair count cannot exceed raw pair count")
+    elif name == "water_resilience_audit":
+        quality = obj["quality"]
+        if quality["potability_status"] in {"lab_verified", "authority_verified"}:
+            if not quality.get("evidence_date") or not quality.get("evidence_ref"):
+                errors.append("verified potability requires evidence_date and evidence_ref")
+        if quality["consumer_sensor_only"] and quality["potability_status"] in {"lab_verified", "authority_verified"}:
+            errors.append("consumer_sensor_only cannot establish verified potability")
+        continuity = obj["continuity"]
+        if continuity["outage_test"] == "pass":
+            if not continuity.get("field_test_duration_hours") or continuity["field_test_duration_hours"] <= 0:
+                errors.append("passed outage test requires positive field_test_duration_hours")
     return errors
 
 def main():
