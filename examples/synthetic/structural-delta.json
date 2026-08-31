@@ -37,7 +37,12 @@
       "velocity_to": "fast",
       "lead_time_min_days_delta": -30,
       "lead_time_max_days_delta": -60,
-      "direction": "worse"
+      "direction": "worse",
+      "reasons": [
+        "probability increased",
+        "velocity accelerated",
+        "lead time compressed"
+      ]
     }
   ],
   "common_cause_refs": [
