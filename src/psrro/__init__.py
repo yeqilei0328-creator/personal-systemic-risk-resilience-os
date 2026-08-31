@@ -1,3 +1,4 @@
+from .communications import assess_communications_verification
 from .intelligence_replay import (
     evaluate_replay_step,
     summarize_replay_suite,
@@ -50,6 +51,7 @@ from .quantification import (
 )
 
 __all__ = [
+    "assess_communications_verification",
     "evaluate_replay_step",
     "summarize_replay_suite",
     "build_chain_snapshot",

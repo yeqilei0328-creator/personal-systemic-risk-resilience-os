@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1.0",
+  "communications_audit_id": "cra-synthetic-fullstack",
+  "capability_id": "cap-communications-synthetic",
+  "service_scope": "full_resilient_stack",
+  "power": {
+    "critical_power_path_mapped": true,
+    "backup_power_status": "ready",
+    "power_outage_test": "pass",
+    "tested_runtime_hours": 24
+  },
+  "internal_network": {
+    "topology_mapped": true,
+    "critical_backbone_medium": "wired",
+    "local_lan_status": "tested_pass",
+    "internet_loss_test": "pass",
+    "local_control_path_without_internet": true
+  },
+  "external_links": [
+    {
+      "link_id": "comlink-synthetic-fiber",
+      "medium": "fiber",
+      "independence_group_id": "synthetic-group-a",
+      "status": "tested_pass",
+      "bidirectional": true,
+      "test_runtime_hours": 12,
+      "critical": true
+    },
+    {
+      "link_id": "comlink-synthetic-cellular",
+      "medium": "cellular",
+      "independence_group_id": "synthetic-group-b",
+      "status": "tested_pass",
+      "bidirectional": true,
+      "test_runtime_hours": 8,
+      "critical": true
+    }
+  ],
+  "offline_compute": {
+    "local_compute_present": true,
+    "critical_workloads_identified": true,
+    "local_runtime_status": "tested_pass",
+    "cloud_dependency_status": "partial",
+    "offline_data_status": "tested_access"
+  },
+  "dependencies": [
+    {
+      "dependency_id": "synthetic-power",
+      "kind": "power",
+      "critical": true,
+      "backup_status": "ready"
+    }
+  ],
+  "single_points_of_failure": [],
+  "maintenance_status": "current",
+  "independent_review_completed": false,
+  "evidence_refs": [
+    "evidence/synthetic-communications.md"
+  ],
+  "updated_at": "2026-08-31T00:00:00Z",
+  "data_sensitivity": "public"
+}

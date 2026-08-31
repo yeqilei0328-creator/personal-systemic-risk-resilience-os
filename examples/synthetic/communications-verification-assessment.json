@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "cva-synthetic-fullstack",
+  "communications_audit_id": "cra-synthetic-fullstack",
+  "recommended_verification_status": "field_tested",
+  "internal_lan_gate_passed": true,
+  "external_redundancy_gate_passed": true,
+  "offline_compute_gate_passed": true,
+  "power_gate_passed": true,
+  "tested_external_path_count": 2,
+  "independent_external_path_count": 2,
+  "minimum_demonstrated_internal_continuity_days": 1,
+  "minimum_demonstrated_external_continuity_days": 0.333333,
+  "degraded_local_operation_candidate": true,
+  "blockers": [],
+  "as_of": "2026-08-31T00:00:00Z",
+  "sensitivity": "public"
+}
