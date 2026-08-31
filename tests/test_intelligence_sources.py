@@ -79,6 +79,22 @@ class SourceConcentrationTests(unittest.TestCase):
         self.assertEqual(result["state"], "UNKNOWN")
         self.assertEqual(result["known_independence_group_count"], 0)
 
+    def test_output_is_deterministic_across_input_order(self):
+        a = observation("sob-2", "src-b", group="group-b")
+        b = observation("sob-1", "src-a", group="group-a")
+        left = assess_source_concentration([a, b])
+        right = assess_source_concentration([b, a])
+        self.assertEqual(left["observation_ids"], right["observation_ids"])
+        self.assertEqual(left["state"], right["state"])
+
+    def test_explicit_claim_ref_rejects_mixed_claims(self):
+        rows = [
+            observation("sob-1", "src-a", claim_ref="claim-a"),
+            observation("sob-2", "src-b", claim_ref="claim-b", group="group-b"),
+        ]
+        with self.assertRaises(ValueError):
+            assess_source_concentration(rows, claim_ref="claim-a")
+
     def test_mixed_known_and_unknown_is_concentrated_not_diverse(self):
         rows = [
             observation("sob-1", "src-a", group="group-a"),
@@ -106,6 +122,16 @@ class AccessTests(unittest.TestCase):
 
 
 class StoreTests(unittest.TestCase):
+    def test_unsafe_path_component_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = SourceStateStore(tmp)
+            with self.assertRaises(ValueError):
+                store.upsert_source({
+                    "source_id": "../escape",
+                    "display_name": "Bad",
+                    "source_class": "other",
+                })
+
     def test_file_backed_store_round_trip(self):
         with tempfile.TemporaryDirectory() as tmp:
             store = SourceStateStore(tmp)
