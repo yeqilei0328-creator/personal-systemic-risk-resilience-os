@@ -1,3 +1,9 @@
+from .intelligence_chain import (
+    build_chain_snapshot,
+    is_chain_supported_link,
+    is_forecast_only,
+    longest_contiguous_supported_path,
+)
 from .intelligence_memory import (
     JudgmentMemoryStore,
     claim_grade_changed,
@@ -40,6 +46,10 @@ from .quantification import (
 )
 
 __all__ = [
+    "build_chain_snapshot",
+    "is_chain_supported_link",
+    "is_forecast_only",
+    "longest_contiguous_supported_path",
     "JudgmentMemoryStore",
     "claim_grade_changed",
     "summarize_judgment_calibration",
