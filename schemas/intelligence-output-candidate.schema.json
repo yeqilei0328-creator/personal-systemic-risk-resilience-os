@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/intelligence-output-candidate.schema.json",
+  "title": "Intelligence Output Gate Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "subject_ref",
+    "event_ids",
+    "delivery_mode",
+    "intelligence_priority",
+    "material_change",
+    "structural_delta_material",
+    "observation_signals",
+    "validated_cross_system_transmission",
+    "major_system_event",
+    "new_strong_edge",
+    "hypothesis_falsified",
+    "lead_time_compressed",
+    "global_stage_change",
+    "global_stage_direction",
+    "personal_action_change",
+    "common_cause_refs",
+    "detected_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^ogc-[A-Za-z0-9._-]+$"
+    },
+    "subject_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evt-[A-Za-z0-9._-]+$"
+      }
+    },
+    "delivery_mode": {
+      "enum": [
+        "scheduled_brief",
+        "interrupt_alert"
+      ]
+    },
+    "intelligence_priority": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ]
+    },
+    "material_change": {
+      "type": "boolean"
+    },
+    "structural_delta_material": {
+      "type": "boolean"
+    },
+    "observation_signals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "geopolitical_conflicts",
+        "energy_shipping",
+        "east_asia_security",
+        "extreme_weather_disasters",
+        "price_real_economy_transmission"
+      ],
+      "properties": {
+        "geopolitical_conflicts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "direction",
+            "real_world_evidence"
+          ],
+          "properties": {
+            "direction": {
+              "enum": [
+                "worsen",
+                "improve",
+                "neutral",
+                "uncertain"
+              ]
+            },
+            "real_world_evidence": {
+              "type": "boolean"
+            }
+          }
+        },
+        "energy_shipping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "direction",
+            "real_world_evidence"
+          ],
+          "properties": {
+            "direction": {
+              "enum": [
+                "worsen",
+                "improve",
+                "neutral",
+                "uncertain"
+              ]
+            },
+            "real_world_evidence": {
+              "type": "boolean"
+            }
+          }
+        },
+        "east_asia_security": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "direction",
+            "real_world_evidence"
+          ],
+          "properties": {
+            "direction": {
+              "enum": [
+                "worsen",
+                "improve",
+                "neutral",
+                "uncertain"
+              ]
+            },
+            "real_world_evidence": {
+              "type": "boolean"
+            }
+          }
+        },
+        "extreme_weather_disasters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "direction",
+            "real_world_evidence"
+          ],
+          "properties": {
+            "direction": {
+              "enum": [
+                "worsen",
+                "improve",
+                "neutral",
+                "uncertain"
+              ]
+            },
+            "real_world_evidence": {
+              "type": "boolean"
+            }
+          }
+        },
+        "price_real_economy_transmission": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "direction",
+            "real_world_evidence"
+          ],
+          "properties": {
+            "direction": {
+              "enum": [
+                "worsen",
+                "improve",
+                "neutral",
+                "uncertain"
+              ]
+            },
+            "real_world_evidence": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "validated_cross_system_transmission": {
+      "type": "boolean"
+    },
+    "major_system_event": {
+      "type": "boolean"
+    },
+    "new_strong_edge": {
+      "type": "boolean"
+    },
+    "hypothesis_falsified": {
+      "type": "boolean"
+    },
+    "lead_time_compressed": {
+      "type": "boolean"
+    },
+    "global_stage_change": {
+      "type": "boolean"
+    },
+    "global_stage_direction": {
+      "enum": [
+        "worsen",
+        "improve",
+        "unchanged",
+        "unknown"
+      ]
+    },
+    "personal_action_change": {
+      "type": "boolean"
+    },
+    "common_cause_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "detected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
