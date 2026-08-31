@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/water-verification-assessment.schema.json",
+  "title": "Water Verification Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "water_audit_id",
+    "recommended_verification_status",
+    "potability_gate_passed",
+    "outage_gate_passed",
+    "storage_autonomy_days",
+    "minimum_demonstrated_continuity_days",
+    "continuous_source_candidate",
+    "blockers",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^wva-[A-Za-z0-9._-]+$"
+    },
+    "water_audit_id": {
+      "type": "string",
+      "pattern": "^wra-[A-Za-z0-9._-]+$"
+    },
+    "recommended_verification_status": {
+      "enum": [
+        "stated",
+        "measured",
+        "field_tested",
+        "audited"
+      ]
+    },
+    "potability_gate_passed": {
+      "type": "boolean"
+    },
+    "outage_gate_passed": {
+      "type": "boolean"
+    },
+    "storage_autonomy_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "minimum_demonstrated_continuity_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "continuous_source_candidate": {
+      "type": "boolean"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

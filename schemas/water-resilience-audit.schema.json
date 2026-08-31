@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/water-resilience-audit.schema.json",
+  "title": "Water Resilience Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "water_audit_id",
+    "capability_id",
+    "service_scope",
+    "source",
+    "hydraulics",
+    "power",
+    "treatment",
+    "quality",
+    "continuity",
+    "dependencies",
+    "single_points_of_failure",
+    "maintenance_status",
+    "independent_review_completed",
+    "evidence_refs",
+    "updated_at",
+    "data_sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "water_audit_id": {
+      "type": "string",
+      "pattern": "^wra-[A-Za-z0-9._-]+$"
+    },
+    "capability_id": {
+      "type": "string",
+      "pattern": "^cap-[A-Za-z0-9._-]+$"
+    },
+    "service_scope": {
+      "enum": [
+        "non_potable",
+        "potable",
+        "mixed"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type",
+        "presence_confirmed",
+        "source_verification"
+      ],
+      "properties": {
+        "source_type": {
+          "enum": [
+            "well",
+            "municipal",
+            "stored",
+            "surface",
+            "rainwater",
+            "other"
+          ]
+        },
+        "presence_confirmed": {
+          "type": "boolean"
+        },
+        "source_verification": {
+          "enum": [
+            "stated",
+            "observed",
+            "measured",
+            "documented"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "hydraulics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "flow_test",
+        "usable_storage_liters"
+      ],
+      "properties": {
+        "flow_test": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "duration_minutes",
+            "sustained_flow_lpm"
+          ],
+          "properties": {
+            "method": {
+              "enum": [
+                "container_timed",
+                "metered",
+                "pump_test",
+                "other"
+              ]
+            },
+            "duration_minutes": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "sustained_flow_lpm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "recovery_minutes": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "usable_storage_liters": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "power": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "extraction_requires_power",
+        "primary_power",
+        "backup_power_status",
+        "outage_extraction_test"
+      ],
+      "properties": {
+        "extraction_requires_power": {
+          "type": "boolean"
+        },
+        "primary_power": {
+          "enum": [
+            "grid",
+            "solar",
+            "generator",
+            "battery",
+            "manual",
+            "other",
+            "unknown"
+          ]
+        },
+        "backup_power_status": {
+          "enum": [
+            "none",
+            "unknown",
+            "partial",
+            "ready",
+            "not_required"
+          ]
+        },
+        "outage_extraction_test": {
+          "enum": [
+            "not_run",
+            "pass",
+            "fail",
+            "partial"
+          ]
+        }
+      }
+    },
+    "treatment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "system_status"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "system_status": {
+          "enum": [
+            "unknown",
+            "absent",
+            "present_unverified",
+            "operational_tested"
+          ]
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "potability_status",
+        "evidence_date",
+        "evidence_ref",
+        "consumer_sensor_only"
+      ],
+      "properties": {
+        "potability_status": {
+          "enum": [
+            "unknown",
+            "not_potable",
+            "lab_verified",
+            "authority_verified"
+          ]
+        },
+        "evidence_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "evidence_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "consumer_sensor_only": {
+          "type": "boolean"
+        }
+      }
+    },
+    "continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "daily_demand_liters",
+        "outage_test",
+        "field_test_duration_hours"
+      ],
+      "properties": {
+        "daily_demand_liters": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "outage_test": {
+          "enum": [
+            "not_run",
+            "pass",
+            "fail",
+            "partial"
+          ]
+        },
+        "field_test_duration_hours": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dependency_id",
+          "kind",
+          "critical",
+          "backup_status"
+        ],
+        "properties": {
+          "dependency_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "power",
+              "pump",
+              "storage",
+              "treatment",
+              "water_quality",
+              "spares",
+              "personnel",
+              "logistics",
+              "other"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "backup_status": {
+            "enum": [
+              "none",
+              "partial",
+              "ready",
+              "unknown",
+              "not_required"
+            ]
+          }
+        }
+      }
+    },
+    "single_points_of_failure": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "maintenance_status": {
+      "enum": [
+        "current",
+        "due",
+        "overdue",
+        "unknown"
+      ]
+    },
+    "independent_review_completed": {
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

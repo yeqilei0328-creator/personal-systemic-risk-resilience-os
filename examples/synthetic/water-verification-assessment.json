@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "wva-synthetic-001",
+  "water_audit_id": "wra-synthetic-001",
+  "recommended_verification_status": "field_tested",
+  "potability_gate_passed": true,
+  "outage_gate_passed": true,
+  "storage_autonomy_days": 10,
+  "minimum_demonstrated_continuity_days": 1,
+  "continuous_source_candidate": true,
+  "blockers": [],
+  "as_of": "2026-08-31T00:00:00Z",
+  "sensitivity": "public"
+}
