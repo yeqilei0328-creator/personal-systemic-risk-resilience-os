@@ -12,11 +12,19 @@ PAIRS = {
     "exposure": ("schemas/exposure.schema.json", "examples/synthetic/exposure.json"),
     "capability": ("schemas/capability.schema.json", "examples/synthetic/capability.json"),
     "alert": ("schemas/alert.schema.json", "examples/synthetic/alert.json"),
+    "coupling_snapshot": ("schemas/coupling-snapshot.schema.json", "examples/synthetic/coupling-snapshot.json"),
+    "buffer_state": ("schemas/buffer-state.schema.json", "examples/synthetic/buffer-state.json"),
+    "buffer_snapshot": ("schemas/buffer-snapshot.schema.json", "examples/synthetic/buffer-snapshot.json"),
+    "edge_assessment": ("schemas/edge-assessment.schema.json", "examples/synthetic/edge-assessment.json"),
+    "r_level_assessment": ("schemas/r-level-assessment.schema.json", "examples/synthetic/r-level-assessment.json"),
 }
 
 def load(path):
     with (ROOT / path).open("r", encoding="utf-8") as f:
         return json.load(f)
+
+def approx_equal(left, right, tol=1e-6):
+    return abs(float(left) - float(right)) <= tol
 
 def semantic_errors(name, obj):
     errors = []
@@ -39,6 +47,18 @@ def semantic_errors(name, obj):
     elif name == "alert" and obj["notify"]:
         if not any(obj["basis"].values()):
             errors.append("notify=true requires at least one basis reference")
+    elif name == "buffer_state":
+        if obj["baseline_capacity"] <= obj["minimum_viable_capacity"]:
+            errors.append("baseline_capacity must be > minimum_viable_capacity")
+    elif name == "coupling_snapshot":
+        if not approx_equal(obj["pair_density"], obj["unique_validated_directed_pairs"] / 12):
+            errors.append("pair_density inconsistent with directed pair count")
+        if not approx_equal(obj["independent_pair_density"], obj["independent_validated_directed_pairs"] / 12):
+            errors.append("independent_pair_density inconsistent with directed pair count")
+        if not approx_equal(obj["coactivation_breadth"], obj["active_variable_count"] / 4):
+            errors.append("coactivation_breadth inconsistent with active variable count")
+        if obj["independent_validated_directed_pairs"] > obj["unique_validated_directed_pairs"]:
+            errors.append("independent pair count cannot exceed raw pair count")
     return errors
 
 def main():
