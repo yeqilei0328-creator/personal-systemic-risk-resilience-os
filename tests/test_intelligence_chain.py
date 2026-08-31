@@ -29,6 +29,7 @@ def assessment(link, idx, h="H1", causality=0, forecast=0, direction="stable", m
         "source_node_id": link["source_node_id"],
         "target_node_id": link["target_node_id"],
         "h_state": h,
+        "supporting_evidence_ids": ["evd-chain-synthetic"] if causality > 0 else [],
         "epistemic_counts": {
             "fact": 0,
             "forecast": forecast,
@@ -79,6 +80,11 @@ class LinkSupportTests(unittest.TestCase):
     def test_h2_with_causal_evidence_is_supported(self):
         row = assessment(definition()["links"][0], 1, h="H2", causality=1)
         self.assertTrue(is_chain_supported_link(row))
+
+    def test_causal_count_without_evidence_ref_fails_closed(self):
+        row = assessment(definition()["links"][0], 1, h="H2", causality=1)
+        row["supporting_evidence_ids"] = []
+        self.assertFalse(is_chain_supported_link(row))
 
 
 class SnapshotTests(unittest.TestCase):
