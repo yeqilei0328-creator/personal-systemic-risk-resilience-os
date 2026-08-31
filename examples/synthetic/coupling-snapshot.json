@@ -17,5 +17,6 @@
   "common_cause_share": 0,
   "max_independent_path_length": 2,
   "band": "C2",
-  "sensitivity": "public"
+  "sensitivity": "public",
+  "strong_independent_cross_edge_count": 1
 }
