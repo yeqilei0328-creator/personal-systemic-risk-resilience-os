@@ -7,6 +7,7 @@ identity, lineage and access state so later claim/judgment logic can be audited.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -24,6 +25,13 @@ ACCESS_LIMITED = {
     "metadata_only",
     "unknown",
 }
+SAFE_COMPONENT = re.compile(r"^[A-Za-z0-9._-]+$")
+
+
+def _safe_component(value: str, label: str) -> str:
+    if not SAFE_COMPONENT.fullmatch(value) or value in {".", ".."}:
+        raise ValueError(f"unsafe {label}: {value!r}")
+    return value
 
 
 def _write_json(path: Path, obj: Mapping) -> None:
@@ -43,39 +51,44 @@ class SourceStateStore:
         self.root = Path(root)
 
     def upsert_source(self, record: Mapping) -> Path:
-        path = self.root / "sources" / f"{record['source_id']}.json"
+        source_id = _safe_component(str(record["source_id"]), "source_id")
+        path = self.root / "sources" / f"{source_id}.json"
         _write_json(path, record)
         return path
 
     def get_source(self, source_id: str) -> dict:
+        source_id = _safe_component(source_id, "source_id")
         return _load_json(self.root / "sources" / f"{source_id}.json")
 
     def upsert_reputation(self, record: Mapping) -> Path:
-        safe_domain = record["domain"].replace("/", "_")
-        safe_claim = record["claim_type"].replace("/", "_")
+        source_id = _safe_component(str(record["source_id"]), "source_id")
+        safe_domain = _safe_component(str(record["domain"]), "domain")
+        safe_claim = _safe_component(str(record["claim_type"]), "claim_type")
         path = (
             self.root
             / "reputation"
-            / record["source_id"]
+            / source_id
             / f"{safe_domain}__{safe_claim}.json"
         )
         _write_json(path, record)
         return path
 
     def get_reputation(self, source_id: str, domain: str, claim_type: str) -> dict:
+        source_id = _safe_component(source_id, "source_id")
+        domain = _safe_component(domain, "domain")
+        claim_type = _safe_component(claim_type, "claim_type")
         return _load_json(
-            self.root
-            / "reputation"
-            / source_id
-            / f"{domain.replace('/', '_')}__{claim_type.replace('/', '_')}.json"
+            self.root / "reputation" / source_id / f"{domain}__{claim_type}.json"
         )
 
     def put_observation(self, record: Mapping) -> Path:
-        path = self.root / "observations" / f"{record['observation_id']}.json"
+        observation_id = _safe_component(str(record["observation_id"]), "observation_id")
+        path = self.root / "observations" / f"{observation_id}.json"
         _write_json(path, record)
         return path
 
     def get_observation(self, observation_id: str) -> dict:
+        observation_id = _safe_component(observation_id, "observation_id")
         return _load_json(self.root / "observations" / f"{observation_id}.json")
 
 
@@ -89,14 +102,16 @@ def assess_source_concentration(
 ) -> dict:
     """Assess independence without converting search-result count into evidence count."""
 
+    claim_refs = {obs.get("claim_ref") for obs in observations if obs.get("claim_ref")}
     if claim_ref is None:
-        claim_refs = {obs.get("claim_ref") for obs in observations if obs.get("claim_ref")}
         if len(claim_refs) == 1:
             claim_ref = next(iter(claim_refs))
         elif not claim_refs:
             claim_ref = "claim-unknown"
         else:
             raise ValueError("observations must refer to one claim_ref")
+    elif claim_refs and claim_refs != {claim_ref}:
+        raise ValueError("observations must match the requested claim_ref")
 
     unique_sources = {obs["source_id"] for obs in observations}
     known_groups = {
@@ -145,7 +160,7 @@ def assess_source_concentration(
         "schema_version": "0.1.0",
         "assessment_id": assessment_id,
         "claim_ref": claim_ref,
-        "observation_ids": [obs["observation_id"] for obs in observations],
+        "observation_ids": sorted(obs["observation_id"] for obs in observations),
         "unique_source_count": len(unique_sources),
         "known_independence_group_count": len(known_groups),
         "unknown_lineage_count": unknown_lineage,
