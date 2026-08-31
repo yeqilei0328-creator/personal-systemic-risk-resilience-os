@@ -1,7 +1,27 @@
 import copy
+import json
 import unittest
+from pathlib import Path
 
 from src.psrro.communications import assess_communications_verification
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class ExampleContractTests(unittest.TestCase):
+    def test_synthetic_audit_recomputes_assessment_fixture(self):
+        audit = json.loads(
+            (ROOT / "examples" / "synthetic" / "communications-resilience-audit.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        expected = json.loads(
+            (ROOT / "examples" / "synthetic" / "communications-verification-assessment.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(assess_communications_verification(audit), expected)
 
 
 def base_audit(scope="full_resilient_stack"):
