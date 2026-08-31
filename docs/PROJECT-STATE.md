@@ -110,7 +110,9 @@ The canonical operational baseline is now the reconciled China Intelligence / Ph
 
 R1 Source / Evidence Persistence, R2 Event / Claim State, R3 Behavior / Counterevidence / Structural Delta, R4 Precision Alert Gate, R5 Judgment Memory / Posterior Learning, and R6 Chain Watch are COMPLETE.
 
-Current node: **R7 — Replay / Red Team**.
+Phase 3R node: **ENGINEERING COMPLETE — R1 through R7**.
+
+Next program node: **Phase 3C — Capability Verification & Baseline Completion**, with historical real-world radar calibration retained for Phase 5.
 
 Priority sequence:
 - Source Registry + Source Reputation Ledger;
@@ -121,7 +123,9 @@ Priority sequence:
 - alert suppression/hysteresis — complete;
 - Judgment Ledger / posterior learning — complete;
 - first Chain Watch — complete: climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation;
-- Replay / Red Team — current.
+- Replay / Red Team — complete;
+- 13-case synthetic exit replay — PASS;
+- Phase 3R engineering gate — PASS.
 
 Namespace rule:
 - `Claim Grade A-D` = epistemic confidence;
@@ -137,3 +141,31 @@ The next task is to move private capabilities from `stated` toward `measured` / 
 Public `main` must continue to contain methods and aggregate status only. Real private values remain outside this repository.
 
 Until sufficient private coverage exists, the system must keep real Base Autonomy and Personal R-Level fail-closed rather than inventing certainty.
+
+
+## Phase 3R completion checkpoint
+
+Phase 3R — Radar Precision Upgrade v0.1 is engineering-complete.
+
+Completed layers:
+- R1 — Source / Evidence Persistence
+- R2 — Event / Claim State
+- R3 — Behavior / Counterevidence / Structural Delta
+- R4 — Precision Output / Alert Gate
+- R5 — Judgment Memory / Posterior Learning
+- R6 — Chain Watch
+- R7 — Replay / Red Team
+
+Final synthetic engineering gate:
+- 45/45 schemas and synthetic examples validated
+- 145 deterministic tests passed
+- 13/13 required cross-layer replay cases passed
+- synthetic false positives: 0
+- synthetic false negatives: 0
+- synthetic code mismatches: 0
+
+These results validate the encoded engineering contracts only. They do not establish real-world forecast accuracy.
+
+Real dated-event calibration, false-positive/false-negative estimation on historical evidence, and threshold tuning remain Phase 5 work.
+
+The existing user-facing news-push conversation remains the presentation layer; Phase 3R upgraded the backend precision/state/memory contracts without replacing that presentation workflow.
