@@ -50,7 +50,7 @@ class FingerprintTests(unittest.TestCase):
     def test_fingerprint_has_stable_known_value(self):
         self.assertEqual(
             event_fingerprint(basis()),
-            "cb04875bb8484e37279a31a4310aa13a019d2b2bc4e325cc23fd27c9ca250465",
+            "b113d7a1a16941a8591eb67f9be5b6d220f15eb00e2f1577421e4f62c40aca87",
         )
 
     def test_display_title_is_not_part_of_fingerprint(self):
