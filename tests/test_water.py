@@ -50,6 +50,29 @@ class WaterVerificationTests(unittest.TestCase):
         self.assertEqual(result["recommended_verification_status"], "stated")
         self.assertIsNone(result["storage_autonomy_days"])
 
+    def test_unknown_extraction_power_requirement_fails_closed(self):
+        audit = base_audit()
+        audit["power"]["extraction_requires_power"] = None
+        audit["hydraulics"]["usable_storage_liters"] = 1000
+        result = assess_water_verification(audit)
+        self.assertEqual(result["recommended_verification_status"], "measured")
+        self.assertFalse(result["outage_gate_passed"])
+        self.assertIn("extraction power requirement unknown", result["blockers"])
+
+    def test_unknown_treatment_requirement_blocks_field_tested(self):
+        audit = base_audit()
+        audit["treatment"]["required"] = None
+        audit["hydraulics"]["usable_storage_liters"] = 1000
+        audit["quality"]["potability_status"] = "lab_verified"
+        audit["quality"]["evidence_date"] = "2026-08-30"
+        audit["quality"]["evidence_ref"] = "synthetic-lab"
+        audit["power"]["outage_extraction_test"] = "pass"
+        audit["continuity"]["outage_test"] = "pass"
+        audit["continuity"]["field_test_duration_hours"] = 24
+        result = assess_water_verification(audit)
+        self.assertEqual(result["recommended_verification_status"], "measured")
+        self.assertIn("treatment requirement unknown", result["blockers"])
+
     def test_measured_storage_does_not_become_field_tested(self):
         audit = base_audit()
         audit["hydraulics"]["usable_storage_liters"] = 1000

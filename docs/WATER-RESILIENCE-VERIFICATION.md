@@ -8,7 +8,7 @@
 
 `Source → Extraction → Power → Storage → Treatment → Quality → Distribution → Maintenance/Spares → Outage Test`
 
-任何关键环节未知，都会限制验证等级。
+任何关键环节未知，都会限制验证等级。对 extraction power requirement 和 treatment requirement 这类尚未确认的事实，允许显式记录为 `null/unknown`，不得为了通过 schema 强行填写 true/false。
 
 ## Verification ladder
 
