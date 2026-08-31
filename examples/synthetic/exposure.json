@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1.0",
+  "exposure_id": "exp-synthetic-001",
+  "subject_kind": "region",
+  "subject_ref": "synthetic-subject",
+  "hazard_ref": {
+    "type": "scenario",
+    "id": "scn-synthetic-001"
+  },
+  "dimensions": {
+    "geography": 2,
+    "assets": 1,
+    "business": 2,
+    "supply_chain": 3,
+    "finance": 2,
+    "family": 0,
+    "infrastructure": 2
+  },
+  "sensitivity_score": 2,
+  "adaptive_capacity_score": 3,
+  "resulting_r_level": "R1",
+  "rationale": "Synthetic exposure record; no real person, business or location.",
+  "updated_at": "2026-08-31T00:35:00Z",
+  "data_sensitivity": "public"
+}
