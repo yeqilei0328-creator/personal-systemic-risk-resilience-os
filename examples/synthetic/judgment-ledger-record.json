@@ -53,9 +53,5 @@
   "source_limitations": [
     "Synthetic fixture only."
   ],
-  "outcome_status": "unresolved",
-  "later_result": null,
-  "error_types": [],
-  "posterior_revision_ids": [],
   "sensitivity": "public"
 }
