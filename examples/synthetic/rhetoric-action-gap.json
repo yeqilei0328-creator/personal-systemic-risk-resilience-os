@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.1.0",
+  "gap_id": "rag-synthetic-r3-001",
+  "event_id": "evt-synthetic-r2-001",
+  "actor": "Synthetic Actor",
+  "rhetoric_claim_ids": [
+    "clm-synthetic-r2-001"
+  ],
+  "behavior_signal_ids": [
+    "beh-synthetic-r3-001"
+  ],
+  "rhetoric_direction": "easing",
+  "behavior_direction": "intensifying",
+  "gap_direction": "behavior_more_intensifying",
+  "assessment": "Synthetic behavior is more intensifying than rhetoric.",
+  "limitations": [
+    "Synthetic fixture only."
+  ],
+  "evidence_ids": [],
+  "as_of": "2026-08-31T02:10:00Z",
+  "sensitivity": "public"
+}
