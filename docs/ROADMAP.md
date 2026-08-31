@@ -108,7 +108,7 @@ Separate private operational-state layer established, pinned to public method ve
 - [x] 13-case replay suite summary and exit gate
 - [x] 13/13 required synthetic cases PASS; FP=0; FN=0; code mismatch=0
 
-### Phase 3C — Capability Verification & Baseline Completion — PAUSED AFTER CLEAN CHECKPOINT
+### Phase 3C — Capability Verification & Baseline Completion — ACTIVE
 
 Private audit domains:
 - [ ] 现金流
@@ -117,10 +117,10 @@ Private audit domains:
 - [ ] 工业空间 / 厂房
 - [ ] 土地 / 转换能力
 - [~] 水源 / 净化 / 储水 — private baseline established; field evidence pending
-- [~] 光伏 / 储能 / 离网能力 — public verification method complete; private instantiation deferred until after Phase 3R
+- [~] 光伏 / 储能 / 离网能力 — public verification method + private baseline complete; field evidence pending
 - [ ] 车辆 / 机动
 - [ ] Physical AI / 防御性感知与巡检
-- [ ] 网络 / 通信 / 离线计算
+- [ ] 网络 / 通信 / 离线计算 — NEXT ENGINEERING DOMAIN
 - [ ] 食品 / 农业转换
 - [ ] 医疗 / 卫生
 - [ ] 工具 / 备件 / 维修
