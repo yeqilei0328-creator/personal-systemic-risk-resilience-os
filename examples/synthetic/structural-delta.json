@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.1.0",
+  "structural_delta_id": "sdl-synthetic-r3-001",
+  "event_id": "evt-synthetic-r2-001",
+  "risk_variable_changes": [
+    {
+      "risk_variable": "C",
+      "direction": "worsen",
+      "reason": "Synthetic financial stress increased.",
+      "evidence_ids": []
+    }
+  ],
+  "edge_changes": [
+    {
+      "edge_id": "edge-synthetic-001",
+      "from_state": "H1",
+      "to_state": "H2",
+      "direction": "strengthened"
+    }
+  ],
+  "coupling_change": {
+    "from_band": "C1",
+    "to_band": "C2",
+    "direction": "denser"
+  },
+  "buffer_change": {
+    "from_band": "B1",
+    "to_band": "B2",
+    "direction": "depleted"
+  },
+  "scenario_changes": [
+    {
+      "scenario_id": "scn-synthetic-001",
+      "probability_low_delta": 0.1,
+      "probability_high_delta": 0.1,
+      "velocity_from": "medium",
+      "velocity_to": "fast",
+      "lead_time_min_days_delta": -30,
+      "lead_time_max_days_delta": -60,
+      "direction": "worse",
+      "reasons": [
+        "probability increased",
+        "velocity accelerated",
+        "lead time compressed"
+      ]
+    }
+  ],
+  "common_cause_refs": [
+    "synthetic-common-cause"
+  ],
+  "material": true,
+  "notes": "Synthetic fixture only.",
+  "as_of": "2026-08-31T02:20:00Z",
+  "sensitivity": "public"
+}

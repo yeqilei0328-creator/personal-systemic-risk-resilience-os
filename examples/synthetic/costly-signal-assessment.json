@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "csa-synthetic-r3-001",
+  "behavior_id": "beh-synthetic-r3-001",
+  "eligible": true,
+  "strength": "STRONG",
+  "resource_commitment_present": true,
+  "persistence_gate": true,
+  "reversibility_gate": true,
+  "reasons": [
+    "max resource commitment level=3",
+    "behavior persists beyond one-off action",
+    "behavior has meaningful reversal cost"
+  ],
+  "assessed_at": "2026-08-31T02:05:00Z",
+  "sensitivity": "public"
+}

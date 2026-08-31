@@ -35,7 +35,7 @@ Primary flow:
 
 ### Taxonomies that must remain separate
 
-- P0/P1/P2 — intelligence priority
+- P0/P1/P2/P3 — intelligence priority
 - Stage I-IV — global systemic stage
 - C0-C3 — coupling structure
 - BU/B0-B3 — buffer status
@@ -108,7 +108,7 @@ Phase 3R-00 and 3R-00A are complete.
 
 The canonical operational baseline is now the reconciled China Intelligence / Physical AI / Global Risk Resonance V0.3 specification. Phase 3R is explicitly an engineering upgrade around that working logic, not a redesign.
 
-Next node: **R1 — Source / Evidence Persistence**.
+R1 Source / Evidence Persistence and R2 Event / Claim State are COMPLETE.\n\nCurrent node: **R3 — Behavior / Counterevidence / Structural Delta**.
 
 Priority sequence:
 - Source Registry + Source Reputation Ledger;

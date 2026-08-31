@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/hypothesis-assessment.schema.json",
+  "title": "Hypothesis / Counterevidence Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "hypothesis_assessment_id",
+    "target_type",
+    "target_id",
+    "supporting_evidence_ids",
+    "refuting_evidence_ids",
+    "alternative_explanations",
+    "omitted_variables",
+    "falsification_condition",
+    "falsification_status",
+    "posterior_direction",
+    "assessed_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "hypothesis_assessment_id": {
+      "type": "string",
+      "pattern": "^hya-[A-Za-z0-9._-]+$"
+    },
+    "target_type": {
+      "enum": [
+        "claim",
+        "edge",
+        "scenario"
+      ]
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supporting_evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "refuting_evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "alternative_explanations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "omitted_variables": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "falsification_condition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "falsification_status": {
+      "enum": [
+        "unknown",
+        "not_triggered",
+        "partial",
+        "triggered"
+      ]
+    },
+    "posterior_direction": {
+      "enum": [
+        "strengthen",
+        "weaken",
+        "unchanged",
+        "falsified",
+        "unknown"
+      ]
+    },
+    "assessed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

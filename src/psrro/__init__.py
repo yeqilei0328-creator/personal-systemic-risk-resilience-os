@@ -1,3 +1,11 @@
+from .intelligence_behavior import (
+    assess_costly_signal,
+    classify_buffer_delta,
+    classify_coupling_delta,
+    classify_h_state_delta,
+    classify_rhetoric_action_gap,
+    classify_scenario_delta,
+)
 from .intelligence_events import (
     EventClaimStateStore,
     detect_material_change,
@@ -23,6 +31,12 @@ from .quantification import (
 )
 
 __all__ = [
+    "assess_costly_signal",
+    "classify_buffer_delta",
+    "classify_coupling_delta",
+    "classify_h_state_delta",
+    "classify_rhetoric_action_gap",
+    "classify_scenario_delta",
     "EventClaimStateStore",
     "detect_material_change",
     "event_fingerprint",
