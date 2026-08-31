@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "eda-synthetic-001",
+  "edge_id": "edge-synthetic-001",
+  "as_of": "2026-08-31T01:00:00Z",
+  "temporal_ordering_confirmed": true,
+  "mechanism_documented": true,
+  "metric_observed": true,
+  "common_cause_resolved": true,
+  "persistence_observations": 2,
+  "counterevidence_resolved": true,
+  "falsification_triggered": false,
+  "recommended_state": "H2",
+  "reasons": [
+    "Synthetic example only."
+  ],
+  "sensitivity": "public"
+}
