@@ -18,6 +18,29 @@ def load(path):
     with (ROOT / path).open("r", encoding="utf-8") as f:
         return json.load(f)
 
+def semantic_errors(name, obj):
+    errors = []
+    if name == "scenario":
+        p = obj["probability"]
+        if p["low"] > p["high"]:
+            errors.append("probability.low must be <= probability.high")
+        lead = obj["lead_time"]
+        if lead["min_days"] > lead["max_days"]:
+            errors.append("lead_time.min_days must be <= lead_time.max_days")
+    elif name == "edge":
+        if obj["source_node"]["node_id"] == obj["target_node"]["node_id"]:
+            errors.append("source_node and target_node must differ")
+        latency = obj.get("latency_days")
+        if latency and latency["min"] > latency["max"]:
+            errors.append("latency_days.min must be <= latency_days.max")
+        common = obj["common_cause"]
+        if common["present"] and not common.get("cause_id"):
+            errors.append("common_cause.cause_id is required when present=true")
+    elif name == "alert" and obj["notify"]:
+        if not any(obj["basis"].values()):
+            errors.append("notify=true requires at least one basis reference")
+    return errors
+
 def main():
     failures = []
     for name, (schema_path, example_path) in PAIRS.items():
@@ -26,6 +49,9 @@ def main():
         try:
             Draft202012Validator.check_schema(schema)
             Draft202012Validator(schema, format_checker=FormatChecker()).validate(example)
+            semantic = semantic_errors(name, example)
+            if semantic:
+                raise ValueError("; ".join(semantic))
             print(f"PASS {name}: {example_path}")
         except Exception as exc:
             failures.append((name, str(exc)))
