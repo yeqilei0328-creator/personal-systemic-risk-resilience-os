@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1.0",
+  "narrative_gap_id": "ngp-synthetic-r3-001",
+  "event_id": "evt-synthetic-r2-001",
+  "interpretations": [
+    {
+      "frame_label": "Frame A",
+      "summary": "Synthetic optimistic framing.",
+      "source_observation_ids": [
+        "sob-synthetic-001"
+      ]
+    },
+    {
+      "frame_label": "Frame B",
+      "summary": "Synthetic pessimistic framing.",
+      "source_observation_ids": [
+        "sob-synthetic-001"
+      ]
+    }
+  ],
+  "verified_fact_claim_ids": [
+    "clm-synthetic-r2-001"
+  ],
+  "disputed_fact_claim_ids": [],
+  "gap_type": "NARRATIVE_ONLY",
+  "material_fact_disagreement": false,
+  "narrative_only_divergence": true,
+  "assessment": "Facts align; interpretation differs.",
+  "as_of": "2026-08-31T02:10:00Z",
+  "sensitivity": "public"
+}
