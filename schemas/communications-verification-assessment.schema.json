@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/communications-verification-assessment.schema.json",
+  "title": "Communications Verification Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "communications_audit_id",
+    "recommended_verification_status",
+    "internal_lan_gate_passed",
+    "external_redundancy_gate_passed",
+    "offline_compute_gate_passed",
+    "power_gate_passed",
+    "tested_external_path_count",
+    "independent_external_path_count",
+    "minimum_demonstrated_internal_continuity_days",
+    "minimum_demonstrated_external_continuity_days",
+    "degraded_local_operation_candidate",
+    "blockers",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^cva-[A-Za-z0-9._-]+$"
+    },
+    "communications_audit_id": {
+      "type": "string",
+      "pattern": "^cra-[A-Za-z0-9._-]+$"
+    },
+    "recommended_verification_status": {
+      "enum": [
+        "stated",
+        "measured",
+        "field_tested",
+        "audited"
+      ]
+    },
+    "internal_lan_gate_passed": {
+      "type": "boolean"
+    },
+    "external_redundancy_gate_passed": {
+      "type": "boolean"
+    },
+    "offline_compute_gate_passed": {
+      "type": "boolean"
+    },
+    "power_gate_passed": {
+      "type": "boolean"
+    },
+    "tested_external_path_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "independent_external_path_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "minimum_demonstrated_internal_continuity_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "minimum_demonstrated_external_continuity_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "degraded_local_operation_candidate": {
+      "type": "boolean"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
