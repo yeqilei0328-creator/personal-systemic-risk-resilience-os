@@ -20,6 +20,7 @@ v0.1 输出四类可审计结果：
 - supported edge count
 - validated edge count
 - H3 strong edge count
+- independent cross-variable H3 edge count
 - validated cross-variable edge count
 - unique directed A/B/C/D pairs
 - independent directed pairs after common-cause exclusion
@@ -35,7 +36,7 @@ v0.1 输出四类可审计结果：
 - C0 Sparse：独立 validated directed pairs < 2。
 - C1 Emerging：>=2 pairs，至少涉及 2 个一级变量。
 - C2 Dense：>=4 pairs，至少 3 个一级变量，且 >=2 条 persistent/structural validated edges。
-- C3 Networked：>=6 pairs，A/B/C/D 全覆盖，>=4 persistent edges，>=2 H3 edges，且存在长度 >=3 的独立传导路径。
+- C3 Networked：>=6 independent pairs，A/B/C/D 全覆盖，>=4 persistent edges，>=2 条 independent cross-variable H3 edges，且存在长度 >=3 的独立传导路径。
 
 **C-band ≠ Global Stage。**
 Stage III 仍然需要真实 feedback closure 证据，不能因为 C3 就自动宣布闭环成立。
@@ -61,6 +62,7 @@ Stage III 仍然需要真实 feedback closure 证据，不能因为 C3 就自动
 
 ### B bands
 
+- BU Unknown：没有足够的 critical buffer 覆盖，禁止伪装成健康。
 - B0 Healthy：关键 buffer 均 >=75%，且没有净消耗。
 - B1 Strained：最弱关键 buffer <75%，或至少一个关键 buffer 正在净消耗。
 - B2 Low：最弱关键 buffer <50%。
