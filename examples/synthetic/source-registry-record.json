@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "source_id": "src-synthetic-wire",
+  "display_name": "Synthetic Wire Service",
+  "source_class": "global_media",
+  "roles": [
+    "discovery",
+    "original_reporting"
+  ],
+  "canonical_origin": {
+    "publisher": "Synthetic Wire Service",
+    "domain": "synthetic.example",
+    "uri": "https://synthetic.example/"
+  },
+  "ownership_group": null,
+  "domain_strengths": [
+    "diplomacy",
+    "financial_markets"
+  ],
+  "default_access_status": "full_access",
+  "notes": "Synthetic fixture only; not a real source reputation assertion.",
+  "updated_at": "2026-08-31T00:00:00Z",
+  "sensitivity": "public"
+}
