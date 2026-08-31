@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/narrative-gap.schema.json",
+  "title": "Narrative Gap",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "narrative_gap_id",
+    "event_id",
+    "interpretations",
+    "verified_fact_claim_ids",
+    "disputed_fact_claim_ids",
+    "gap_type",
+    "material_fact_disagreement",
+    "narrative_only_divergence",
+    "assessment",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "narrative_gap_id": {
+      "type": "string",
+      "pattern": "^ngp-[A-Za-z0-9._-]+$"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[A-Za-z0-9._-]+$"
+    },
+    "interpretations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "frame_label",
+          "summary",
+          "source_observation_ids"
+        ],
+        "properties": {
+          "frame_label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_observation_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^sob-[A-Za-z0-9._-]+$"
+            }
+          }
+        }
+      }
+    },
+    "verified_fact_claim_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^clm-[A-Za-z0-9._-]+$"
+      }
+    },
+    "disputed_fact_claim_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^clm-[A-Za-z0-9._-]+$"
+      }
+    },
+    "gap_type": {
+      "enum": [
+        "NO_MATERIAL_GAP",
+        "NARRATIVE_ONLY",
+        "FACT_DISPUTE",
+        "MIXED",
+        "UNKNOWN"
+      ]
+    },
+    "material_fact_disagreement": {
+      "type": "boolean"
+    },
+    "narrative_only_divergence": {
+      "type": "boolean"
+    },
+    "assessment": {
+      "type": "string",
+      "minLength": 1
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
