@@ -12,7 +12,7 @@
     "covered_domains",
     "missing_domains",
     "confirmed_domains",
-    "unknown_domains",
+    "unverified_domains",
     "critical_capability_count",
     "critical_unknown_count",
     "critical_unavailable_count",
@@ -132,30 +132,6 @@
         ]
       }
     },
-    "unknown_domains": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "enum": [
-          "cash_flow",
-          "liquidity",
-          "asset_disposition",
-          "industrial_space",
-          "land",
-          "energy",
-          "water",
-          "food",
-          "mobility",
-          "physical_ai",
-          "communications",
-          "medical",
-          "sanitation",
-          "tools_spares",
-          "offline_knowledge",
-          "people_network"
-        ]
-      }
-    },
     "critical_capability_count": {
       "type": "integer",
       "minimum": 0
@@ -213,6 +189,30 @@
         "confidential",
         "restricted"
       ]
+    },
+    "unverified_domains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "cash_flow",
+          "liquidity",
+          "asset_disposition",
+          "industrial_space",
+          "land",
+          "energy",
+          "water",
+          "food",
+          "mobility",
+          "physical_ai",
+          "communications",
+          "medical",
+          "sanitation",
+          "tools_spares",
+          "offline_knowledge",
+          "people_network"
+        ]
+      }
     }
   }
 }
