@@ -22,5 +22,8 @@
     "unknown": 0
   },
   "generated_at": "2026-08-31T05:10:00Z",
-  "sensitivity": "public"
+  "sensitivity": "public",
+  "outcome_ids": [
+    "jot-synthetic-r5-001"
+  ]
 }
