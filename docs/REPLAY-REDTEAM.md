@@ -54,7 +54,9 @@ Summary reports counts only:
 
 There is no aggregate `accuracy_score`.
 
-Passing 13 synthetic cases does not mean the system is 100% accurate in the real world. It only means the encoded synthetic failure modes behave as intended.
+The Phase 3R exit replay contains 13 required synthetic cases.
+
+Passing 13/13 does not mean the system is 100% accurate in the real world. It only means the encoded synthetic failure modes behave as intended.
 
 ## 4. Cross-layer replay
 
