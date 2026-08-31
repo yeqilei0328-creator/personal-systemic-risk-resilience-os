@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "sca-synthetic-001",
+  "claim_ref": "claim-synthetic-001",
+  "observation_ids": [
+    "sob-synthetic-001"
+  ],
+  "unique_source_count": 1,
+  "known_independence_group_count": 1,
+  "unknown_lineage_count": 0,
+  "derivative_observation_count": 0,
+  "access_limited_count": 0,
+  "state": "SINGLE_ORIGIN",
+  "single_source_bias": true,
+  "reasons": [
+    "all observations trace to one known independence group"
+  ],
+  "as_of": "2026-08-31T00:10:00Z",
+  "sensitivity": "public"
+}
