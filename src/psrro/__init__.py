@@ -1,3 +1,7 @@
+from .intelligence_replay import (
+    evaluate_replay_step,
+    summarize_replay_suite,
+)
 from .intelligence_chain import (
     build_chain_snapshot,
     is_chain_supported_link,
@@ -46,6 +50,8 @@ from .quantification import (
 )
 
 __all__ = [
+    "evaluate_replay_step",
+    "summarize_replay_suite",
     "build_chain_snapshot",
     "is_chain_supported_link",
     "is_forecast_only",
