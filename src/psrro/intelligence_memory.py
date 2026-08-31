@@ -70,6 +70,19 @@ class JudgmentMemoryStore:
         jid = _safe(judgment_id, "judgment_id")
         return _load(self.root / "judgments" / f"{jid}.json")
 
+    def append_outcome(self, record: Mapping) -> Path:
+        oid = _safe(str(record["outcome_id"]), "outcome_id")
+        jid = _safe(str(record["judgment_id"]), "judgment_id")
+        return _append_only_write(
+            self.root / "outcomes" / jid / f"{oid}.json",
+            record,
+        )
+
+    def get_outcome(self, judgment_id: str, outcome_id: str) -> dict:
+        jid = _safe(judgment_id, "judgment_id")
+        oid = _safe(outcome_id, "outcome_id")
+        return _load(self.root / "outcomes" / jid / f"{oid}.json")
+
     def append_revision(self, record: Mapping) -> Path:
         rid = _safe(str(record["revision_id"]), "revision_id")
         jid = _safe(str(record["judgment_id"]), "judgment_id")
@@ -93,13 +106,13 @@ class JudgmentMemoryStore:
 
 
 def summarize_judgment_calibration(
-    judgments: Sequence[Mapping],
+    outcomes: Sequence[Mapping],
     *,
     summary_id: str = "jcs-derived",
     generated_at: str = "1970-01-01T00:00:00Z",
     sensitivity: str = "public",
 ) -> dict:
-    """Count outcomes/errors without manufacturing one aggregate accuracy score."""
+    """Count latest supplied outcome records without manufacturing one accuracy score."""
     status_counts = {
         "resolved": 0,
         "partially_resolved": 0,
@@ -107,11 +120,11 @@ def summarize_judgment_calibration(
     }
     error_counts = {name: 0 for name in ERROR_TYPES}
 
-    ids = []
-    for judgment in judgments:
-        ids.append(judgment["judgment_id"])
-        status_counts[judgment["outcome_status"]] += 1
-        for error_type in judgment.get("error_types", []):
+    judgment_ids = []
+    for outcome in outcomes:
+        judgment_ids.append(outcome["judgment_id"])
+        status_counts[outcome["outcome_status"]] += 1
+        for error_type in outcome.get("error_types", []):
             if error_type not in error_counts:
                 raise ValueError(f"unsupported error type: {error_type}")
             error_counts[error_type] += 1
@@ -119,8 +132,8 @@ def summarize_judgment_calibration(
     return {
         "schema_version": "0.1.0",
         "summary_id": summary_id,
-        "judgment_ids": sorted(set(ids)),
-        "total_count": len(judgments),
+        "judgment_ids": sorted(set(judgment_ids)),
+        "total_count": len(outcomes),
         "resolved_count": status_counts["resolved"],
         "partially_resolved_count": status_counts["partially_resolved"],
         "unresolved_count": status_counts["unresolved"],
@@ -128,7 +141,6 @@ def summarize_judgment_calibration(
         "generated_at": generated_at,
         "sensitivity": sensitivity,
     }
-
 
 def claim_grade_changed(prior_grade: str | None, posterior_grade: str | None) -> bool:
     """Identity comparison only. No A/B/C/D numeric ordering exists here."""
