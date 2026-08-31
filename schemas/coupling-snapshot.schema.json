@@ -11,6 +11,7 @@
     "supported_edge_count",
     "validated_edge_count",
     "strong_edge_count",
+    "strong_independent_cross_edge_count",
     "validated_cross_variable_edge_count",
     "unique_validated_directed_pairs",
     "independent_validated_directed_pairs",
@@ -116,6 +117,10 @@
         "confidential",
         "restricted"
       ]
+    },
+    "strong_independent_cross_edge_count": {
+      "type": "integer",
+      "minimum": 0
     }
   }
 }
