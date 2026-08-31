@@ -101,6 +101,13 @@ class EventClaimStateStore:
         _write_json(path, record)
         return path
 
+    def get_material_change(self, event_id: str, assessment_id: str) -> dict:
+        event_id = _safe_component(event_id, "event_id")
+        assessment_id = _safe_component(assessment_id, "assessment_id")
+        return _load_json(
+            self.root / "material-change" / event_id / f"{assessment_id}.json"
+        )
+
 
 def numeric_material_change(
     policy: Mapping | None,
