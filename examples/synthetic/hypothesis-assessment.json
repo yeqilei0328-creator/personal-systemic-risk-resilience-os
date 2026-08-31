@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1.0",
+  "hypothesis_assessment_id": "hya-synthetic-r3-001",
+  "target_type": "edge",
+  "target_id": "edge-synthetic-001",
+  "supporting_evidence_ids": [
+    "evd-synthetic-001"
+  ],
+  "refuting_evidence_ids": [],
+  "alternative_explanations": [
+    "Synthetic alternative cause."
+  ],
+  "omitted_variables": [
+    "Synthetic omitted variable."
+  ],
+  "falsification_condition": "Synthetic downstream metric fails to respond.",
+  "falsification_status": "not_triggered",
+  "posterior_direction": "unchanged",
+  "assessed_at": "2026-08-31T02:15:00Z",
+  "sensitivity": "public"
+}
