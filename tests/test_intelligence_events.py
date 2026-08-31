@@ -47,6 +47,12 @@ class FingerprintTests(unittest.TestCase):
         }
         self.assertEqual(event_fingerprint(left), event_fingerprint(right))
 
+    def test_fingerprint_has_stable_known_value(self):
+        self.assertEqual(
+            event_fingerprint(basis()),
+            "cb04875bb8484e37279a31a4310aa13a019d2b2bc4e325cc23fd27c9ca250465",
+        )
+
     def test_display_title_is_not_part_of_fingerprint(self):
         self.assertEqual(event("P3", "Headline A")["fingerprint"], event("P3", "Totally different headline")["fingerprint"])
 
@@ -127,12 +133,15 @@ class StoreTests(unittest.TestCase):
             ev = {"event_id": "evt-1", "value": 1}
             cl = {"claim_id": "clm-1", "value": 2}
             val = {"value_observation_id": "cvo-1", "claim_id": "clm-1", "value": 3}
+            change = {"assessment_id": "mca-1", "event_id": "evt-1", "value": 4}
             store.put_event(ev)
             store.put_claim(cl)
             store.put_value_observation(val)
+            store.put_material_change(change)
             self.assertEqual(store.get_event("evt-1"), ev)
             self.assertEqual(store.get_claim("clm-1"), cl)
             self.assertEqual(store.get_value_observation("clm-1", "cvo-1"), val)
+            self.assertEqual(store.get_material_change("evt-1", "mca-1"), change)
 
     def test_unsafe_identifier_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
