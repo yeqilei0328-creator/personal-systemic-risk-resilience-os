@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "rpr-synthetic-r7-001",
+  "case_id": "rpc-synthetic-r7-001",
+  "step_id": "step-001",
+  "category": "duplicate",
+  "expected_notify": false,
+  "actual_notify": false,
+  "expected_code": "DUPLICATE_STATE",
+  "actual_trigger_codes": [],
+  "actual_suppression_codes": [
+    "DUPLICATE_STATE"
+  ],
+  "passed": true,
+  "error_class": "NONE",
+  "notes": "Synthetic replay result.",
+  "sensitivity": "public"
+}
