@@ -12,10 +12,12 @@
     "as_of",
     "ordered_link_assessment_ids",
     "total_link_count",
+    "required_link_count",
     "supported_link_count",
     "h3_link_count",
     "forecast_only_link_count",
     "falsified_link_count",
+    "falsified_required_link_count",
     "strengthening_link_count",
     "weakening_link_count",
     "material_link_count",
@@ -117,6 +119,14 @@
         "confidential",
         "restricted"
       ]
+    },
+    "required_link_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "falsified_required_link_count": {
+      "type": "integer",
+      "minimum": 0
     }
   }
 }
