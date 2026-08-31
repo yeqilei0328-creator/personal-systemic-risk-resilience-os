@@ -16,10 +16,18 @@ def judgment(jid="jdg-1"):
     }
 
 
-def outcome(oid="jot-1", jid="jdg-1", status="unresolved", errors=None, later=None):
+def outcome(
+    oid="jot-1",
+    jid="jdg-1",
+    status="unresolved",
+    errors=None,
+    later=None,
+    evaluated_at="2026-08-31T00:00:00Z",
+):
     return {
         "outcome_id": oid,
         "judgment_id": jid,
+        "evaluated_at": evaluated_at,
         "outcome_status": status,
         "error_types": errors or [],
         "later_result": later,
@@ -122,14 +130,39 @@ class CalibrationTests(unittest.TestCase):
         self.assertEqual(result["error_type_counts"]["timing_error"], 1)
         self.assertNotIn("accuracy_score", result)
 
-    def test_duplicate_judgment_ids_remain_visible_as_multiple_outcome_observations(self):
+    def test_latest_outcome_per_judgment_is_used_for_current_calibration(self):
         rows = [
-            outcome("jot-1", "jdg-1", "unresolved", [], None),
-            outcome("jot-2", "jdg-1", "partially_resolved", ["unknown"], "new evidence"),
+            outcome(
+                "jot-1",
+                "jdg-1",
+                "unresolved",
+                [],
+                None,
+                "2026-08-31T00:00:00Z",
+            ),
+            outcome(
+                "jot-2",
+                "jdg-1",
+                "partially_resolved",
+                ["unknown"],
+                "new evidence",
+                "2026-08-31T01:00:00Z",
+            ),
         ]
         result = summarize_judgment_calibration(rows)
-        self.assertEqual(result["total_count"], 2)
+        self.assertEqual(result["total_count"], 1)
         self.assertEqual(result["judgment_ids"], ["jdg-1"])
+        self.assertEqual(result["outcome_ids"], ["jot-2"])
+        self.assertEqual(result["partially_resolved_count"], 1)
+        self.assertEqual(result["error_type_counts"]["unknown"], 1)
+
+    def test_equal_latest_timestamps_fail_closed(self):
+        rows = [
+            outcome("jot-1", "jdg-1", evaluated_at="2026-08-31T01:00:00Z"),
+            outcome("jot-2", "jdg-1", evaluated_at="2026-08-31T01:00:00Z"),
+        ]
+        with self.assertRaises(ValueError):
+            summarize_judgment_calibration(rows)
 
 
 if __name__ == "__main__":
