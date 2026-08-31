@@ -35,8 +35,10 @@
 - [x] Single Point of Failure detection
 - [x] Public-method / private-state contract
 
-### Phase 3B — Private Operational State Bootstrap — NEXT / BLOCKED
-Requires a separate private operational-state repository or equivalent private data layer.
+### Phase 3B — Private Operational State Bootstrap — COMPLETE
+Separate private operational-state layer established, pinned to public method version and validation-enabled.
+
+### Phase 3C — Capability Verification & Baseline Completion — NEXT
 
 Private audit domains:
 - [ ] 现金流
@@ -52,7 +54,14 @@ Private audit domains:
 - [ ] 食品 / 农业转换
 - [ ] 医疗 / 卫生
 - [ ] 工具 / 备件 / 维修
+- [ ] 离线知识库
 - [ ] 人员 / 技能 / 可信网络
+
+Exit gate:
+- required private domains sufficiently covered;
+- critical capabilities no longer unknown where evidence can reasonably be obtained;
+- first-failure point and autonomy are derived only from measured/field-tested/audited evidence;
+- real SPOFs and readiness gaps are explicitly surfaced.
 
 ## Phase 4 — Playbooks — NOT STARTED
 - [ ] 金融危机
