@@ -100,7 +100,20 @@ Principle:
 
 ## Current priority
 
-### Phase 3R — Radar Precision Upgrade v0.1
+### Phase 3C — Capability Verification & Baseline Completion — ACTIVE
+
+Phase 3R is engineering-complete. The program has returned to physical/private capability verification.
+
+Current aggregate checkpoint:
+- private Water baseline exists and remains `stated`; field evidence pending;
+- private Energy baseline exists and remains `stated`; field evidence pending;
+- no Water/Energy autonomy claim is permitted yet;
+- Preparedness remains fail-closed until required domains and critical capabilities are sufficiently verified;
+- next engineering domain: **Communications / Network / Offline Compute Resilience**.
+
+The public repository remains method-only. Real operational values stay in the separate private state layer.
+
+### Phase 3R — Radar Precision Upgrade v0.1 — ENGINEERING COMPLETE
 
 The existing news-push conversation remains the user-facing presentation layer. The current priority is to upgrade the backend World Intelligence Engine from conceptual Draft 0.2 into a stateful, precise systemic-risk radar before continuing deeper physical-capability audits.
 
@@ -132,9 +145,9 @@ Namespace rule:
 - `Risk Variable A-D` = systemic first-order variables;
 - bare A/B/C/D is prohibited where ambiguous.
 
-### Phase 3C — Capability Verification & Baseline Completion — PAUSED AFTER CLEAN CHECKPOINT
+### Phase 3C — Capability Verification & Baseline Completion — ACTIVE
 
-Phase 3B has established a separate private operational-state layer and validated it against a pinned public method version. Water baseline has been instantiated in private state; Water field evidence collection remains open. Energy verification method v0.1 is complete in the public method repository.
+Phase 3B has established a separate private operational-state layer and validated it against a pinned public method version. Water and Energy both have private baseline audits backed by pinned public methods. Both remain at stated verification until field evidence is supplied.
 
 The next task is to move private capabilities from `stated` toward `measured` / `field_tested` / `audited`, fill missing required domains, identify real single points of failure, and only then derive defensible Base Autonomy / First Failure Point.
 
