@@ -98,11 +98,24 @@ Principle:
 
 > **Open methodology, private exposure.**
 
-## Next engineering node
+## Current priority
 
-### Phase 3C — Capability Verification & Baseline Completion
+### Phase 3R — Radar Precision Upgrade v0.1
 
-Phase 3B has established a separate private operational-state layer and validated it against a pinned public method version.
+The existing news-push conversation remains the user-facing presentation layer. The current priority is to upgrade the backend World Intelligence Engine from conceptual Draft 0.2 into a stateful, precise systemic-risk radar before continuing deeper physical-capability audits.
+
+Priority focus:
+- source/evidence precision;
+- event fingerprinting and dedup;
+- behavior vs rhetoric;
+- counterevidence/falsification;
+- A/B/C/D edge and coupling deltas;
+- alert suppression/hysteresis;
+- first Chain Watch: climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation.
+
+### Phase 3C — Capability Verification & Baseline Completion — PAUSED AFTER CLEAN CHECKPOINT
+
+Phase 3B has established a separate private operational-state layer and validated it against a pinned public method version. Water baseline has been instantiated in private state; Water field evidence collection remains open. Energy verification method v0.1 is complete in the public method repository.
 
 The next task is to move private capabilities from `stated` toward `measured` / `field_tested` / `audited`, fill missing required domains, identify real single points of failure, and only then derive defensible Base Autonomy / First Failure Point.
 
