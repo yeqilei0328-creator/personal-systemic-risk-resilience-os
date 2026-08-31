@@ -587,8 +587,8 @@ class ReplaySummaryTests(unittest.TestCase):
         )
         self.assertEqual(actual, expected)
 
-    def test_all_pass_synthetic_suite_matches_fixture(self):
-        # Build a compact deterministic pass suite from gate outcomes.
+    def test_compact_all_pass_summary_helper(self):
+        # Small helper-level sanity check; the 13-case fixture is owned by the exit replay.
         cases = []
 
         c1 = base_candidate(mode="scheduled_brief", priority="P2")
@@ -619,18 +619,13 @@ class ReplaySummaryTests(unittest.TestCase):
             "HYPOTHESIS_FALSIFIED",
         ))
 
-        expected = json.loads(
-            (ROOT / "examples" / "synthetic" / "replay-suite-summary.json").read_text(
-                encoding="utf-8"
-            )
-        )
-        actual = summarize_replay_suite(
-            cases,
-            suite_id=expected["suite_id"],
-            generated_at=expected["generated_at"],
-            sensitivity=expected["sensitivity"],
-        )
-        self.assertEqual(actual, expected)
+        actual = summarize_replay_suite(cases)
+        self.assertEqual(actual["total_steps"], 3)
+        self.assertEqual(actual["passed_steps"], 3)
+        self.assertEqual(actual["failed_steps"], 0)
+        self.assertEqual(actual["false_positive_count"], 0)
+        self.assertEqual(actual["false_negative_count"], 0)
+        self.assertEqual(actual["code_mismatch_count"], 0)
 
 
 if __name__ == "__main__":
