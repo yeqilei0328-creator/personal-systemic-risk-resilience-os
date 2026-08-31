@@ -56,6 +56,13 @@ class CostlySignalTests(unittest.TestCase):
         )
         self.assertEqual(result["strength"], "WEAK")
 
+    def test_none_known_plus_unknown_resources_stays_unknown(self):
+        row = behavior(resource="none", persistence="sustained", reversibility="hard")
+        row["resource_commitment"]["military_assets"] = "unknown"
+        result = assess_costly_signal(row)
+        self.assertEqual(result["strength"], "UNKNOWN")
+        self.assertFalse(result["resource_commitment_present"])
+
     def test_unknown_resources_fail_to_unknown_not_strong(self):
         row = behavior(resource="unknown")
         row["resource_commitment"] = {k: "unknown" for k in row["resource_commitment"]}
