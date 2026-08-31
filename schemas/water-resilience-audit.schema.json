@@ -151,7 +151,10 @@
       ],
       "properties": {
         "extraction_requires_power": {
-          "type": "boolean"
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "primary_power": {
           "enum": [
@@ -192,7 +195,10 @@
       ],
       "properties": {
         "required": {
-          "type": "boolean"
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "system_status": {
           "enum": [
