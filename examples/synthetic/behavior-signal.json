@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1.0",
+  "behavior_id": "beh-synthetic-r3-001",
+  "event_id": "evt-synthetic-r2-001",
+  "actor": "Synthetic Actor",
+  "behavior_kind": "budget",
+  "observable_action": true,
+  "description": "Synthetic budget commitment.",
+  "direction": "intensifying",
+  "resource_commitment": {
+    "money": "high",
+    "military_assets": "none",
+    "foreign_exchange": "none",
+    "capacity": "medium",
+    "personnel": "low",
+    "political_capital": "medium",
+    "time": "medium"
+  },
+  "persistence": "sustained",
+  "reversibility": "hard",
+  "claim_ids": [
+    "clm-synthetic-r2-001"
+  ],
+  "evidence_ids": [],
+  "source_observation_ids": [
+    "sob-synthetic-001"
+  ],
+  "observed_at": "2026-08-31T02:00:00Z",
+  "sensitivity": "public"
+}
