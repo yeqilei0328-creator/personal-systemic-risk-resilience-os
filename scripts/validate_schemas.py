@@ -17,6 +17,8 @@ PAIRS = {
     "buffer_snapshot": ("schemas/buffer-snapshot.schema.json", "examples/synthetic/buffer-snapshot.json"),
     "edge_assessment": ("schemas/edge-assessment.schema.json", "examples/synthetic/edge-assessment.json"),
     "r_level_assessment": ("schemas/r-level-assessment.schema.json", "examples/synthetic/r-level-assessment.json"),
+    "capability_audit": ("schemas/capability-audit.schema.json", "examples/synthetic/capability-audit.json"),
+    "preparedness_snapshot": ("schemas/preparedness-snapshot.schema.json", "examples/synthetic/preparedness-snapshot.json"),
 }
 
 def load(path):
