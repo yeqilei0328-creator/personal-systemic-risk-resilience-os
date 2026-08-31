@@ -1,6 +1,8 @@
 import copy
+import json
 import tempfile
 import unittest
+from pathlib import Path
 
 from src.psrro.intelligence_memory import (
     JudgmentMemoryStore,
@@ -32,6 +34,26 @@ def outcome(
         "error_types": errors or [],
         "later_result": later,
     }
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class ExampleContractTests(unittest.TestCase):
+    def test_synthetic_outcome_recomputes_calibration_fixture(self):
+        outcome_obj = json.loads(
+            (ROOT / "examples" / "synthetic" / "judgment-outcome-record.json").read_text(encoding="utf-8")
+        )
+        expected = json.loads(
+            (ROOT / "examples" / "synthetic" / "judgment-calibration-summary.json").read_text(encoding="utf-8")
+        )
+        actual = summarize_judgment_calibration(
+            [outcome_obj],
+            summary_id=expected["summary_id"],
+            generated_at=expected["generated_at"],
+            sensitivity=expected["sensitivity"],
+        )
+        self.assertEqual(actual, expected)
 
 
 class AppendOnlyStoreTests(unittest.TestCase):
