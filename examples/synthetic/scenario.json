@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1.0",
+  "scenario_id": "scn-synthetic-001",
+  "title": "Synthetic climate-finance-technology resonance",
+  "summary": "Synthetic scenario for end-to-end schema validation; not a real-world forecast.",
+  "status": "watch",
+  "probability": {
+    "low": 0.2,
+    "high": 0.4,
+    "basis": "Synthetic test range only."
+  },
+  "impact": 3,
+  "velocity": "medium",
+  "lead_time": {
+    "min_days": 30,
+    "max_days": 180,
+    "confidence": 0.4
+  },
+  "reversibility": "medium",
+  "first_order_variables": [
+    "B",
+    "C",
+    "D"
+  ],
+  "event_ids": [
+    "evt-synthetic-001"
+  ],
+  "edge_ids": [
+    "edge-synthetic-001"
+  ],
+  "evidence_ids": [
+    "evd-synthetic-001"
+  ],
+  "trigger_conditions": [
+    "Two or more synthetic indicators worsen together."
+  ],
+  "disconfirming_conditions": [
+    "Synthetic indicators normalize without transmission."
+  ],
+  "updated_at": "2026-08-31T00:30:00Z",
+  "sensitivity": "public"
+}
