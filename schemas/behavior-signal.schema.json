@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/behavior-signal.schema.json",
+  "title": "Behavior Signal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "behavior_id",
+    "event_id",
+    "actor",
+    "behavior_kind",
+    "observable_action",
+    "description",
+    "resource_commitment",
+    "persistence",
+    "reversibility",
+    "claim_ids",
+    "evidence_ids",
+    "source_observation_ids",
+    "observed_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "behavior_id": {
+      "type": "string",
+      "pattern": "^beh-[A-Za-z0-9._-]+$"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[A-Za-z0-9._-]+$"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "behavior_kind": {
+      "enum": [
+        "speech",
+        "policy",
+        "regulation",
+        "budget",
+        "procurement",
+        "deployment",
+        "attack",
+        "construction",
+        "production",
+        "withdrawal",
+        "market_action",
+        "logistics",
+        "agreement",
+        "delivery",
+        "other"
+      ]
+    },
+    "observable_action": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "direction": {
+      "enum": [
+        "easing",
+        "neutral",
+        "intensifying",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "resource_commitment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "money",
+        "military_assets",
+        "foreign_exchange",
+        "capacity",
+        "personnel",
+        "political_capital",
+        "time"
+      ],
+      "properties": {
+        "money": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "military_assets": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "foreign_exchange": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "capacity": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "personnel": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "political_capital": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "time": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "persistence": {
+      "enum": [
+        "one_off",
+        "repeated",
+        "sustained",
+        "structural",
+        "unknown"
+      ]
+    },
+    "reversibility": {
+      "enum": [
+        "easy",
+        "moderate",
+        "hard",
+        "committed",
+        "unknown"
+      ]
+    },
+    "claim_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^clm-[A-Za-z0-9._-]+$"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "source_observation_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sob-[A-Za-z0-9._-]+$"
+      }
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
