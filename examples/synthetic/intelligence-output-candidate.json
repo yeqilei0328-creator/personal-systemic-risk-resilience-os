@@ -1,0 +1,48 @@
+{
+  "schema_version": "0.1.0",
+  "candidate_id": "ogc-synthetic-r4-001",
+  "subject_ref": "synthetic-global-risk",
+  "event_ids": [
+    "evt-synthetic-r2-001"
+  ],
+  "delivery_mode": "interrupt_alert",
+  "intelligence_priority": "P1",
+  "material_change": true,
+  "structural_delta_material": true,
+  "observation_signals": {
+    "geopolitical_conflicts": {
+      "direction": "worsen",
+      "real_world_evidence": true
+    },
+    "energy_shipping": {
+      "direction": "worsen",
+      "real_world_evidence": true
+    },
+    "east_asia_security": {
+      "direction": "neutral",
+      "real_world_evidence": false
+    },
+    "extreme_weather_disasters": {
+      "direction": "neutral",
+      "real_world_evidence": false
+    },
+    "price_real_economy_transmission": {
+      "direction": "worsen",
+      "real_world_evidence": true
+    }
+  },
+  "validated_cross_system_transmission": true,
+  "major_system_event": false,
+  "new_strong_edge": false,
+  "hypothesis_falsified": false,
+  "lead_time_compressed": false,
+  "global_stage_change": false,
+  "global_stage_direction": "unchanged",
+  "personal_action_change": false,
+  "common_cause_refs": [
+    "synthetic-common-cause"
+  ],
+  "notes": "Synthetic fixture only.",
+  "detected_at": "2026-08-31T03:00:00Z",
+  "sensitivity": "public"
+}
