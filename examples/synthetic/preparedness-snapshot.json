@@ -12,7 +12,6 @@
   "confirmed_domains": [
     "water"
   ],
-  "unknown_domains": [],
   "critical_capability_count": 1,
   "critical_unknown_count": 0,
   "critical_unavailable_count": 0,
@@ -22,5 +21,6 @@
   "first_failure_domain": "water",
   "state": "AUDITED",
   "readiness_gaps": [],
-  "sensitivity": "public"
+  "sensitivity": "public",
+  "unverified_domains": []
 }
