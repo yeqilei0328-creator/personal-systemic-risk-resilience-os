@@ -38,7 +38,19 @@
 ### Phase 3B — Private Operational State Bootstrap — COMPLETE
 Separate private operational-state layer established, pinned to public method version and validation-enabled.
 
-### Phase 3C — Capability Verification & Baseline Completion — NEXT
+### Phase 3R — Radar Precision Upgrade v0.1 — CURRENT PRIORITY
+
+- [ ] Source registry / source quality / provenance
+- [ ] Event fingerprint / clustering / dedup
+- [ ] Behavior vs rhetoric / directionality
+- [ ] Counterevidence / falsification
+- [ ] Edge / Coupling / Buffer / Scenario delta tracking
+- [ ] Alert gate / suppression / hysteresis
+- [ ] Chain Watch: climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation
+- [ ] Synthetic replay tests for duplicate, worsening, improvement, falsification
+- [ ] Existing news-push conversation retained as presentation layer
+
+### Phase 3C — Capability Verification & Baseline Completion — PAUSED AFTER CLEAN CHECKPOINT
 
 Private audit domains:
 - [ ] 现金流
@@ -46,8 +58,8 @@ Private audit domains:
 - [ ] 房产 / 资产处置
 - [ ] 工业空间 / 厂房
 - [ ] 土地 / 转换能力
-- [ ] 水源 / 净化 / 储水
-- [ ] 光伏 / 储能 / 离网能力
+- [~] 水源 / 净化 / 储水 — private baseline established; field evidence pending
+- [~] 光伏 / 储能 / 离网能力 — public verification method complete; private instantiation deferred until after Phase 3R
 - [ ] 车辆 / 机动
 - [ ] Physical AI / 防御性感知与巡检
 - [ ] 网络 / 通信 / 离线计算
