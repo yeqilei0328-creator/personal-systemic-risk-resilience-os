@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.1.0",
+  "event_id": "evt-synthetic-r2-001",
+  "display_title": "Synthetic event state",
+  "event_type": "synthetic_deployment",
+  "domain": "technology",
+  "fingerprint_basis": {
+    "actors": [
+      "Synthetic Actor"
+    ],
+    "actions": [
+      "Deploy"
+    ],
+    "objects": [
+      "Synthetic System"
+    ],
+    "locations": [
+      "Synthetic Region"
+    ],
+    "time_window_key": "2026-08-31",
+    "consequences": [
+      "Operational change"
+    ]
+  },
+  "fingerprint": "4cfd8ce370c4d12bb393f6f55be60d35380c53f3d26cfe1f61c6571925747762",
+  "first_seen": "2026-08-31T00:00:00Z",
+  "last_updated": "2026-08-31T01:00:00Z",
+  "intelligence_priority": "P3",
+  "lifecycle": "developing",
+  "claim_ids": [
+    "clm-synthetic-r2-001"
+  ],
+  "source_observation_ids": [
+    "sob-synthetic-001"
+  ],
+  "material_markers": [],
+  "notes": "Synthetic fixture only.",
+  "sensitivity": "public"
+}
