@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "suite_id": "rps-synthetic-r7-001",
+  "result_ids": [
+    "rpr-redteam-21",
+    "rpr-redteam-22",
+    "rpr-redteam-23"
+  ],
+  "total_steps": 3,
+  "passed_steps": 3,
+  "failed_steps": 0,
+  "false_positive_count": 0,
+  "false_negative_count": 0,
+  "code_mismatch_count": 0,
+  "duplicate_control_failure_count": 0,
+  "deescalation_falsification_failure_count": 0,
+  "generated_at": "2026-08-31T07:00:00Z",
+  "sensitivity": "public"
+}
