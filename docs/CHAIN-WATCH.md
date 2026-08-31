@@ -86,7 +86,9 @@ Every required ordered link is supported.
 A previously BUILDING/TRANSMITTING chain is losing support and weakening dominates, without a required link being formally falsified.
 
 ### BROKEN
-At least one required link is Hx.
+At least one **required** link is Hx.
+
+Auxiliary/optional links may be tracked without automatically breaking the canonical required path.
 
 ## 5. Longest contiguous supported path
 
@@ -111,6 +113,12 @@ R6 does not output:
 - a new global danger index.
 
 It reports structure.
+
+Snapshots therefore expose both:
+- total link count;
+- required link count;
+- all falsified links;
+- falsified required links.
 
 ## 7. Relationship to R4
 
