@@ -1,5 +1,7 @@
 import copy
+import json
 import unittest
+from pathlib import Path
 
 from src.psrro.intelligence_output import decide_output_gate, output_state_signature
 
@@ -55,6 +57,28 @@ def worsen_three(row):
     for name in ("geopolitical_conflicts", "energy_shipping", "price_real_economy_transmission"):
         row["observation_signals"][name] = {"direction": "worsen", "real_world_evidence": True}
     return row
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class ExampleContractTests(unittest.TestCase):
+    def test_synthetic_example_decision_matches_reference_logic(self):
+        candidate_obj = json.loads(
+            (ROOT / "examples" / "synthetic" / "intelligence-output-candidate.json").read_text(encoding="utf-8")
+        )
+        context_obj = json.loads(
+            (ROOT / "examples" / "synthetic" / "intelligence-output-gate-context.json").read_text(encoding="utf-8")
+        )
+        expected = json.loads(
+            (ROOT / "examples" / "synthetic" / "intelligence-output-decision.json").read_text(encoding="utf-8")
+        )
+        actual = decide_output_gate(
+            candidate_obj,
+            context_obj,
+            decision_id=expected["decision_id"],
+        )
+        self.assertEqual(actual, expected)
 
 
 class ScheduledBriefTests(unittest.TestCase):
