@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/r-level-assessment.schema.json",
+  "title": "R-Level Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "scenario_id",
+    "exposure_id",
+    "as_of",
+    "governance_integrity",
+    "preparation_latency_days",
+    "local_disruption",
+    "life_safety_failure",
+    "readiness_gap",
+    "recommended_r_level",
+    "reasons",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^rla-[A-Za-z0-9._-]+$"
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^scn-[A-Za-z0-9._-]+$"
+    },
+    "exposure_id": {
+      "type": "string",
+      "pattern": "^exp-[A-Za-z0-9._-]+$"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "governance_integrity": {
+      "enum": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ]
+    },
+    "preparation_latency_days": {
+      "type": "number",
+      "minimum": 0
+    },
+    "local_disruption": {
+      "type": "boolean"
+    },
+    "life_safety_failure": {
+      "type": "boolean"
+    },
+    "readiness_gap": {
+      "type": "boolean"
+    },
+    "recommended_r_level": {
+      "enum": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
