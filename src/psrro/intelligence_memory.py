@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -54,6 +55,15 @@ def _append_only_write(path: Path, obj: Mapping) -> Path:
 
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _parse_dt(value: str) -> datetime:
+    if value.endswith("Z"):
+        value = value[:-1] + "+00:00"
+    dt = datetime.fromisoformat(value)
+    if dt.tzinfo is None:
+        raise ValueError("datetime must be timezone-aware")
+    return dt.astimezone(timezone.utc)
 
 
 class JudgmentMemoryStore:
@@ -112,7 +122,19 @@ def summarize_judgment_calibration(
     generated_at: str = "1970-01-01T00:00:00Z",
     sensitivity: str = "public",
 ) -> dict:
-    """Count latest supplied outcome records without manufacturing one accuracy score."""
+    """Use the latest outcome per judgment; retain full history outside the summary."""
+    latest: dict[str, Mapping] = {}
+    latest_time: dict[str, datetime] = {}
+
+    for outcome in outcomes:
+        jid = outcome["judgment_id"]
+        evaluated = _parse_dt(outcome["evaluated_at"])
+        if jid not in latest or evaluated > latest_time[jid]:
+            latest[jid] = outcome
+            latest_time[jid] = evaluated
+        elif evaluated == latest_time[jid] and outcome["outcome_id"] != latest[jid]["outcome_id"]:
+            raise ValueError(f"ambiguous latest outcome timestamp for {jid}")
+
     status_counts = {
         "resolved": 0,
         "partially_resolved": 0,
@@ -120,9 +142,8 @@ def summarize_judgment_calibration(
     }
     error_counts = {name: 0 for name in ERROR_TYPES}
 
-    judgment_ids = []
-    for outcome in outcomes:
-        judgment_ids.append(outcome["judgment_id"])
+    selected = [latest[jid] for jid in sorted(latest)]
+    for outcome in selected:
         status_counts[outcome["outcome_status"]] += 1
         for error_type in outcome.get("error_types", []):
             if error_type not in error_counts:
@@ -132,8 +153,9 @@ def summarize_judgment_calibration(
     return {
         "schema_version": "0.1.0",
         "summary_id": summary_id,
-        "judgment_ids": sorted(set(judgment_ids)),
-        "total_count": len(outcomes),
+        "judgment_ids": [outcome["judgment_id"] for outcome in selected],
+        "outcome_ids": [outcome["outcome_id"] for outcome in selected],
+        "total_count": len(selected),
         "resolved_count": status_counts["resolved"],
         "partially_resolved_count": status_counts["partially_resolved"],
         "unresolved_count": status_counts["unresolved"],
