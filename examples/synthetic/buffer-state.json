@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1.0",
+  "buffer_id": "buf-synthetic-energy",
+  "domain": "energy_spare_capacity",
+  "criticality": 5,
+  "unit": "synthetic-units",
+  "baseline_capacity": 100,
+  "current_capacity": 60,
+  "minimum_viable_capacity": 10,
+  "replenishment_rate_per_day": 1,
+  "depletion_rate_per_day": 2,
+  "as_of": "2026-08-31T01:00:00Z",
+  "confidence": 0.5,
+  "sensitivity": "public"
+}

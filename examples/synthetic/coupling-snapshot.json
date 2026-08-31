@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.1.0",
+  "snapshot_id": "cpl-synthetic-001",
+  "as_of": "2026-08-31T01:00:00Z",
+  "supported_edge_count": 4,
+  "validated_edge_count": 4,
+  "strong_edge_count": 1,
+  "validated_cross_variable_edge_count": 4,
+  "unique_validated_directed_pairs": 4,
+  "independent_validated_directed_pairs": 4,
+  "pair_density": 0.333333,
+  "independent_pair_density": 0.333333,
+  "active_variable_count": 3,
+  "coactivation_breadth": 0.75,
+  "persistent_validated_edge_count": 2,
+  "common_cause_flagged_validated_edges": 0,
+  "common_cause_share": 0,
+  "max_independent_path_length": 2,
+  "band": "C2",
+  "sensitivity": "public",
+  "strong_independent_cross_edge_count": 1
+}

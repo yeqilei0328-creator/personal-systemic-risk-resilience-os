@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/buffer-state.schema.json",
+  "title": "Buffer State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "buffer_id",
+    "domain",
+    "criticality",
+    "unit",
+    "baseline_capacity",
+    "current_capacity",
+    "minimum_viable_capacity",
+    "replenishment_rate_per_day",
+    "depletion_rate_per_day",
+    "as_of",
+    "confidence",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "buffer_id": {
+      "type": "string",
+      "pattern": "^buf-[A-Za-z0-9._-]+$"
+    },
+    "domain": {
+      "enum": [
+        "fiscal_space",
+        "monetary_space",
+        "energy_spare_capacity",
+        "food_inventory",
+        "strategic_reserve",
+        "financial_liquidity",
+        "supply_chain_redundancy",
+        "institutional_capacity",
+        "other"
+      ]
+    },
+    "criticality": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_capacity": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "current_capacity": {
+      "type": "number",
+      "minimum": 0
+    },
+    "minimum_viable_capacity": {
+      "type": "number",
+      "minimum": 0
+    },
+    "replenishment_rate_per_day": {
+      "type": "number",
+      "minimum": 0
+    },
+    "depletion_rate_per_day": {
+      "type": "number",
+      "minimum": 0
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

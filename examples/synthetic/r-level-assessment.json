@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "rla-synthetic-001",
+  "scenario_id": "scn-synthetic-001",
+  "exposure_id": "exp-synthetic-001",
+  "as_of": "2026-08-31T01:00:00Z",
+  "governance_integrity": "G0",
+  "preparation_latency_days": 60,
+  "local_disruption": false,
+  "life_safety_failure": false,
+  "readiness_gap": false,
+  "recommended_r_level": "R2",
+  "reasons": [
+    "Synthetic example only."
+  ],
+  "sensitivity": "public"
+}

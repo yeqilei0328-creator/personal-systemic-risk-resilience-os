@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "snapshot_id": "bfs-synthetic-001",
+  "as_of": "2026-08-31T01:00:00Z",
+  "buffer_ids": [
+    "buf-synthetic-energy"
+  ],
+  "critical_buffer_count": 1,
+  "critical_below_75_count": 1,
+  "critical_below_50_count": 0,
+  "critical_below_25_count": 0,
+  "critical_depleting_count": 1,
+  "min_critical_remaining_fraction": 0.555556,
+  "earliest_floor_days": 50,
+  "coverage_gap": false,
+  "band": "B1",
+  "sensitivity": "public"
+}
