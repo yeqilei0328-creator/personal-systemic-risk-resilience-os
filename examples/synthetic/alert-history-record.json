@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "alert_history_id": "ahs-synthetic-r5-001",
+  "candidate_id": "ogc-synthetic-r4-001",
+  "decision_id": "ogd-synthetic-r4-001",
+  "delivery_mode": "interrupt_alert",
+  "outcome": "EMIT",
+  "trigger_codes": [
+    "TRIGGER_A_RESONANCE"
+  ],
+  "suppression_codes": [],
+  "state_signature": "9a56c387d5ea6d49cdee2ddac765d3f0254305b4d35199225798fbdac8eeae8f",
+  "decided_at": "2026-08-31T03:05:00Z",
+  "recorded_at": "2026-08-31T03:06:00Z",
+  "related_prior_alert_id": null,
+  "later_evaluation": "unreviewed",
+  "transport_status": "not_applicable",
+  "sensitivity": "public"
+}
