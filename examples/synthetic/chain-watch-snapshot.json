@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "snapshot_id": "chs-synthetic-r6-001",
+  "chain_id": "chn-climate-food-energy-inflation-ai-v0.1",
+  "previous_snapshot_id": null,
+  "as_of": "2026-08-31T06:15:00Z",
+  "ordered_link_assessment_ids": [
+    "cla-chain-1",
+    "cla-chain-2",
+    "cla-chain-3",
+    "cla-chain-4",
+    "cla-chain-5"
+  ],
+  "total_link_count": 5,
+  "supported_link_count": 5,
+  "h3_link_count": 0,
+  "forecast_only_link_count": 0,
+  "falsified_link_count": 0,
+  "strengthening_link_count": 5,
+  "weakening_link_count": 0,
+  "material_link_count": 5,
+  "longest_contiguous_supported_path": 5,
+  "full_chain_supported": true,
+  "chain_state": "TRANSMITTING",
+  "sensitivity": "public"
+}
