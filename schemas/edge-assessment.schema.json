@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/edge-assessment.schema.json",
+  "title": "Edge Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "edge_id",
+    "as_of",
+    "temporal_ordering_confirmed",
+    "mechanism_documented",
+    "metric_observed",
+    "common_cause_resolved",
+    "persistence_observations",
+    "counterevidence_resolved",
+    "falsification_triggered",
+    "recommended_state",
+    "reasons",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^eda-[A-Za-z0-9._-]+$"
+    },
+    "edge_id": {
+      "type": "string",
+      "pattern": "^edge-[A-Za-z0-9._-]+$"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "temporal_ordering_confirmed": {
+      "type": "boolean"
+    },
+    "mechanism_documented": {
+      "type": "boolean"
+    },
+    "metric_observed": {
+      "type": "boolean"
+    },
+    "common_cause_resolved": {
+      "type": "boolean"
+    },
+    "persistence_observations": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "counterevidence_resolved": {
+      "type": "boolean"
+    },
+    "falsification_triggered": {
+      "type": "boolean"
+    },
+    "recommended_state": {
+      "enum": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "Hx"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
