@@ -43,6 +43,7 @@ def assess_costly_signal(
 
     levels = list(behavior["resource_commitment"].values())
     known = [RESOURCE_ORDER[v] for v in levels if v != "unknown"]
+    unknown_count = sum(v == "unknown" for v in levels)
     if not known:
         strength = "UNKNOWN"
         resource_present = False
@@ -53,7 +54,10 @@ def assess_costly_signal(
         persistence_gate = behavior["persistence"] in PERSISTENCE_GATE
         reversibility_gate = behavior["reversibility"] in REVERSIBILITY_GATE
 
-        if max_resource >= 3 and (persistence_gate or behavior["reversibility"] in {"hard", "committed"}):
+        if max_resource == 0 and unknown_count:
+            strength = "UNKNOWN"
+            reasons.append("no positive commitment is known and some resource dimensions remain unknown")
+        elif max_resource >= 3 and (persistence_gate or behavior["reversibility"] in {"hard", "committed"}):
             strength = "STRONG"
         elif resource_present and (persistence_gate or reversibility_gate):
             strength = "MODERATE"
