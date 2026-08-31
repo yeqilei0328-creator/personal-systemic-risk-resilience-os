@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/intelligence-output-gate-context.schema.json",
+  "title": "Intelligence Output Gate Context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "context_id",
+    "previous_notified_state_signature",
+    "last_notified_at",
+    "cooldown_hours",
+    "hysteresis",
+    "now",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "context_id": {
+      "type": "string",
+      "pattern": "^ogx-[A-Za-z0-9._-]+$"
+    },
+    "previous_notified_state_signature": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "last_notified_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "cooldown_hours": {
+      "type": "number",
+      "minimum": 0
+    },
+    "hysteresis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicable",
+        "persistence_count",
+        "required_count"
+      ],
+      "properties": {
+        "applicable": {
+          "type": "boolean"
+        },
+        "persistence_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "required_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "now": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
