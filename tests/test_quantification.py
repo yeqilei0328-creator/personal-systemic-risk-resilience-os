@@ -86,6 +86,21 @@ class CouplingTests(unittest.TestCase):
         self.assertEqual(result["band"], "C3")
         self.assertGreaterEqual(result["max_independent_path_length"], 3)
 
+    def test_common_cause_h3_does_not_satisfy_c3_strength_gate(self):
+        edges = [
+            edge("e1", "A", "B", persistence="persistent"),
+            edge("e2", "B", "C", persistence="persistent"),
+            edge("e3", "C", "D", persistence="persistent"),
+            edge("e4", "D", "A", persistence="persistent"),
+            edge("e5", "A", "C"),
+            edge("e6", "B", "D"),
+            edge("e7", "C", "A", state="H3", common=True),
+            edge("e8", "D", "B", state="H3", common=True),
+        ]
+        result = coupling_snapshot(edges)
+        self.assertEqual(result["strong_independent_cross_edge_count"], 0)
+        self.assertEqual(result["band"], "C2")
+
     def test_common_cause_not_counted_as_independent_pair(self):
         result = coupling_snapshot([
             edge("e1", "A", "B", common=True),
@@ -123,6 +138,11 @@ class BufferTests(unittest.TestCase):
     def test_b3(self):
         result = buffer_snapshot([self.buf("b1", 5)])
         self.assertEqual(result["band"], "B3")
+
+    def test_unknown_when_no_critical_buffer_is_covered(self):
+        result = buffer_snapshot([self.buf("b1", 90, criticality=3)])
+        self.assertTrue(result["coverage_gap"])
+        self.assertEqual(result["band"], "BU")
 
     def test_depletion_time(self):
         result = buffer_snapshot([self.buf("b1", 50, burn=5)])
