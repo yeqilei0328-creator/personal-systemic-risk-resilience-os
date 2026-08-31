@@ -1,4 +1,4 @@
-name: Schema validation
+name: Validation
 
 on:
   push:
@@ -16,4 +16,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements-dev.txt
-      - run: python scripts/validate_schemas.py
+      - name: Validate schemas and synthetic examples
+        run: python scripts/validate_schemas.py
+      - name: Run quantification unit tests
+        run: python -m unittest discover -s tests -v
