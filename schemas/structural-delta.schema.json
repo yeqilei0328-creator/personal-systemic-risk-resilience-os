@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/structural-delta.schema.json",
+  "title": "Structural Risk Delta",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "structural_delta_id",
+    "event_id",
+    "risk_variable_changes",
+    "edge_changes",
+    "coupling_change",
+    "buffer_change",
+    "scenario_changes",
+    "common_cause_refs",
+    "material",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "structural_delta_id": {
+      "type": "string",
+      "pattern": "^sdl-[A-Za-z0-9._-]+$"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[A-Za-z0-9._-]+$"
+    },
+    "risk_variable_changes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "risk_variable",
+          "direction",
+          "reason",
+          "evidence_ids"
+        ],
+        "properties": {
+          "risk_variable": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "description": "Risk Variable A-D, not Claim Grade."
+          },
+          "direction": {
+            "enum": [
+              "worsen",
+              "improve",
+              "neutral",
+              "uncertain"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^evd-[A-Za-z0-9._-]+$"
+            }
+          }
+        }
+      }
+    },
+    "edge_changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "edge_id",
+          "from_state",
+          "to_state",
+          "direction"
+        ],
+        "properties": {
+          "edge_id": {
+            "type": "string",
+            "pattern": "^edge-[A-Za-z0-9._-]+$"
+          },
+          "from_state": {
+            "enum": [
+              "H0",
+              "H1",
+              "H2",
+              "H3",
+              "Hx"
+            ]
+          },
+          "to_state": {
+            "enum": [
+              "H0",
+              "H1",
+              "H2",
+              "H3",
+              "Hx"
+            ]
+          },
+          "direction": {
+            "enum": [
+              "strengthened",
+              "weakened",
+              "falsified",
+              "recovered",
+              "unchanged",
+              "uncertain"
+            ]
+          }
+        }
+      }
+    },
+    "coupling_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_band",
+        "to_band",
+        "direction"
+      ],
+      "properties": {
+        "from_band": {
+          "enum": [
+            "C0",
+            "C1",
+            "C2",
+            "C3"
+          ]
+        },
+        "to_band": {
+          "enum": [
+            "C0",
+            "C1",
+            "C2",
+            "C3"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "denser",
+            "sparser",
+            "unchanged",
+            "uncertain"
+          ]
+        }
+      }
+    },
+    "buffer_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_band",
+        "to_band",
+        "direction"
+      ],
+      "properties": {
+        "from_band": {
+          "enum": [
+            "BU",
+            "B0",
+            "B1",
+            "B2",
+            "B3"
+          ]
+        },
+        "to_band": {
+          "enum": [
+            "BU",
+            "B0",
+            "B1",
+            "B2",
+            "B3"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "depleted",
+            "restored",
+            "unchanged",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "scenario_changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scenario_id",
+          "probability_low_delta",
+          "probability_high_delta",
+          "velocity_from",
+          "velocity_to",
+          "lead_time_min_days_delta",
+          "lead_time_max_days_delta",
+          "direction"
+        ],
+        "properties": {
+          "scenario_id": {
+            "type": "string",
+            "pattern": "^scn-[A-Za-z0-9._-]+$"
+          },
+          "probability_low_delta": {
+            "type": "number"
+          },
+          "probability_high_delta": {
+            "type": "number"
+          },
+          "velocity_from": {
+            "enum": [
+              "slow",
+              "medium",
+              "fast",
+              "acute"
+            ]
+          },
+          "velocity_to": {
+            "enum": [
+              "slow",
+              "medium",
+              "fast",
+              "acute"
+            ]
+          },
+          "lead_time_min_days_delta": {
+            "type": "number"
+          },
+          "lead_time_max_days_delta": {
+            "type": "number"
+          },
+          "direction": {
+            "enum": [
+              "worse",
+              "improved",
+              "mixed",
+              "unchanged",
+              "uncertain"
+            ]
+          }
+        }
+      }
+    },
+    "common_cause_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "material": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
