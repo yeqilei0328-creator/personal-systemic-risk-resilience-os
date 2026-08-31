@@ -9,17 +9,25 @@ from src.psrro.intelligence_memory import (
 )
 
 
-def judgment(jid="jdg-1", outcome="unresolved", errors=None):
+def judgment(jid="jdg-1"):
     return {
         "judgment_id": jid,
-        "outcome_status": outcome,
-        "error_types": errors or [],
         "current_finding": "synthetic",
     }
 
 
+def outcome(oid="jot-1", jid="jdg-1", status="unresolved", errors=None, later=None):
+    return {
+        "outcome_id": oid,
+        "judgment_id": jid,
+        "outcome_status": status,
+        "error_types": errors or [],
+        "later_result": later,
+    }
+
+
 class AppendOnlyStoreTests(unittest.TestCase):
-    def test_idempotent_replay_is_allowed(self):
+    def test_idempotent_judgment_replay_is_allowed(self):
         with tempfile.TemporaryDirectory() as tmp:
             store = JudgmentMemoryStore(tmp)
             row = judgment()
@@ -27,7 +35,7 @@ class AppendOnlyStoreTests(unittest.TestCase):
             store.append_judgment(copy.deepcopy(row))
             self.assertEqual(store.get_judgment("jdg-1"), row)
 
-    def test_same_id_with_changed_content_is_rejected(self):
+    def test_original_judgment_cannot_be_rewritten(self):
         with tempfile.TemporaryDirectory() as tmp:
             store = JudgmentMemoryStore(tmp)
             store.append_judgment(judgment())
@@ -35,6 +43,29 @@ class AppendOnlyStoreTests(unittest.TestCase):
             changed["current_finding"] = "rewritten history"
             with self.assertRaises(ValueError):
                 store.append_judgment(changed)
+
+    def test_later_result_is_appended_as_outcome_not_judgment_mutation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = JudgmentMemoryStore(tmp)
+            j = judgment()
+            o = outcome(
+                status="resolved",
+                errors=["none"],
+                later="synthetic result confirmed",
+            )
+            store.append_judgment(j)
+            store.append_outcome(o)
+            self.assertEqual(store.get_judgment("jdg-1"), j)
+            self.assertEqual(store.get_outcome("jdg-1", "jot-1"), o)
+
+    def test_outcome_is_append_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = JudgmentMemoryStore(tmp)
+            store.append_outcome(outcome())
+            changed = outcome()
+            changed["outcome_status"] = "resolved"
+            with self.assertRaises(ValueError):
+                store.append_outcome(changed)
 
     def test_revision_is_append_only(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -75,12 +106,12 @@ class ClaimGradeTests(unittest.TestCase):
 
 
 class CalibrationTests(unittest.TestCase):
-    def test_counts_resolved_and_error_types(self):
+    def test_counts_latest_supplied_outcomes_and_error_types(self):
         rows = [
-            judgment("jdg-1", "resolved", ["none"]),
-            judgment("jdg-2", "resolved", ["overreaction", "timing_error"]),
-            judgment("jdg-3", "unresolved", []),
-            judgment("jdg-4", "partially_resolved", ["omitted_variable"]),
+            outcome("jot-1", "jdg-1", "resolved", ["none"], "confirmed"),
+            outcome("jot-2", "jdg-2", "resolved", ["overreaction", "timing_error"], "wrong timing"),
+            outcome("jot-3", "jdg-3", "unresolved", [], None),
+            outcome("jot-4", "jdg-4", "partially_resolved", ["omitted_variable"], "partial"),
         ]
         result = summarize_judgment_calibration(rows)
         self.assertEqual(result["total_count"], 4)
@@ -91,10 +122,10 @@ class CalibrationTests(unittest.TestCase):
         self.assertEqual(result["error_type_counts"]["timing_error"], 1)
         self.assertNotIn("accuracy_score", result)
 
-    def test_duplicate_ids_do_not_change_total_observation_count(self):
+    def test_duplicate_judgment_ids_remain_visible_as_multiple_outcome_observations(self):
         rows = [
-            judgment("jdg-1", "resolved", ["none"]),
-            judgment("jdg-1", "resolved", ["none"]),
+            outcome("jot-1", "jdg-1", "unresolved", [], None),
+            outcome("jot-2", "jdg-1", "partially_resolved", ["unknown"], "new evidence"),
         ]
         result = summarize_judgment_calibration(rows)
         self.assertEqual(result["total_count"], 2)
