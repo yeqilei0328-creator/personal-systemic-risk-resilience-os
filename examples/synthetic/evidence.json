@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "evidence_id": "evd-synthetic-001",
+  "event_id": "evt-synthetic-001",
+  "source": {
+    "name": "Synthetic Test Source",
+    "source_type": "other",
+    "uri": "https://example.invalid/source/1",
+    "published_at": "2026-08-31T00:10:00Z",
+    "primary": false
+  },
+  "claim_type": "forecast",
+  "claim": "Synthetic forecast: multiple stress indicators may strengthen concurrently.",
+  "stance": "supports",
+  "target_type": "event",
+  "target_id": "evt-synthetic-001",
+  "retrieved_at": "2026-08-31T00:12:00Z",
+  "source_locator": "synthetic-section-1",
+  "metric": {
+    "name": "synthetic_index",
+    "value": 1.2,
+    "unit": "index",
+    "as_of": "2026-08-31T00:00:00Z"
+  },
+  "quality": {
+    "provenance_score": 0.5,
+    "independence_score": 0.5,
+    "corroboration_count": 0,
+    "confidence": 0.4
+  },
+  "sensitivity": "public"
+}

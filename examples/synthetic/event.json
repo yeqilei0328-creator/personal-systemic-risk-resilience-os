@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1.0",
+  "event_id": "evt-synthetic-001",
+  "title": "Synthetic multi-domain stress event",
+  "summary": "Synthetic test event used only to validate the public data model.",
+  "occurred_at": "2026-08-31T00:00:00Z",
+  "published_at": "2026-08-31T00:10:00Z",
+  "discovered_at": "2026-08-31T00:12:00Z",
+  "intelligence_priority": "P1",
+  "observation_domains": [
+    "climate",
+    "energy",
+    "rates",
+    "ai_capex"
+  ],
+  "first_order_variables": [
+    "B",
+    "C",
+    "D"
+  ],
+  "geography": [
+    "synthetic-region"
+  ],
+  "status": "developing",
+  "evidence_ids": [
+    "evd-synthetic-001"
+  ],
+  "tags": [
+    "synthetic",
+    "schema-test"
+  ],
+  "model_change_candidate": true,
+  "sensitivity": "public"
+}

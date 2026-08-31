@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/exposure.schema.json",
+  "title": "Exposure",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "exposure_id",
+    "subject_kind",
+    "subject_ref",
+    "hazard_ref",
+    "dimensions",
+    "sensitivity_score",
+    "adaptive_capacity_score",
+    "resulting_r_level",
+    "rationale",
+    "updated_at",
+    "data_sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "exposure_id": {
+      "type": "string",
+      "pattern": "^exp-[A-Za-z0-9._-]+$"
+    },
+    "subject_kind": {
+      "enum": [
+        "person",
+        "family",
+        "enterprise",
+        "base",
+        "asset",
+        "region"
+      ]
+    },
+    "subject_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque identifier; do not place personal names or precise locations in public data."
+    },
+    "hazard_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "event",
+            "scenario"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "geography",
+        "assets",
+        "business",
+        "supply_chain",
+        "finance",
+        "family",
+        "infrastructure"
+      ],
+      "properties": {
+        "geography": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "assets": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "business": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "supply_chain": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "finance": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "family": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "infrastructure": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        }
+      }
+    },
+    "sensitivity_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "adaptive_capacity_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "resulting_r_level": {
+      "enum": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

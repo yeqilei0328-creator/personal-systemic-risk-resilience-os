@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/alert.schema.json",
+  "title": "Alert",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "alert_id",
+    "emitted_at",
+    "intelligence_priority",
+    "global_stage",
+    "personal_r_level",
+    "governance_integrity",
+    "change_reason",
+    "basis",
+    "summary",
+    "actions",
+    "do_not_do",
+    "escalation_conditions",
+    "deescalation_conditions",
+    "notify",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "alert_id": {
+      "type": "string",
+      "pattern": "^alt-[A-Za-z0-9._-]+$"
+    },
+    "emitted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "intelligence_priority": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2"
+      ]
+    },
+    "global_stage": {
+      "enum": [
+        "Stage-I",
+        "Stage-II",
+        "Stage-III",
+        "Stage-IV"
+      ]
+    },
+    "personal_r_level": {
+      "enum": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ]
+    },
+    "governance_integrity": {
+      "enum": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ]
+    },
+    "change_reason": {
+      "enum": [
+        "model_state_change",
+        "coupling_change",
+        "feedback_loop_candidate",
+        "risk_level_change",
+        "hypothesis_falsified",
+        "lead_time_compression",
+        "action_change",
+        "other"
+      ]
+    },
+    "basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_ids",
+        "edge_ids",
+        "scenario_ids",
+        "evidence_ids"
+      ],
+      "properties": {
+        "event_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^evt-[A-Za-z0-9._-]+$"
+          }
+        },
+        "edge_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^edge-[A-Za-z0-9._-]+$"
+          }
+        },
+        "scenario_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^scn-[A-Za-z0-9._-]+$"
+          }
+        },
+        "evidence_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^evd-[A-Za-z0-9._-]+$"
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "do_not_do": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "escalation_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "deescalation_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notify": {
+      "type": "boolean"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

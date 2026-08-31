@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/capability.schema.json",
+  "title": "Capability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "capability_id",
+    "domain",
+    "status",
+    "external_dependencies",
+    "single_points_of_failure",
+    "dual_use",
+    "conversions",
+    "last_audited_at",
+    "data_sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "capability_id": {
+      "type": "string",
+      "pattern": "^cap-[A-Za-z0-9._-]+$"
+    },
+    "domain": {
+      "enum": [
+        "cash_flow",
+        "liquidity",
+        "asset_disposition",
+        "industrial_space",
+        "land",
+        "energy",
+        "water",
+        "food",
+        "mobility",
+        "physical_ai",
+        "communications",
+        "medical",
+        "sanitation",
+        "tools_spares",
+        "offline_knowledge",
+        "people_network"
+      ]
+    },
+    "status": {
+      "enum": [
+        "unverified",
+        "partial",
+        "confirmed",
+        "unavailable"
+      ]
+    },
+    "capacity": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit",
+        "verification_status"
+      ],
+      "properties": {
+        "value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification_status": {
+          "enum": [
+            "stated",
+            "measured",
+            "audited"
+          ]
+        }
+      }
+    },
+    "autonomy_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "external_dependencies": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "single_points_of_failure": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "dual_use": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "peace_value",
+        "resilience_value"
+      ],
+      "properties": {
+        "peace_value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "resilience_value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        }
+      }
+    },
+    "conversions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "target_capability",
+          "latency_hours",
+          "dependencies"
+        ],
+        "properties": {
+          "target_capability": {
+            "type": "string",
+            "minLength": 1
+          },
+          "latency_hours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_audited_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

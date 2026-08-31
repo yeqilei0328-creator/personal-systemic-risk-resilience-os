@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0",
+  "capability_id": "cap-synthetic-communications",
+  "domain": "communications",
+  "status": "partial",
+  "capacity": {
+    "value": 2,
+    "unit": "independent_paths",
+    "verification_status": "stated"
+  },
+  "autonomy_days": null,
+  "external_dependencies": [
+    "external-power",
+    "carrier-network"
+  ],
+  "single_points_of_failure": [
+    "shared-upstream-provider"
+  ],
+  "dual_use": {
+    "peace_value": 5,
+    "resilience_value": 5
+  },
+  "conversions": [
+    {
+      "target_capability": "offline-local-network",
+      "latency_hours": 8,
+      "dependencies": [
+        "local-power",
+        "router",
+        "local-server"
+      ]
+    }
+  ],
+  "notes": "Synthetic capability only.",
+  "last_audited_at": "2026-08-31T00:40:00Z",
+  "data_sensitivity": "public"
+}

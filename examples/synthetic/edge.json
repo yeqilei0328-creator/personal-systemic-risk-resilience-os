@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "edge_id": "edge-synthetic-001",
+  "source_node": {
+    "node_id": "climate-stress",
+    "label": "Climate stress",
+    "first_order_variable": "B",
+    "observation_domain": "climate"
+  },
+  "target_node": {
+    "node_id": "financial-conditions",
+    "label": "Financial conditions",
+    "first_order_variable": "C",
+    "observation_domain": "rates"
+  },
+  "direction": "amplifies",
+  "mechanism": "Synthetic mechanism for validation only.",
+  "state": "H1",
+  "evidence_ids": [
+    "evd-synthetic-001"
+  ],
+  "counterevidence_ids": [],
+  "common_cause": {
+    "present": false,
+    "cause_id": null,
+    "note": null
+  },
+  "latency_days": {
+    "min": 1,
+    "max": 90
+  },
+  "persistence": "unknown",
+  "metrics": [
+    {
+      "name": "synthetic_index",
+      "unit": "index",
+      "latest_value": 1.2,
+      "as_of": "2026-08-31T00:00:00Z"
+    }
+  ],
+  "falsification_condition": "Synthetic index returns to baseline without downstream response.",
+  "last_assessed_at": "2026-08-31T00:20:00Z",
+  "sensitivity": "public"
+}
