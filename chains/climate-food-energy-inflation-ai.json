@@ -1,0 +1,146 @@
+{
+  "schema_version": "0.1.0",
+  "chain_id": "chn-climate-food-energy-inflation-ai-v0.1",
+  "title": "Climate → Food/Energy → Inflation → Fed → UST/Financial Conditions → AI Capital Cycle",
+  "purpose": "Track whether climate/resource pressure is becoming a validated multi-link financial/technology transmission chain.",
+  "nodes": [
+    {
+      "node_id": "chnode-climate-el-nino",
+      "label": "Climate / El Niño",
+      "description": "ENSO intensity, climate anomalies and associated physical constraints.",
+      "observation_domains": [
+        "climate",
+        "natural_disaster"
+      ],
+      "risk_variables": [
+        "B"
+      ]
+    },
+    {
+      "node_id": "chnode-food-energy-pressure",
+      "label": "Food & Energy Pressure",
+      "description": "Food-price and energy-price/resource stress potentially linked to climate/resource constraints.",
+      "observation_domains": [
+        "food",
+        "energy"
+      ],
+      "risk_variables": [
+        "B"
+      ]
+    },
+    {
+      "node_id": "chnode-inflation-expectations",
+      "label": "Inflation / Inflation Expectations",
+      "description": "Observed and expected inflation response to food/energy pressure.",
+      "observation_domains": [
+        "rates",
+        "financial_markets"
+      ],
+      "risk_variables": [
+        "C"
+      ]
+    },
+    {
+      "node_id": "chnode-fed-policy",
+      "label": "Fed / Monetary Policy",
+      "description": "Federal Reserve reaction function and policy-path repricing.",
+      "observation_domains": [
+        "rates",
+        "macro"
+      ],
+      "risk_variables": [
+        "C"
+      ]
+    },
+    {
+      "node_id": "chnode-ust-financial-fiscal",
+      "label": "UST Long End / Financial Conditions / Fiscal Pressure",
+      "description": "10Y/30Y Treasury yields, term premium, financing conditions and fiscal-duration pressure.",
+      "observation_domains": [
+        "rates",
+        "sovereign_debt",
+        "financial_markets"
+      ],
+      "risk_variables": [
+        "C"
+      ]
+    },
+    {
+      "node_id": "chnode-ai-capex-valuation-financing",
+      "label": "AI CapEx / Tech Valuation / Financing Stress",
+      "description": "AI infrastructure spending, financing conditions and technology-asset valuation sensitivity.",
+      "observation_domains": [
+        "ai_capex",
+        "technology_valuation",
+        "financing"
+      ],
+      "risk_variables": [
+        "D"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "link_id": "chlink-climate-to-food-energy",
+      "source_node_id": "chnode-climate-el-nino",
+      "target_node_id": "chnode-food-energy-pressure",
+      "mechanism": "Climate anomalies affect agricultural output, hydropower/resource availability and selected energy/food markets.",
+      "required": true,
+      "expected_latency_days": {
+        "min": 0,
+        "max": 180
+      },
+      "persistence_note": "Impact is geography-, crop-, season- and energy-system-specific; broad global transmission is not automatic."
+    },
+    {
+      "link_id": "chlink-food-energy-to-inflation",
+      "source_node_id": "chnode-food-energy-pressure",
+      "target_node_id": "chnode-inflation-expectations",
+      "mechanism": "Food and energy cost pressure transmits into headline inflation and may affect inflation expectations.",
+      "required": true,
+      "expected_latency_days": {
+        "min": 0,
+        "max": 120
+      },
+      "persistence_note": "Second-round/core inflation effects require separate evidence."
+    },
+    {
+      "link_id": "chlink-inflation-to-fed",
+      "source_node_id": "chnode-inflation-expectations",
+      "target_node_id": "chnode-fed-policy",
+      "mechanism": "Persistent inflation risk changes the Federal Reserve reaction function and expected policy path.",
+      "required": true,
+      "expected_latency_days": {
+        "min": 0,
+        "max": 180
+      },
+      "persistence_note": "Policy response also depends on labor markets, growth and financial stability."
+    },
+    {
+      "link_id": "chlink-fed-to-ust-financial-fiscal",
+      "source_node_id": "chnode-fed-policy",
+      "target_node_id": "chnode-ust-financial-fiscal",
+      "mechanism": "Policy expectations interact with term premium, Treasury supply and fiscal duration to alter long-end yields and financial conditions.",
+      "required": true,
+      "expected_latency_days": {
+        "min": 0,
+        "max": 180
+      },
+      "persistence_note": "Long-end yields are not a mechanical function of the policy rate; fiscal/term-premium drivers must remain explicit."
+    },
+    {
+      "link_id": "chlink-ust-financial-to-ai-capex",
+      "source_node_id": "chnode-ust-financial-fiscal",
+      "target_node_id": "chnode-ai-capex-valuation-financing",
+      "mechanism": "Higher long-duration financing costs and tighter credit conditions raise hurdle rates for AI infrastructure and compress rate-sensitive technology valuations.",
+      "required": true,
+      "expected_latency_days": {
+        "min": 0,
+        "max": 365
+      },
+      "persistence_note": "Strong earnings/monetization or strategic financing can offset rate pressure; CapEx reversal requires direct evidence."
+    }
+  ],
+  "created_at": "2026-08-31T06:00:00Z",
+  "sensitivity": "public"
+}

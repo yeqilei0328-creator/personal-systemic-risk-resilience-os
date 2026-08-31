@@ -45,6 +45,9 @@ PAIRS = {
     "posterior_revision": ("schemas/posterior-revision.schema.json", "examples/synthetic/posterior-revision.json"),
     "alert_history_record": ("schemas/alert-history-record.schema.json", "examples/synthetic/alert-history-record.json"),
     "judgment_calibration_summary": ("schemas/judgment-calibration-summary.schema.json", "examples/synthetic/judgment-calibration-summary.json"),
+    "chain_definition": ("schemas/chain-definition.schema.json", "chains/climate-food-energy-inflation-ai.json"),
+    "chain_link_assessment": ("schemas/chain-link-assessment.schema.json", "examples/synthetic/chain-link-assessment.json"),
+    "chain_watch_snapshot": ("schemas/chain-watch-snapshot.schema.json", "examples/synthetic/chain-watch-snapshot.json"),
 }
 
 def load(path):
@@ -214,6 +217,75 @@ def semantic_errors(name, obj):
             errors.append("calibration must contain one latest judgment_id per total_count")
         if len(obj["outcome_ids"]) != total:
             errors.append("calibration must contain one selected outcome_id per total_count")
+    elif name == "chain_definition":
+        node_ids = [node["node_id"] for node in obj["nodes"]]
+        link_ids = [link["link_id"] for link in obj["links"]]
+        if len(node_ids) != len(set(node_ids)):
+            errors.append("chain node_id values must be unique")
+        if len(link_ids) != len(set(link_ids)):
+            errors.append("chain link_id values must be unique")
+        if not all(link["required"] for link in obj["links"]):
+            errors.append("v0.1 canonical linear chain requires every link to be required")
+        node_set = set(node_ids)
+        for link in obj["links"]:
+            if link["source_node_id"] == link["target_node_id"]:
+                errors.append("chain link cannot self-loop")
+            if link["source_node_id"] not in node_set or link["target_node_id"] not in node_set:
+                errors.append("chain link endpoints must reference defined nodes")
+            latency = link["expected_latency_days"]
+            if latency is not None and latency["min"] > latency["max"]:
+                errors.append("chain expected latency min must be <= max")
+        for left, right in zip(obj["links"], obj["links"][1:]):
+            if left["target_node_id"] != right["source_node_id"]:
+                errors.append("v0.1 canonical chain links must form an ordered contiguous path")
+    elif name == "chain_link_assessment":
+        counts = obj["epistemic_counts"]
+        forecast_only = (
+            counts["forecast"] > 0
+            and counts["fact"] == 0
+            and counts["correlation"] == 0
+            and counts["causality"] == 0
+        )
+        if forecast_only and obj["h_state"] in {"H2", "H3"}:
+            errors.append("forecast-only link cannot claim H2/H3 chain transmission")
+        if counts["causality"] > 0 and not obj["supporting_evidence_ids"]:
+            errors.append("causal evidence count requires supporting_evidence_ids")
+        if obj["h_state"] == "Hx" and obj["direction"] != "falsified":
+            errors.append("Hx link must use direction=falsified")
+        if obj["direction"] == "falsified" and obj["h_state"] != "Hx":
+            errors.append("direction=falsified requires Hx")
+    elif name == "chain_watch_snapshot":
+        total = obj["total_link_count"]
+        required = obj["required_link_count"]
+        if required > total:
+            errors.append("required_link_count cannot exceed total_link_count")
+        for field in (
+            "supported_link_count",
+            "h3_link_count",
+            "forecast_only_link_count",
+            "falsified_link_count",
+            "falsified_required_link_count",
+            "strengthening_link_count",
+            "weakening_link_count",
+            "material_link_count",
+        ):
+            if obj[field] > total:
+                errors.append(f"{field} cannot exceed total_link_count")
+        if obj["falsified_required_link_count"] > obj["falsified_link_count"]:
+            errors.append("falsified required links cannot exceed all falsified links")
+        if obj["longest_contiguous_supported_path"] > obj["supported_link_count"]:
+            errors.append("longest contiguous path cannot exceed supported_link_count")
+        if obj["full_chain_supported"] and obj["chain_state"] != "TRANSMITTING":
+            errors.append("full_chain_supported requires TRANSMITTING")
+        if obj["chain_state"] == "TRANSMITTING" and not obj["full_chain_supported"]:
+            errors.append("TRANSMITTING requires full_chain_supported")
+        if obj["chain_state"] == "BROKEN" and obj["falsified_required_link_count"] == 0:
+            errors.append("BROKEN requires a falsified required link")
+        if obj["chain_state"] == "BUILDING" and obj["longest_contiguous_supported_path"] < 2:
+            errors.append("BUILDING requires a contiguous supported path of at least 2")
+        if obj["chain_state"] == "FRAGMENTED":
+            if obj["supported_link_count"] == 0 or obj["longest_contiguous_supported_path"] > 1:
+                errors.append("FRAGMENTED requires isolated supported links")
     elif name == "structural_delta":
         h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
         c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}

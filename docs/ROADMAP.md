@@ -87,17 +87,19 @@ Separate private operational-state layer established, pinned to public method ve
 - [x] "no substantive change = no notification"
 - [x] scheduled brief vs interrupt alert separation
 
-#### R5 — Judgment Memory / Learning — CURRENT
-- [~] immutable Judgment Ledger
-- [~] append-only Judgment Outcome history
-- [~] Alert History
-- [~] Posterior Revision
-- [~] source + judgment calibration
+#### R5 — Judgment Memory / Learning — COMPLETE
+- [x] immutable Judgment Ledger
+- [x] append-only Judgment Outcome history
+- [x] Alert History
+- [x] Posterior Revision
+- [x] source + judgment calibration
 
-#### R6 — Chain Watch
-- [ ] climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation
-- [ ] chain-state persistence
-- [ ] fact / forecast / correlation / causality / counterevidence per link
+#### R6 — Chain Watch — CURRENT
+- [~] climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation
+- [~] chain-state persistence
+- [~] fact / forecast / correlation / causality / counterevidence per link
+- [~] contiguous supported-path detection
+- [~] TRANSMITTING / BUILDING / FRAGMENTED / RELAXING / BROKEN semantics
 
 #### R7 — Replay / Red Team
 - [ ] Synthetic replay tests for duplicate, worsening, improvement, falsification

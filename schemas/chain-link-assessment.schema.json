@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/chain-link-assessment.schema.json",
+  "title": "Chain Link Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "chain_id",
+    "link_id",
+    "source_node_id",
+    "target_node_id",
+    "h_state",
+    "epistemic_counts",
+    "supporting_evidence_ids",
+    "refuting_evidence_ids",
+    "hypothesis_assessment_ids",
+    "direction",
+    "material_delta",
+    "common_cause_refs",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^cla-[A-Za-z0-9._-]+$"
+    },
+    "chain_id": {
+      "type": "string",
+      "pattern": "^chn-[A-Za-z0-9._-]+$"
+    },
+    "link_id": {
+      "type": "string",
+      "pattern": "^chlink-[A-Za-z0-9._-]+$"
+    },
+    "source_node_id": {
+      "type": "string",
+      "pattern": "^chnode-[A-Za-z0-9._-]+$"
+    },
+    "target_node_id": {
+      "type": "string",
+      "pattern": "^chnode-[A-Za-z0-9._-]+$"
+    },
+    "h_state": {
+      "enum": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "Hx"
+      ]
+    },
+    "epistemic_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fact",
+        "forecast",
+        "correlation",
+        "causality",
+        "counterevidence"
+      ],
+      "properties": {
+        "fact": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "forecast": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "correlation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "causality": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "counterevidence": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "supporting_evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "refuting_evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "hypothesis_assessment_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^hya-[A-Za-z0-9._-]+$"
+      }
+    },
+    "direction": {
+      "enum": [
+        "strengthening",
+        "weakening",
+        "stable",
+        "uncertain",
+        "falsified"
+      ]
+    },
+    "material_delta": {
+      "type": "boolean"
+    },
+    "common_cause_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

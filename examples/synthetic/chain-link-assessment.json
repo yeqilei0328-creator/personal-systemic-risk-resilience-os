@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "cla-synthetic-r6-001",
+  "chain_id": "chn-climate-food-energy-inflation-ai-v0.1",
+  "link_id": "chlink-food-energy-to-inflation",
+  "source_node_id": "chnode-food-energy-pressure",
+  "target_node_id": "chnode-inflation-expectations",
+  "h_state": "H2",
+  "epistemic_counts": {
+    "fact": 2,
+    "forecast": 1,
+    "correlation": 1,
+    "causality": 1,
+    "counterevidence": 1
+  },
+  "supporting_evidence_ids": [
+    "evd-synthetic-001"
+  ],
+  "refuting_evidence_ids": [],
+  "hypothesis_assessment_ids": [
+    "hya-synthetic-r3-001"
+  ],
+  "direction": "strengthening",
+  "material_delta": true,
+  "common_cause_refs": [
+    "synthetic-common-cause"
+  ],
+  "notes": "Synthetic fixture only.",
+  "as_of": "2026-08-31T06:10:00Z",
+  "sensitivity": "public"
+}

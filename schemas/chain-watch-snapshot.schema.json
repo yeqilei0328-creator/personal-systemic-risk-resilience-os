@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/chain-watch-snapshot.schema.json",
+  "title": "Chain Watch Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "chain_id",
+    "previous_snapshot_id",
+    "as_of",
+    "ordered_link_assessment_ids",
+    "total_link_count",
+    "required_link_count",
+    "supported_link_count",
+    "h3_link_count",
+    "forecast_only_link_count",
+    "falsified_link_count",
+    "falsified_required_link_count",
+    "strengthening_link_count",
+    "weakening_link_count",
+    "material_link_count",
+    "longest_contiguous_supported_path",
+    "full_chain_supported",
+    "chain_state",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "pattern": "^chs-[A-Za-z0-9._-]+$"
+    },
+    "chain_id": {
+      "type": "string",
+      "pattern": "^chn-[A-Za-z0-9._-]+$"
+    },
+    "previous_snapshot_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^chs-[A-Za-z0-9._-]+$"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ordered_link_assessment_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^cla-[A-Za-z0-9._-]+$"
+      }
+    },
+    "total_link_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supported_link_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "h3_link_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "forecast_only_link_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "falsified_link_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "strengthening_link_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "weakening_link_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "material_link_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "longest_contiguous_supported_path": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "full_chain_supported": {
+      "type": "boolean"
+    },
+    "chain_state": {
+      "enum": [
+        "UNKNOWN",
+        "FRAGMENTED",
+        "BUILDING",
+        "TRANSMITTING",
+        "RELAXING",
+        "BROKEN"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    },
+    "required_link_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "falsified_required_link_count": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}
