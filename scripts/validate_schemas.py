@@ -224,8 +224,8 @@ def semantic_errors(name, obj):
             errors.append("chain node_id values must be unique")
         if len(link_ids) != len(set(link_ids)):
             errors.append("chain link_id values must be unique")
-        if not any(link["required"] for link in obj["links"]):
-            errors.append("chain requires at least one required link")
+        if not all(link["required"] for link in obj["links"]):
+            errors.append("v0.1 canonical linear chain requires every link to be required")
         node_set = set(node_ids)
         for link in obj["links"]:
             if link["source_node_id"] == link["target_node_id"]:
