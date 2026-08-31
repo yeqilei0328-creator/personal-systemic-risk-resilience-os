@@ -23,6 +23,10 @@ PAIRS = {
     "water_verification_assessment": ("schemas/water-verification-assessment.schema.json", "examples/synthetic/water-verification-assessment.json"),
     "energy_resilience_audit": ("schemas/energy-resilience-audit.schema.json", "examples/synthetic/energy-resilience-audit.json"),
     "energy_verification_assessment": ("schemas/energy-verification-assessment.schema.json", "examples/synthetic/energy-verification-assessment.json"),
+    "source_registry_record": ("schemas/source-registry-record.schema.json", "examples/synthetic/source-registry-record.json"),
+    "source_observation": ("schemas/source-observation.schema.json", "examples/synthetic/source-observation.json"),
+    "source_reputation_record": ("schemas/source-reputation-record.schema.json", "examples/synthetic/source-reputation-record.json"),
+    "source_concentration_assessment": ("schemas/source-concentration-assessment.schema.json", "examples/synthetic/source-concentration-assessment.json"),
 }
 
 def load(path):
@@ -97,6 +101,24 @@ def semantic_errors(name, obj):
         if outage["status"] == "pass":
             if not outage.get("duration_hours") or outage["duration_hours"] <= 0:
                 errors.append("passed outage test requires positive duration_hours")
+    elif name == "source_observation":
+        if obj["provenance"]["full_text_verified"] and obj["access_status"] != "full_access":
+            errors.append("full_text_verified requires full_access")
+        if obj["lineage"]["relation"] in {"repost", "syndication", "shared_press_release", "shared_anonymous_origin"}:
+            if not obj["lineage"].get("origin_observation_id"):
+                errors.append("derivative lineage requires origin_observation_id")
+    elif name == "source_concentration_assessment":
+        if obj["known_independence_group_count"] > obj["unique_source_count"]:
+            errors.append("known independence groups cannot exceed unique sources")
+        if obj["derivative_observation_count"] > len(obj["observation_ids"]):
+            errors.append("derivative count cannot exceed observation count")
+        if obj["state"] == "SINGLE_ORIGIN":
+            if obj["known_independence_group_count"] != 1 or obj["unknown_lineage_count"] != 0:
+                errors.append("SINGLE_ORIGIN requires exactly one known group and no unknown lineage")
+            if not obj["single_source_bias"]:
+                errors.append("SINGLE_ORIGIN must set single_source_bias=true")
+        if obj["state"] == "DIVERSE" and obj["known_independence_group_count"] < 2:
+            errors.append("DIVERSE requires at least two known independence groups")
     return errors
 
 def main():
