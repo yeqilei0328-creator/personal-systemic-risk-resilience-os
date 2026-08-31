@@ -1,0 +1,15 @@
+# Local/private operational data
+private/
+.private/
+data/private/
+*.local
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
