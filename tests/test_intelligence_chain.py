@@ -23,7 +23,7 @@ def definition():
 
 def assessment(link, idx, h="H1", causality=0, forecast=0, direction="stable", material=False):
     return {
-        "assessment_id": f"cla-test-{idx}",
+        "assessment_id": f"cla-chain-{idx}",
         "chain_id": "chn-climate-food-energy-inflation-ai-v0.1",
         "link_id": link["link_id"],
         "source_node_id": link["source_node_id"],
@@ -47,6 +47,27 @@ def all_assessments(h="H1", causality=0, direction="stable"):
         assessment(link, idx, h=h, causality=causality, direction=direction)
         for idx, link in enumerate(d["links"], start=1)
     ]
+
+
+class ExampleContractTests(unittest.TestCase):
+    def test_full_transmitting_snapshot_matches_fixture(self):
+        d = definition()
+        rows = all_assessments(h="H2", causality=1, direction="strengthening")
+        for row in rows:
+            row["material_delta"] = True
+        expected = json.loads(
+            (ROOT / "examples" / "synthetic" / "chain-watch-snapshot.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        actual = build_chain_snapshot(
+            d,
+            rows,
+            snapshot_id=expected["snapshot_id"],
+            as_of=expected["as_of"],
+            sensitivity=expected["sensitivity"],
+        )
+        self.assertEqual(actual, expected)
 
 
 class LinkSupportTests(unittest.TestCase):
