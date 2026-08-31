@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "decision_id": "ogd-synthetic-r4-001",
+  "candidate_id": "ogc-synthetic-r4-001",
+  "delivery_mode": "interrupt_alert",
+  "notify": true,
+  "outcome": "EMIT",
+  "trigger_codes": [
+    "TRIGGER_A_RESONANCE"
+  ],
+  "suppression_codes": [],
+  "state_signature": "f25690e0d4626e26d9d3f3427a43b7e8a6c53ec9e3535ae9d48cc6e37fc7f123",
+  "worsening_signal_count": 3,
+  "next_eligible_at": null,
+  "reasons": [
+    "material update crossed an interrupt-alert gate"
+  ],
+  "decided_at": "2026-08-31T03:05:00Z",
+  "sensitivity": "public"
+}
