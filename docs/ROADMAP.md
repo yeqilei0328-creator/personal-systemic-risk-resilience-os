@@ -55,28 +55,30 @@ Separate private operational-state layer established, pinned to public method ve
 - [x] Legacy Global Systemic Risk Index reconciled with Stage/Coupling/Buffer architecture
 - [x] P0-P3 restored as canonical news-importance axis
 
-#### R1 — Source / Evidence Persistence — NEXT
-- [ ] Source Registry schema/store
-- [ ] Source Reputation Ledger schema/store
-- [ ] source independence / derivative lineage
-- [ ] Access Failure state
-- [ ] Source Concentration Gate
-- [ ] claim-level provenance
-- [ ] Claim Grade namespace hardening
+#### R1 — Source / Evidence Persistence — COMPLETE
+- [x] Source Registry schema/store
+- [x] Source Reputation Ledger schema/store
+- [x] source independence / derivative lineage
+- [x] Access Failure state
+- [x] Source Concentration Gate
+- [x] claim-level provenance
+- [x] Claim Grade namespace hardening
 
-#### R2 — Event / Claim State
-- [ ] Event Store
-- [ ] Claim Store
-- [ ] Event fingerprint / clustering / dedup
-- [ ] Material Change detector
-- [ ] dynamic-number timestamp discipline
+#### R2 — Event / Claim State — COMPLETE
+- [x] Event Store
+- [x] Claim Store
+- [x] Event fingerprint / clustering / dedup
+- [x] Material Change detector
+- [x] dynamic-number timestamp discipline
+- [x] P3 persistence compatibility
+- [x] Evidence → Claim target compatibility
 
-#### R3 — Behavior / System Delta
-- [ ] Costly Signal state
-- [ ] Rhetoric–Action Gap
-- [ ] Narrative Gap
-- [ ] Counterevidence / falsification
-- [ ] Risk Variable / Edge / Coupling / Buffer / Scenario delta tracking
+#### R3 — Behavior / System Delta — CURRENT
+- [~] Costly Signal state
+- [~] Rhetoric–Action Gap
+- [~] Narrative Gap
+- [~] Counterevidence / falsification
+- [~] Risk Variable / Edge / Coupling / Buffer / Scenario delta tracking
 
 #### R4 — Precision Alert Gate
 - [ ] P0-P3 gate implementation
