@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/coupling-snapshot.schema.json",
+  "title": "Coupling Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "as_of",
+    "supported_edge_count",
+    "validated_edge_count",
+    "strong_edge_count",
+    "validated_cross_variable_edge_count",
+    "unique_validated_directed_pairs",
+    "independent_validated_directed_pairs",
+    "pair_density",
+    "independent_pair_density",
+    "active_variable_count",
+    "coactivation_breadth",
+    "persistent_validated_edge_count",
+    "common_cause_flagged_validated_edges",
+    "common_cause_share",
+    "max_independent_path_length",
+    "band",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "pattern": "^cpl-[A-Za-z0-9._-]+$"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "supported_edge_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "validated_edge_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "strong_edge_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "validated_cross_variable_edge_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unique_validated_directed_pairs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 12
+    },
+    "independent_validated_directed_pairs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 12
+    },
+    "pair_density": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "independent_pair_density": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "active_variable_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "coactivation_breadth": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "persistent_validated_edge_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "common_cause_flagged_validated_edges": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "common_cause_share": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "max_independent_path_length": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "band": {
+      "enum": [
+        "C0",
+        "C1",
+        "C2",
+        "C3"
+      ]
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
