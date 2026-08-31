@@ -1,3 +1,7 @@
+from .intelligence_output import (
+    decide_output_gate,
+    output_state_signature,
+)
 from .intelligence_behavior import (
     assess_costly_signal,
     classify_buffer_delta,
@@ -31,6 +35,8 @@ from .quantification import (
 )
 
 __all__ = [
+    "decide_output_gate",
+    "output_state_signature",
     "assess_costly_signal",
     "classify_buffer_delta",
     "classify_coupling_delta",

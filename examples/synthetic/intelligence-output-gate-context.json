@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.1.0",
+  "context_id": "ogx-synthetic-r4-001",
+  "previous_notified_state_signature": null,
+  "last_notified_at": null,
+  "cooldown_hours": 6,
+  "hysteresis": {
+    "applicable": true,
+    "persistence_count": 2,
+    "required_count": 2
+  },
+  "now": "2026-08-31T03:05:00Z",
+  "sensitivity": "public"
+}

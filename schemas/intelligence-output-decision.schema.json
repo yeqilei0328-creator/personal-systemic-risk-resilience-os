@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/intelligence-output-decision.schema.json",
+  "title": "Intelligence Output Gate Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "candidate_id",
+    "delivery_mode",
+    "notify",
+    "outcome",
+    "trigger_codes",
+    "suppression_codes",
+    "state_signature",
+    "worsening_signal_count",
+    "next_eligible_at",
+    "reasons",
+    "decided_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^ogd-[A-Za-z0-9._-]+$"
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^ogc-[A-Za-z0-9._-]+$"
+    },
+    "delivery_mode": {
+      "enum": [
+        "scheduled_brief",
+        "interrupt_alert"
+      ]
+    },
+    "notify": {
+      "type": "boolean"
+    },
+    "outcome": {
+      "enum": [
+        "EMIT",
+        "SUPPRESS"
+      ]
+    },
+    "trigger_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "SCHEDULED_MATERIAL_ITEM",
+          "P0_MATERIAL",
+          "TRIGGER_A_RESONANCE",
+          "TRIGGER_B_MAJOR_EVENT",
+          "TRIGGER_C_NEW_STRONG_EDGE",
+          "HYPOTHESIS_FALSIFIED",
+          "LEAD_TIME_COMPRESSION",
+          "GLOBAL_STAGE_CHANGE",
+          "PERSONAL_ACTION_CHANGE"
+        ]
+      }
+    },
+    "suppression_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "P3_SILENT",
+          "NO_SUBSTANTIVE_CHANGE",
+          "DUPLICATE_STATE",
+          "NO_TRIGGER",
+          "COOLDOWN",
+          "HYSTERESIS"
+        ]
+      }
+    },
+    "state_signature": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "worsening_signal_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "next_eligible_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

@@ -73,18 +73,19 @@ Separate private operational-state layer established, pinned to public method ve
 - [x] P3 persistence compatibility
 - [x] Evidence → Claim target compatibility
 
-#### R3 — Behavior / System Delta — CURRENT
-- [~] Costly Signal state
-- [~] Rhetoric–Action Gap
-- [~] Narrative Gap
-- [~] Counterevidence / falsification
-- [~] Risk Variable / Edge / Coupling / Buffer / Scenario delta tracking
+#### R3 — Behavior / System Delta — COMPLETE
+- [x] Costly Signal state
+- [x] Rhetoric–Action Gap
+- [x] Narrative Gap
+- [x] Counterevidence / falsification
+- [x] Risk Variable / Edge / Coupling / Buffer / Scenario delta tracking
 
-#### R4 — Precision Alert Gate
-- [ ] P0-P3 gate implementation
-- [ ] Trigger A/B/C compatibility rules
-- [ ] duplicate suppression / cooldown / hysteresis
-- [ ] "no substantive change = no notification"
+#### R4 — Precision Alert Gate — CURRENT
+- [~] P0-P3 gate implementation
+- [~] Trigger A/B/C compatibility rules
+- [~] duplicate suppression / cooldown / hysteresis
+- [~] "no substantive change = no notification"
+- [~] scheduled brief vs interrupt alert separation
 
 #### R5 — Judgment Memory / Learning
 - [ ] Judgment Ledger

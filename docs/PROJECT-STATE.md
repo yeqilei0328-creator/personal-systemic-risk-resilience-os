@@ -108,15 +108,17 @@ Phase 3R-00 and 3R-00A are complete.
 
 The canonical operational baseline is now the reconciled China Intelligence / Physical AI / Global Risk Resonance V0.3 specification. Phase 3R is explicitly an engineering upgrade around that working logic, not a redesign.
 
-R1 Source / Evidence Persistence and R2 Event / Claim State are COMPLETE.\n\nCurrent node: **R3 — Behavior / Counterevidence / Structural Delta**.
+R1 Source / Evidence Persistence, R2 Event / Claim State, and R3 Behavior / Counterevidence / Structural Delta are COMPLETE.
+
+Current node: **R4 — Precision Alert Gate**.
 
 Priority sequence:
 - Source Registry + Source Reputation Ledger;
 - source independence / derivative lineage / access failures;
 - Event + Claim durable state;
 - Material Change and event fingerprints;
-- Behavior/System structural deltas;
-- alert suppression/hysteresis;
+- Behavior/System structural deltas — complete;
+- alert suppression/hysteresis — current;
 - Judgment Ledger / posterior learning;
 - first Chain Watch: climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation.
 
