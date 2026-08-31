@@ -50,6 +50,8 @@ PAIRS = {
     "chain_watch_snapshot": ("schemas/chain-watch-snapshot.schema.json", "examples/synthetic/chain-watch-snapshot.json"),
     "replay_step_result": ("schemas/replay-step-result.schema.json", "examples/synthetic/replay-step-result.json"),
     "replay_suite_summary": ("schemas/replay-suite-summary.schema.json", "examples/synthetic/replay-suite-summary.json"),
+    "communications_resilience_audit": ("schemas/communications-resilience-audit.schema.json", "examples/synthetic/communications-resilience-audit.json"),
+    "communications_verification_assessment": ("schemas/communications-verification-assessment.schema.json", "examples/synthetic/communications-verification-assessment.json"),
 }
 
 def load(path):
@@ -327,6 +329,38 @@ def semantic_errors(name, obj):
             errors.append("duplicate_control_failure_count cannot exceed failed_steps")
         if obj["deescalation_falsification_failure_count"] > obj["failed_steps"]:
             errors.append("deescalation/falsification failures cannot exceed failed_steps")
+    elif name == "communications_resilience_audit":
+        link_ids = [link["link_id"] for link in obj["external_links"]]
+        if len(link_ids) != len(set(link_ids)):
+            errors.append("external link_id values must be unique")
+        if obj["power"]["power_outage_test"] == "pass":
+            runtime = obj["power"]["tested_runtime_hours"]
+            if runtime is None or runtime <= 0:
+                errors.append("passed communications power outage test requires positive runtime")
+        internal = obj["internal_network"]
+        if internal["local_lan_status"] == "tested_pass" and internal["internet_loss_test"] != "pass":
+            errors.append("tested_pass local LAN requires internet_loss_test=pass")
+        for link in obj["external_links"]:
+            if link["status"] == "tested_pass":
+                if not link["independence_group_id"]:
+                    errors.append(f"{link['link_id']}: tested external link requires independence_group_id")
+                if link["bidirectional"] is not True:
+                    errors.append(f"{link['link_id']}: tested external link must be bidirectional")
+                if link["test_runtime_hours"] is None or link["test_runtime_hours"] <= 0:
+                    errors.append(f"{link['link_id']}: tested external link requires positive runtime")
+    elif name == "communications_verification_assessment":
+        if obj["independent_external_path_count"] > obj["tested_external_path_count"]:
+            errors.append("independent external paths cannot exceed tested paths")
+        if obj["minimum_demonstrated_internal_continuity_days"] is not None and not obj["internal_lan_gate_passed"]:
+            errors.append("internal continuity lower bound requires internal LAN gate")
+        if obj["minimum_demonstrated_external_continuity_days"] is not None and not obj["external_redundancy_gate_passed"]:
+            errors.append("external continuity lower bound requires external redundancy gate")
+        if obj["degraded_local_operation_candidate"] and not (
+            obj["internal_lan_gate_passed"]
+            and obj["offline_compute_gate_passed"]
+            and obj["power_gate_passed"]
+        ):
+            errors.append("degraded local candidate requires internal + offline compute + power gates")
     elif name == "structural_delta":
         h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
         c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}
