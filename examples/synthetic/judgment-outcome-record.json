@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.1.0",
+  "outcome_id": "jot-synthetic-r5-001",
+  "judgment_id": "jdg-synthetic-r5-001",
+  "previous_outcome_id": null,
+  "evaluated_at": "2026-08-31T05:05:00Z",
+  "outcome_status": "unresolved",
+  "later_result": null,
+  "error_types": [],
+  "posterior_revision_ids": [
+    "prv-synthetic-r5-001"
+  ],
+  "sensitivity": "public"
+}
