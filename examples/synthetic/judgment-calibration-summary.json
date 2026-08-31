@@ -5,9 +5,9 @@
     "jdg-synthetic-r5-001"
   ],
   "total_count": 1,
-  "resolved_count": 0,
+  "resolved_count": 1,
   "partially_resolved_count": 0,
-  "unresolved_count": 1,
+  "unresolved_count": 0,
   "error_type_counts": {
     "none": 1,
     "source_error": 0,
