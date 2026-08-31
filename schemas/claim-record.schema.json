@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/claim-record.schema.json",
+  "title": "Claim Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "claim_id",
+    "event_id",
+    "claim_kind",
+    "epistemic_class",
+    "statement",
+    "claim_grade",
+    "grade_updated_at",
+    "status",
+    "source_observation_ids",
+    "evidence_ids",
+    "dynamic_value_policy",
+    "superseded_by_claim_id",
+    "last_updated",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "claim_id": {
+      "type": "string",
+      "pattern": "^clm-[A-Za-z0-9._-]+$"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[A-Za-z0-9._-]+$"
+    },
+    "claim_kind": {
+      "enum": [
+        "existence",
+        "time",
+        "quantity",
+        "identity",
+        "behavior",
+        "legal_status",
+        "causal",
+        "motive",
+        "intent",
+        "prediction",
+        "battle_result",
+        "technical_performance",
+        "commercial_scale",
+        "other"
+      ]
+    },
+    "epistemic_class": {
+      "enum": [
+        "fact",
+        "forecast",
+        "correlation",
+        "causality",
+        "opinion"
+      ]
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_grade": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "Claim Grade A-D only; not Risk Variable A-D."
+    },
+    "grade_updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "developing",
+        "accepted",
+        "disputed",
+        "refuted",
+        "superseded",
+        "withdrawn"
+      ]
+    },
+    "source_observation_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sob-[A-Za-z0-9._-]+$"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^evd-[A-Za-z0-9._-]+$"
+      }
+    },
+    "dynamic_value_policy": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value_type",
+            "unit",
+            "materiality_rule",
+            "absolute_delta",
+            "relative_delta"
+          ],
+          "properties": {
+            "value_type": {
+              "enum": [
+                "number",
+                "integer"
+              ]
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1
+            },
+            "materiality_rule": {
+              "enum": [
+                "none",
+                "any_change",
+                "absolute",
+                "relative",
+                "either"
+              ]
+            },
+            "absolute_delta": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "relative_delta": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "superseded_by_claim_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^clm-[A-Za-z0-9._-]+$"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "superseded"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "superseded_by_claim_id": {
+            "type": "string",
+            "pattern": "^clm-[A-Za-z0-9._-]+$"
+          }
+        }
+      }
+    }
+  ]
+}
