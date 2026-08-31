@@ -55,7 +55,8 @@ It also stores:
 For Chain Watch v0.1, a link counts as connected transmission only when:
 
 - `H2` or `H3`; and
-- at least one explicit `causality` evidence item exists; and
+- at least one explicit `causality` evidence item exists;
+- at least one supporting Evidence reference is attached; and
 - the link is not falsified.
 
 Therefore:
@@ -86,9 +87,13 @@ Every required ordered link is supported.
 A previously BUILDING/TRANSMITTING chain is losing support and weakening dominates, without a required link being formally falsified.
 
 ### BROKEN
-At least one **required** link is Hx.
+At least one required link is Hx.
 
-Auxiliary/optional links may be tracked without automatically breaking the canonical required path.
+### v0.1 linear-chain constraint
+
+The canonical v0.1 Chain Watch is a single ordered linear path. Every link in that path is required.
+
+Branching, alternative mechanisms and auxiliary links are deliberately deferred to a future schema version rather than pretending a skipped middle link still forms a continuous path.
 
 ## 5. Longest contiguous supported path
 
