@@ -4,9 +4,11 @@
   "judgment_id": "jdg-synthetic-r5-001",
   "previous_outcome_id": null,
   "evaluated_at": "2026-08-31T05:05:00Z",
-  "outcome_status": "unresolved",
-  "later_result": null,
-  "error_types": [],
+  "outcome_status": "resolved",
+  "later_result": "Synthetic narrow claim was confirmed by later evidence.",
+  "error_types": [
+    "none"
+  ],
   "posterior_revision_ids": [
     "prv-synthetic-r5-001"
   ],
