@@ -36,20 +36,27 @@ def assess_water_verification(audit: Mapping) -> dict:
     if quality.get("consumer_sensor_only") and potability_required:
         blockers.append("consumer sensors do not establish potability")
 
-    extraction_power_gate = (
-        not power["extraction_requires_power"]
-        or power["outage_extraction_test"] == "pass"
-        or power["primary_power"] == "manual"
-    )
+    extraction_requires_power = power["extraction_requires_power"]
+    if extraction_requires_power is None:
+        blockers.append("extraction power requirement unknown")
+        extraction_power_gate = False
+    else:
+        extraction_power_gate = (
+            not extraction_requires_power
+            or power["outage_extraction_test"] == "pass"
+            or power["primary_power"] == "manual"
+        )
     outage_gate = continuity["outage_test"] == "pass" and extraction_power_gate
 
-    if power["extraction_requires_power"] and power["outage_extraction_test"] != "pass":
+    if extraction_requires_power is True and power["outage_extraction_test"] != "pass":
         blockers.append("outage extraction path not demonstrated")
 
     if potability_required and not potability_gate:
         blockers.append("potability not independently verified")
 
-    if potability_required and treatment["required"] and treatment["system_status"] != "operational_tested":
+    if potability_required and treatment["required"] is None:
+        blockers.append("treatment requirement unknown")
+    if potability_required and treatment["required"] is True and treatment["system_status"] != "operational_tested":
         blockers.append("required treatment path not operationally tested")
 
     storage = hydraulics.get("usable_storage_liters")
@@ -80,9 +87,19 @@ def assess_water_verification(audit: Mapping) -> dict:
     else:
         status = "measured"
 
-    if status == "measured" and outage_gate and (potability_gate or not potability_required):
-        if not (potability_required and treatment["required"] and treatment["system_status"] != "operational_tested"):
-            status = "field_tested"
+    treatment_gate = (
+        not potability_required
+        or (
+            treatment["required"] is False
+            or (
+                treatment["required"] is True
+                and treatment["system_status"] == "operational_tested"
+            )
+        )
+    )
+
+    if status == "measured" and outage_gate and (potability_gate or not potability_required) and treatment_gate:
+        status = "field_tested"
 
     if (
         status == "field_tested"
