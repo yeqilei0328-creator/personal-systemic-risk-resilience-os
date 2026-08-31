@@ -1,174 +1,301 @@
-# Existing News Radar Baseline — Phase 3R-00
+# News Radar Baseline — Canonical after V0.3 Reconciliation
 
 ## Status
 
-Recovered operational baseline.
+**CANONICAL OPERATIONAL BASELINE / Phase 3R-00A**
 
-This document captures the already-working news recommendation and briefing logic before Phase 3R precision upgrades. It is a preservation baseline, not a redesign.
+Primary source:
+`docs/reference/CHINA_INTELLIGENCE_PUSH_AND_RUNTIME_ARCHITECTURE_V0.3.md`
 
-If an original Markdown specification is later supplied, reconcile it against this baseline and record differences explicitly.
+Reconciliation:
+`docs/NEWS-RADAR-V0.3-RECONCILIATION.md`
 
-## 1. Product role
+This baseline preserves the existing working product and makes explicit where Phase 3R adds persistence/precision.
 
-The existing news conversation remains the primary user-facing intelligence surface.
+## Mission
 
-It covers:
-- domestic and international current affairs;
-- geopolitical competition;
-- military developments;
-- regional conflict;
-- macro / finance / trade / supply-chain developments;
-- climate / disasters / resource constraints;
-- Physical AI developments relevant to the user's project.
+This is not a news summarizer.
 
-The front end should remain conversational and direct. The backend may be much more complex.
+It converts noisy public information into:
+1. China Morning Intelligence Brief;
+2. Physical AI Radar;
+3. Global Risk Resonance anomaly detection.
 
-## 2. Recovered presentation behavior
+Core rule:
 
-Operational preferences recovered from prior use:
+> 后台复杂，前台简单；事实先于判断；行为重于语言；系统重于单条新闻；变化重于重复；宁缺毋滥。
 
-- primary delivery is a daily morning briefing around 08:00;
-- avoid duplicative evening briefing as a second default digest;
-- avoid a noisy hourly P0 presentation loop as a default user experience;
-- front-end analysis is intentionally compressed;
-- backend reasoning remains deep;
-- top-level daily judgments remain tightly bounded, historically around no more than three major judgments;
-- individual event items should emphasize:
-  1. what happened;
-  2. current judgment;
-  3. why it matters;
-  4. what to watch next.
+## Runtime product shape
 
-These are preserved operating preferences, not hard-coded scheduling infrastructure in this repository.
+### Morning brief
+- enabled;
+- once daily around 08:00;
+- P0-P2 China items;
+- includes Physical AI Radar;
+- no duplicate evening brief;
+- no default hourly P0 presentation loop.
 
-## 3. P0 / P1 / P2
+### Global Risk Resonance
+- separate condition watch;
+- normally silent;
+- triggers only on meaningful systemic change.
 
-P0 / P1 / P2 is an **intelligence priority taxonomy**, not the global systemic-risk stage and not the personal R-Level.
+Runtime scheduling is operational/external. This repository defines logic, state and gates.
 
-### P0
-Must-know information because it may:
-- materially change model state;
-- materially shorten Lead Time;
-- alter a major scenario;
-- change an action/playbook;
-- invalidate an important assumption;
-- represent a single major event with immediate systemic relevance.
+## Canonical pipeline
 
-P0 is not “dramatic headline”.
+`Multi-source Discovery`
+→ `Candidate Event Pool`
+→ `Cluster / Deduplicate`
+→ `Atomic Claim Split`
+→ `Evidence Acquisition`
+→ `Independence / Provenance`
+→ `Claim Grade A-D`
+→ `Evidence · Behavior · Systems`
+→ `Importance / Relevance / Coupling`
+→ `Material Change`
+→ `Structural Delta`
+→ `Output / Alert Gate`
+→ `Front-end Simplification`
+→ `Judgment Ledger`
+→ `Posterior Revision`
 
-### P1
-Important trend evidence worth retaining and incorporating into the model, but not necessarily requiring immediate interruption.
+## Time windows
 
-### P2
-Background/context. Useful for state maintenance and understanding, but normally not worth interrupting the user.
+- T0: 0-24h — discovery / immediate change
+- T1: 3-15d — trend / repetition / behavior continuity
+- T2: 30-90d — structural context / resonance / capital and policy cycles
 
-## 4. Backend reasoning contract
+## Evidence discipline
 
-The radar may use a full Evidence · Behavior · Systems reasoning chain internally.
+Hard rules:
+- one media outlet cannot decide what is visible;
+- reposts are not independent confirmation;
+- “reported” does not mean “fact”;
+- official sources are high-value for some claim classes, not universal truth;
+- do not fill quotas.
 
-### Evidence
-- multi-source discovery;
-- claim splitting;
-- source quality / provenance;
-- primary vs secondary;
-- independent vs derivative sources;
-- fact / forecast / correlation / causality / opinion;
-- counterevidence;
-- confidence and uncertainty.
+### Claim Grade A-D
 
-### Behavior
-For political/military/state actors:
-- observable action may carry more evidentiary value than rhetoric;
-- words-actions gap is explicit;
-- logistics, mobilization, routing, procurement, deployment, regulation and market behavior may matter more than statements.
+- A: confirmed enough for factual use
+- B: high-confidence but not fully confirmed
+- C: developing / insufficiently verified
+- D: analysis / opinion / prediction
 
-### Systems
-- map events into first-order variables A/B/C/D;
-- track transmission edges;
-- avoid common-cause double counting;
-- update Coupling Density;
-- monitor feedback-loop candidates;
-- track buffer depletion/restoration;
-- update scenarios and Lead Time;
-- map personal exposure only after global-system judgment.
+Always write **Claim Grade A-D** when ambiguity with Risk Variable A-D is possible.
 
-## 5. Multi-risk resonance baseline
+### Source independence
 
-The radar is not a “bad news counter”.
+Count origin/independence, not search-result volume.
 
-A resonance alert becomes meaningful when:
-- multiple distinct risk domains synchronously deteriorate; or
-- one major event materially changes several downstream systems; or
-- an important transmission edge is strengthened/validated; or
-- a key buffer is depleted; or
-- the global risk structure changes.
+### Source Reputation Ledger
 
-A prior operational threshold used “at least three risk categories visibly worsening together, or one major event”. Phase 3R may refine this into explicit structural-delta logic, but it should preserve the spirit: synchronized change matters more than headline count.
+Reliability is domain × claim-type specific and updates over time.
 
-## 6. Front-end compression
+Low-reputation sources may still serve:
+- narrative monitoring;
+- propaganda detection;
+- anomaly discovery;
+- reverse indicators;
+but cannot independently upgrade a claim.
 
-The front end should not expose the entire backend reasoning chain.
+## Event intelligence
 
-Default user-facing output should emphasize:
-- conclusion;
-- material evidence;
+Event Cluster identity uses:
+Actor + Action + Object + Location + Time Window + Consequence
+
+Same cluster only re-alerts on **Material Change**, such as:
+- threat → attack;
+- plan → budget;
+- budget → procurement;
+- procurement → delivery;
+- demo → deployment;
+- expected price effect → observed price/flow transmission.
+
+## Behavior layer
+
+### Costly Signal
+
+Higher value if behavior:
+- consumes real resources;
+- persists;
+- is difficult to reverse.
+
+### Rhetoric–Action Gap
+
+Observable actions may outweigh low-cost statements.
+
+### Narrative Gap
+
+Separate:
+- verifiable behavior;
+- interpretation;
+- emotional language;
+- actor interest;
+- audience positioning.
+
+## Counterevidence
+
+Every material hypothesis requires active search for:
+- alternative causes;
+- omitted variables;
+- stabilizers;
+- contradictory behavior;
+- disconfirming prices/flows.
+
+## Systems layer
+
+Track:
+Actor / Capability / Intent / Action / Constraint / Resource / Relationship / Feedback / Outcome
+
+Do not equate:
+Capability = Intent = Action = Outcome.
+
+## Priority axis
+
+Canonical news importance = **P0-P3**.
+
+- P0 system-level
+- P1 high impact
+- P2 worth recording
+- P3 background / normally silent
+
+Morning brief outputs P0-P2.
+
+Priority is separate from Claim Grade and all systemic/personal states.
+
+## Global Risk observation channels
+
+Preserve the V0.3 five signal groups as detection channels:
+1. synchronized geopolitical conflict;
+2. energy/shipping corridors;
+3. East Asia security structure;
+4. extreme weather / major disasters;
+5. price and real-economy transmission.
+
+They feed, but do not replace, the four first-order Risk Variables.
+
+## Global systemic state
+
+Canonical engine uses:
+- Risk Variable A-D;
+- Edge H-state;
+- Coupling C0-C3;
+- Buffer BU/B0-B3;
+- Global Stage I-IV;
+- Scenario state.
+
+Legacy `Global Systemic Risk Index` is a display compatibility panel only. No aggregate doomsday score.
+
+## Resonance alert candidates
+
+Preserve V0.3:
+- Trigger A: 3+ core observation signals materially worsening;
+- Trigger B: one major system-changing event;
+- Trigger C: new strong coupling edge.
+
+Phase 3R adds:
+- common-cause correction;
+- Material Change;
+- real-world cost/behavior evidence;
+- cooldown;
+- hysteresis;
+- explicit state delta.
+
+No substantive change = no notification.
+
+## Judgment and learning
+
+Persist:
+- Judgment Ledger
+- Source Reputation Ledger
+- Alert History
+- posterior updates
+- error types
+- source limitations
+- predicted paths
+- disconfirming outcomes
+
+The system audits both sources and itself.
+
+## Access / concentration / dynamic-number discipline
+
+- disclose paywall/robots/access limitations;
+- do not pretend full-text verification;
+- mark single-source concentration;
+- timestamp unstable numbers;
+- do not mix old/new casualty, strike, order or funding figures.
+
+## Physical AI Radar
+
+Physical AI is part of the same user-facing product, not a separate news silo.
+
+Evaluate:
+- engineering relevance;
+- maturity;
+- battlefield evidence maturity where applicable;
+- architecture/safety/runtime implications.
+
+News-side Action Tags:
+- IGNORE
+- WATCH
+- TECH-RADAR
+- ENGINEERING-IMPACT-PROPOSAL
+
+These are handoff intents only. Formal engineering authority remains in the Physical AI project's TECH-RADAR-04 / TECH-RADAR-01 governance.
+
+See:
+`docs/PHYSICAL-AI-RADAR-INTEGRATION.md`
+
+## Front-end contract
+
+Daily top judgments: normally max 3.
+
+Per event:
+1. what happened;
+2. current judgment / Claim Grade;
+3. why it matters;
+4. next observable;
+5. optional unresolved point.
+
+Global Risk alerts remain short and explain:
 - what changed;
-- why it matters;
-- uncertainty/counterevidence when decision-relevant;
-- next trigger.
+- what is resonating;
+- why this is not ordinary bad-news accumulation;
+- current systemic state;
+- 30-90d observables.
 
-Detailed chain-of-thought style exposition is not required for normal alerts.
+## Silence is a valid result
 
-## 7. Physical AI Radar
+Remain silent for:
+- duplicate news;
+- rhetoric without action;
+- ordinary PR;
+- single weak paper;
+- battlefield propaganda;
+- one isolated fluctuating risk dimension;
+- news-density increase without transmission;
+- no real cost signal;
+- no engineering impact.
 
-Physical AI is a fixed intelligence module within the same user-facing news product.
+> 只有真正值得打断用户时才打断。
 
-Coverage includes:
-- drones / UAVs;
-- quadrupeds / robot dogs;
-- UGVs;
-- humanoids;
-- manipulators;
-- biomimetic / insect-scale / micro robots;
-- AI vision / VLM / VLA / perception;
-- world models;
-- planning / control;
-- multi-agent / swarm / one-to-many supervision;
-- digital twins / simulation / data flywheels / RoboOps;
-- edge/local AI;
-- degraded/offline runtime;
-- autonomous inspection / security;
-- high-adversity field lessons from real unmanned systems, bounded to generalizable systems/robotics insight.
+## Phase 3R upgrade target
 
-The Physical AI Radar is not a separate news product. It is one domain inside the broader intelligence product, with a specialized downstream engineering path into the Physical AI project's Technology Radar.
+Do not redesign recommendation logic.
 
-## 8. What Phase 3R may improve
-
-Phase 3R should improve:
-- source registry;
-- source independence;
-- event fingerprinting;
-- clustering/dedup;
-- novelty/change detection;
-- behavior-vs-rhetoric;
-- counterevidence/falsification;
-- edge/coupling/buffer/scenario deltas;
-- alert suppression/hysteresis;
-- Chain Watch.
-
-It should **not** casually replace:
-- P0/P1/P2;
-- the concise presentation style;
-- the existing daily briefing experience;
-- Physical AI Radar;
-- the principle that no substantive change means no notification.
-
-## 9. Reconciliation rule
-
-If an original news-radar Markdown/spec is supplied:
-1. parse it as a source artifact;
-2. compare against this recovered baseline;
-3. prefer later explicit user rules over older rules;
-4. record conflicts;
-5. preserve working behavior unless there is an explicit reason to change it;
-6. update this document through review rather than silent replacement.
+Engineer persistence and precision:
+- Source Registry
+- Event Store
+- Claim Store
+- Evidence Graph
+- Source Reputation Ledger
+- Judgment Ledger
+- System State Graph
+- Risk Coupling Graph
+- Alert History
+- event fingerprint/dedup
+- structural delta
+- suppression/hysteresis
+- Chain Watch
+- replay/backtest
