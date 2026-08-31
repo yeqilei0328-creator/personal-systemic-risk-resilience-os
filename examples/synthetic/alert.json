@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.1.0",
+  "alert_id": "alt-synthetic-001",
+  "emitted_at": "2026-08-31T00:45:00Z",
+  "intelligence_priority": "P1",
+  "global_stage": "Stage-II",
+  "personal_r_level": "R1",
+  "governance_integrity": "G0",
+  "change_reason": "coupling_change",
+  "basis": {
+    "event_ids": [
+      "evt-synthetic-001"
+    ],
+    "edge_ids": [
+      "edge-synthetic-001"
+    ],
+    "scenario_ids": [
+      "scn-synthetic-001"
+    ],
+    "evidence_ids": [
+      "evd-synthetic-001"
+    ]
+  },
+  "summary": "Synthetic alert generated because a test coupling changed.",
+  "actions": [
+    "Reassess the synthetic scenario."
+  ],
+  "do_not_do": [
+    "Do not treat synthetic data as a real-world warning."
+  ],
+  "escalation_conditions": [
+    "A second independent synthetic edge validates."
+  ],
+  "deescalation_conditions": [
+    "The synthetic edge is falsified."
+  ],
+  "notify": true,
+  "sensitivity": "public"
+}
