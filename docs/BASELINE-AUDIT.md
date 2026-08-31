@@ -50,8 +50,8 @@ Base Autonomy Days 不取平均。
 ### Fail closed
 
 - required domain 缺失 → INCOMPLETE，禁止虚构自治天数
-- critical capability 未知 → UNKNOWN
-- critical capability unavailable → DEGRADED / 0 days
+- critical capability 的 availability/autonomy 未知 → UNKNOWN
+- critical capability 明确 unavailable → DEGRADED / 0 days，即使 autonomy_days 尚未填写
 - 全部关键能力已知 → AUDITED
 
 ## Single Point of Failure
