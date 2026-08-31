@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/preparedness-snapshot.schema.json",
+  "title": "Preparedness Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "as_of",
+    "required_domains",
+    "covered_domains",
+    "missing_domains",
+    "confirmed_domains",
+    "unverified_domains",
+    "critical_capability_count",
+    "critical_unknown_count",
+    "critical_unavailable_count",
+    "critical_single_point_count",
+    "base_autonomy_days",
+    "first_failure_capability_id",
+    "first_failure_domain",
+    "state",
+    "readiness_gaps",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "pattern": "^prs-[A-Za-z0-9._-]+$"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "required_domains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "cash_flow",
+          "liquidity",
+          "asset_disposition",
+          "industrial_space",
+          "land",
+          "energy",
+          "water",
+          "food",
+          "mobility",
+          "physical_ai",
+          "communications",
+          "medical",
+          "sanitation",
+          "tools_spares",
+          "offline_knowledge",
+          "people_network"
+        ]
+      }
+    },
+    "covered_domains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "cash_flow",
+          "liquidity",
+          "asset_disposition",
+          "industrial_space",
+          "land",
+          "energy",
+          "water",
+          "food",
+          "mobility",
+          "physical_ai",
+          "communications",
+          "medical",
+          "sanitation",
+          "tools_spares",
+          "offline_knowledge",
+          "people_network"
+        ]
+      }
+    },
+    "missing_domains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "cash_flow",
+          "liquidity",
+          "asset_disposition",
+          "industrial_space",
+          "land",
+          "energy",
+          "water",
+          "food",
+          "mobility",
+          "physical_ai",
+          "communications",
+          "medical",
+          "sanitation",
+          "tools_spares",
+          "offline_knowledge",
+          "people_network"
+        ]
+      }
+    },
+    "confirmed_domains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "cash_flow",
+          "liquidity",
+          "asset_disposition",
+          "industrial_space",
+          "land",
+          "energy",
+          "water",
+          "food",
+          "mobility",
+          "physical_ai",
+          "communications",
+          "medical",
+          "sanitation",
+          "tools_spares",
+          "offline_knowledge",
+          "people_network"
+        ]
+      }
+    },
+    "critical_capability_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "critical_unknown_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "critical_unavailable_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "critical_single_point_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "base_autonomy_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "first_failure_capability_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "first_failure_domain": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "state": {
+      "enum": [
+        "INCOMPLETE",
+        "UNKNOWN",
+        "DEGRADED",
+        "AUDITED"
+      ]
+    },
+    "readiness_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    },
+    "unverified_domains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "cash_flow",
+          "liquidity",
+          "asset_disposition",
+          "industrial_space",
+          "land",
+          "energy",
+          "water",
+          "food",
+          "mobility",
+          "physical_ai",
+          "communications",
+          "medical",
+          "sanitation",
+          "tools_spares",
+          "offline_knowledge",
+          "people_network"
+        ]
+      }
+    }
+  }
+}

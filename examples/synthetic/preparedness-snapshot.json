@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "snapshot_id": "prs-synthetic-001",
+  "as_of": "2026-08-31T02:00:00Z",
+  "required_domains": [
+    "water"
+  ],
+  "covered_domains": [
+    "water"
+  ],
+  "missing_domains": [],
+  "confirmed_domains": [
+    "water"
+  ],
+  "critical_capability_count": 1,
+  "critical_unknown_count": 0,
+  "critical_unavailable_count": 0,
+  "critical_single_point_count": 0,
+  "base_autonomy_days": 14,
+  "first_failure_capability_id": "cap-synthetic-water",
+  "first_failure_domain": "water",
+  "state": "AUDITED",
+  "readiness_gaps": [],
+  "sensitivity": "public",
+  "unverified_domains": []
+}

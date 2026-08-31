@@ -1,3 +1,4 @@
+from .preparedness import preparedness_snapshot
 from .quantification import (
     buffer_floor_days,
     buffer_remaining_fraction,
@@ -8,6 +9,7 @@ from .quantification import (
 )
 
 __all__ = [
+    "preparedness_snapshot",
     "buffer_floor_days",
     "buffer_remaining_fraction",
     "buffer_snapshot",
