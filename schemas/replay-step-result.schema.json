@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/replay-step-result.schema.json",
+  "title": "Replay Step Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result_id",
+    "case_id",
+    "step_id",
+    "category",
+    "expected_notify",
+    "actual_notify",
+    "expected_code",
+    "actual_trigger_codes",
+    "actual_suppression_codes",
+    "passed",
+    "error_class",
+    "notes",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "result_id": {
+      "type": "string",
+      "pattern": "^rpr-[A-Za-z0-9._-]+$"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^rpc-[A-Za-z0-9._-]+$"
+    },
+    "step_id": {
+      "type": "string",
+      "pattern": "^step-[A-Za-z0-9._-]+$"
+    },
+    "category": {
+      "enum": [
+        "derivative_source",
+        "false_resonance",
+        "true_resonance",
+        "duplicate",
+        "hysteresis",
+        "p3_silent",
+        "scheduled_brief",
+        "falsification",
+        "improvement",
+        "chain_break",
+        "chain_relaxation",
+        "materiality",
+        "access_failure",
+        "other"
+      ]
+    },
+    "expected_notify": {
+      "type": "boolean"
+    },
+    "actual_notify": {
+      "type": "boolean"
+    },
+    "expected_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "actual_trigger_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "actual_suppression_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "error_class": {
+      "enum": [
+        "NONE",
+        "FALSE_POSITIVE",
+        "FALSE_NEGATIVE",
+        "CODE_MISMATCH"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "suite_id": "rps-synthetic-r7-001",
+  "result_ids": [
+    "rpr-redteam-101",
+    "rpr-redteam-102",
+    "rpr-redteam-103",
+    "rpr-redteam-104",
+    "rpr-redteam-105",
+    "rpr-redteam-106",
+    "rpr-redteam-107",
+    "rpr-redteam-108",
+    "rpr-redteam-109",
+    "rpr-redteam-110",
+    "rpr-redteam-111",
+    "rpr-redteam-112",
+    "rpr-redteam-113"
+  ],
+  "total_steps": 13,
+  "passed_steps": 13,
+  "failed_steps": 0,
+  "false_positive_count": 0,
+  "false_negative_count": 0,
+  "code_mismatch_count": 0,
+  "duplicate_control_failure_count": 0,
+  "deescalation_falsification_failure_count": 0,
+  "generated_at": "2026-08-31T07:00:00Z",
+  "sensitivity": "public"
+}

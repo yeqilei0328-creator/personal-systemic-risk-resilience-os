@@ -38,7 +38,7 @@
 ### Phase 3B — Private Operational State Bootstrap — COMPLETE
 Separate private operational-state layer established, pinned to public method version and validation-enabled.
 
-### Phase 3R — Radar Precision Upgrade v0.1 — CURRENT PRIORITY
+### Phase 3R — Radar Precision Upgrade v0.1 — ENGINEERING COMPLETE
 
 #### R00 — Preserve existing radar — COMPLETE
 - [x] Existing news-push conversation retained as presentation layer
@@ -94,16 +94,19 @@ Separate private operational-state layer established, pinned to public method ve
 - [x] Posterior Revision
 - [x] source + judgment calibration
 
-#### R6 — Chain Watch — CURRENT
-- [~] climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation
-- [~] chain-state persistence
-- [~] fact / forecast / correlation / causality / counterevidence per link
-- [~] contiguous supported-path detection
-- [~] TRANSMITTING / BUILDING / FRAGMENTED / RELAXING / BROKEN semantics
+#### R6 — Chain Watch — COMPLETE
+- [x] climate→food/energy→inflation→Fed→UST/financial conditions→AI CapEx/valuation
+- [x] chain-state persistence
+- [x] fact / forecast / correlation / causality / counterevidence per link
+- [x] contiguous supported-path detection
+- [x] TRANSMITTING / BUILDING / FRAGMENTED / RELAXING / BROKEN semantics
 
-#### R7 — Replay / Red Team
-- [ ] Synthetic replay tests for duplicate, worsening, improvement, falsification
-- [ ] false-positive / false-negative review
+#### R7 — Replay / Red Team — COMPLETE
+- [x] Synthetic replay tests for duplicate, worsening, improvement, falsification
+- [x] cross-layer R1→R4 and R6→R4 replay
+- [x] false-positive / false-negative review
+- [x] 13-case replay suite summary and exit gate
+- [x] 13/13 required synthetic cases PASS; FP=0; FN=0; code mismatch=0
 
 ### Phase 3C — Capability Verification & Baseline Completion — PAUSED AFTER CLEAN CHECKPOINT
 
