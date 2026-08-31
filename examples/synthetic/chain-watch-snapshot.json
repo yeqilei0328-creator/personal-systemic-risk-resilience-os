@@ -22,5 +22,7 @@
   "longest_contiguous_supported_path": 5,
   "full_chain_supported": true,
   "chain_state": "TRANSMITTING",
-  "sensitivity": "public"
+  "sensitivity": "public",
+  "required_link_count": 5,
+  "falsified_required_link_count": 0
 }
