@@ -27,6 +27,10 @@ PAIRS = {
     "source_observation": ("schemas/source-observation.schema.json", "examples/synthetic/source-observation.json"),
     "source_reputation_record": ("schemas/source-reputation-record.schema.json", "examples/synthetic/source-reputation-record.json"),
     "source_concentration_assessment": ("schemas/source-concentration-assessment.schema.json", "examples/synthetic/source-concentration-assessment.json"),
+    "event_state_record": ("schemas/event-state-record.schema.json", "examples/synthetic/event-state-record.json"),
+    "claim_record": ("schemas/claim-record.schema.json", "examples/synthetic/claim-record.json"),
+    "claim_value_observation": ("schemas/claim-value-observation.schema.json", "examples/synthetic/claim-value-observation.json"),
+    "material_change_assessment": ("schemas/material-change-assessment.schema.json", "examples/synthetic/material-change-assessment.json"),
 }
 
 def load(path):
@@ -119,6 +123,23 @@ def semantic_errors(name, obj):
                 errors.append("SINGLE_ORIGIN must set single_source_bias=true")
         if obj["state"] == "DIVERSE" and obj["known_independence_group_count"] < 2:
             errors.append("DIVERSE requires at least two known independence groups")
+    elif name == "claim_record":
+        policy = obj["dynamic_value_policy"]
+        if policy is not None:
+            rule = policy["materiality_rule"]
+            if rule == "absolute" and policy["absolute_delta"] is None:
+                errors.append("absolute materiality rule requires absolute_delta")
+            if rule == "relative" and policy["relative_delta"] is None:
+                errors.append("relative materiality rule requires relative_delta")
+            if rule == "either" and policy["absolute_delta"] is None and policy["relative_delta"] is None:
+                errors.append("either materiality rule requires at least one threshold")
+    elif name == "material_change_assessment":
+        if obj["material"] and "non_material_update" in obj["change_types"]:
+            errors.append("material assessment cannot include non_material_update")
+        if not obj["material"] and obj["change_types"] != ["non_material_update"]:
+            errors.append("non-material assessment must contain only non_material_update")
+        if "priority_change" in obj["change_types"] and obj["priority_from"] == obj["priority_to"]:
+            errors.append("priority_change requires different from/to values")
     return errors
 
 def main():

@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "mca-synthetic-r2-001",
+  "event_id": "evt-synthetic-r2-001",
+  "previous_state_ref": "snapshot-0",
+  "current_state_ref": "snapshot-1",
+  "material": true,
+  "change_types": [
+    "priority_change"
+  ],
+  "changed_claim_ids": [],
+  "numeric_change_refs": [],
+  "priority_from": "P3",
+  "priority_to": "P2",
+  "reasons": [
+    "priority changed P3->P2"
+  ],
+  "assessed_at": "2026-08-31T01:00:00Z",
+  "sensitivity": "public"
+}

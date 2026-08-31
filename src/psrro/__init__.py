@@ -1,3 +1,9 @@
+from .intelligence_events import (
+    EventClaimStateStore,
+    detect_material_change,
+    event_fingerprint,
+    numeric_material_change,
+)
 from .intelligence_sources import (
     SourceStateStore,
     access_disclosure_required,
@@ -17,6 +23,10 @@ from .quantification import (
 )
 
 __all__ = [
+    "EventClaimStateStore",
+    "detect_material_change",
+    "event_fingerprint",
+    "numeric_material_change",
     "SourceStateStore",
     "access_disclosure_required",
     "assess_source_concentration",

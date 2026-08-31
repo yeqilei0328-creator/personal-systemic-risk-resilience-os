@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/material-change-assessment.schema.json",
+  "title": "Material Change Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "event_id",
+    "previous_state_ref",
+    "current_state_ref",
+    "material",
+    "change_types",
+    "changed_claim_ids",
+    "numeric_change_refs",
+    "priority_from",
+    "priority_to",
+    "reasons",
+    "assessed_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^mca-[A-Za-z0-9._-]+$"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[A-Za-z0-9._-]+$"
+    },
+    "previous_state_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "current_state_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "material": {
+      "type": "boolean"
+    },
+    "change_types": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "new_event",
+          "material_marker_added",
+          "material_marker_removed",
+          "priority_change",
+          "numeric_material_change",
+          "claim_grade_change",
+          "lifecycle_change",
+          "non_material_update"
+        ]
+      }
+    },
+    "changed_claim_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^clm-[A-Za-z0-9._-]+$"
+      }
+    },
+    "numeric_change_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^cvo-[A-Za-z0-9._-]+$"
+      }
+    },
+    "priority_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        null
+      ]
+    },
+    "priority_to": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "assessed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

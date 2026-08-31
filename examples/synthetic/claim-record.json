@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1.0",
+  "claim_id": "clm-synthetic-r2-001",
+  "event_id": "evt-synthetic-r2-001",
+  "claim_kind": "quantity",
+  "epistemic_class": "fact",
+  "statement": "Synthetic quantity claim.",
+  "claim_grade": "C",
+  "grade_updated_at": "2026-08-31T01:00:00Z",
+  "status": "developing",
+  "source_observation_ids": [
+    "sob-synthetic-001"
+  ],
+  "evidence_ids": [],
+  "dynamic_value_policy": {
+    "value_type": "number",
+    "unit": "synthetic-units",
+    "materiality_rule": "absolute",
+    "absolute_delta": 10,
+    "relative_delta": null
+  },
+  "superseded_by_claim_id": null,
+  "last_updated": "2026-08-31T01:00:00Z",
+  "sensitivity": "public"
+}
