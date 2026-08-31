@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/source-registry-record.schema.json",
+  "title": "Source Registry Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_id",
+    "display_name",
+    "source_class",
+    "roles",
+    "canonical_origin",
+    "domain_strengths",
+    "default_access_status",
+    "updated_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^src-[A-Za-z0-9._-]+$"
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "source_class": {
+      "enum": [
+        "global_media",
+        "specialist_media",
+        "government",
+        "regulator",
+        "company",
+        "academic",
+        "technical_primary",
+        "military",
+        "osint",
+        "disaster_data",
+        "market_data",
+        "social",
+        "aggregator",
+        "other"
+      ]
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "discovery",
+          "original_reporting",
+          "official_record",
+          "official_statement",
+          "technical_primary",
+          "field_evidence",
+          "data_provider",
+          "market_context",
+          "narrative_monitoring",
+          "aggregator"
+        ]
+      }
+    },
+    "canonical_origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publisher",
+        "domain"
+      ],
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      }
+    },
+    "ownership_group": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "domain_strengths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "china_policy",
+          "macro",
+          "financial_markets",
+          "industry",
+          "technology",
+          "diplomacy",
+          "military",
+          "taiwan_strait",
+          "south_china_sea",
+          "sanctions_export_controls",
+          "corporate",
+          "disaster",
+          "physical_ai",
+          "war_unmanned_systems",
+          "energy",
+          "shipping",
+          "supply_chain",
+          "global_risk",
+          "other"
+        ]
+      }
+    },
+    "default_access_status": {
+      "enum": [
+        "full_access",
+        "partial",
+        "paywall",
+        "robots_blocked",
+        "unavailable",
+        "metadata_only",
+        "unknown"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

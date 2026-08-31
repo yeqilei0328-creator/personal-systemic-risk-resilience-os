@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1.0",
+  "observation_id": "sob-synthetic-001",
+  "source_id": "src-synthetic-wire",
+  "claim_ref": "claim-synthetic-001",
+  "published_at": "2026-08-31T00:00:00Z",
+  "retrieved_at": "2026-08-31T00:05:00Z",
+  "access_status": "full_access",
+  "access_limit_note": null,
+  "source_role": "original_report",
+  "evidence_type": "interview",
+  "lineage": {
+    "relation": "original",
+    "origin_observation_id": null,
+    "independence_group_id": "ind-synthetic-origin-001",
+    "shared_origin_note": null
+  },
+  "anonymous_source": {
+    "present": false,
+    "origin_group_id": null
+  },
+  "provenance": {
+    "full_text_verified": true,
+    "primary_material_accessed": false,
+    "source_locator": "synthetic-section"
+  },
+  "sensitivity": "public"
+}

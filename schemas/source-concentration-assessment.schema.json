@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/source-concentration-assessment.schema.json",
+  "title": "Source Concentration Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "claim_ref",
+    "observation_ids",
+    "unique_source_count",
+    "known_independence_group_count",
+    "unknown_lineage_count",
+    "derivative_observation_count",
+    "access_limited_count",
+    "state",
+    "single_source_bias",
+    "reasons",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^sca-[A-Za-z0-9._-]+$"
+    },
+    "claim_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observation_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sob-[A-Za-z0-9._-]+$"
+      }
+    },
+    "unique_source_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "known_independence_group_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unknown_lineage_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "derivative_observation_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "access_limited_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "state": {
+      "enum": [
+        "UNKNOWN",
+        "SINGLE_ORIGIN",
+        "CONCENTRATED",
+        "DIVERSE"
+      ]
+    },
+    "single_source_bias": {
+      "type": "boolean"
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

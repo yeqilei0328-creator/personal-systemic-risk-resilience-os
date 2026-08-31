@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/source-reputation-record.schema.json",
+  "title": "Source Reputation Ledger Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reputation_id",
+    "source_id",
+    "domain",
+    "claim_type",
+    "sample_count",
+    "metrics",
+    "directional_error_notes",
+    "updated_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "reputation_id": {
+      "type": "string",
+      "pattern": "^rep-[A-Za-z0-9._-]+$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^src-[A-Za-z0-9._-]+$"
+    },
+    "domain": {
+      "enum": [
+        "china_policy",
+        "macro",
+        "financial_markets",
+        "industry",
+        "technology",
+        "diplomacy",
+        "military",
+        "taiwan_strait",
+        "south_china_sea",
+        "sanctions_export_controls",
+        "corporate",
+        "disaster",
+        "physical_ai",
+        "war_unmanned_systems",
+        "energy",
+        "shipping",
+        "supply_chain",
+        "global_risk",
+        "other"
+      ]
+    },
+    "claim_type": {
+      "enum": [
+        "existence",
+        "time",
+        "quantity",
+        "identity",
+        "behavior",
+        "legal_status",
+        "causal",
+        "motive",
+        "intent",
+        "prediction",
+        "battle_result",
+        "technical_performance",
+        "commercial_scale",
+        "other"
+      ]
+    },
+    "sample_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original_reporting_ratio",
+        "later_confirmed_ratio",
+        "correction_frequency",
+        "anonymous_source_dependence",
+        "headline_exaggeration",
+        "battlefield_claim_accuracy",
+        "pr_copy_tendency",
+        "median_lead_time_hours"
+      ],
+      "properties": {
+        "original_reporting_ratio": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "later_confirmed_ratio": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "correction_frequency": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "anonymous_source_dependence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "headline_exaggeration": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "battlefield_claim_accuracy": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "pr_copy_tendency": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "median_lead_time_hours": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "directional_error_notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

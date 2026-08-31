@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "reputation_id": "rep-synthetic-wire-diplomacy-behavior",
+  "source_id": "src-synthetic-wire",
+  "domain": "diplomacy",
+  "claim_type": "behavior",
+  "sample_count": 20,
+  "metrics": {
+    "original_reporting_ratio": 0.8,
+    "later_confirmed_ratio": 0.75,
+    "correction_frequency": 0.05,
+    "anonymous_source_dependence": 0.4,
+    "headline_exaggeration": 0.1,
+    "battlefield_claim_accuracy": null,
+    "pr_copy_tendency": 0.05,
+    "median_lead_time_hours": 6
+  },
+  "directional_error_notes": [
+    "Synthetic example only."
+  ],
+  "limitations": [
+    "Not a real-world source assessment."
+  ],
+  "updated_at": "2026-08-31T00:00:00Z",
+  "sensitivity": "public"
+}
