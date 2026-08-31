@@ -31,6 +31,12 @@ PAIRS = {
     "claim_record": ("schemas/claim-record.schema.json", "examples/synthetic/claim-record.json"),
     "claim_value_observation": ("schemas/claim-value-observation.schema.json", "examples/synthetic/claim-value-observation.json"),
     "material_change_assessment": ("schemas/material-change-assessment.schema.json", "examples/synthetic/material-change-assessment.json"),
+    "behavior_signal": ("schemas/behavior-signal.schema.json", "examples/synthetic/behavior-signal.json"),
+    "costly_signal_assessment": ("schemas/costly-signal-assessment.schema.json", "examples/synthetic/costly-signal-assessment.json"),
+    "rhetoric_action_gap": ("schemas/rhetoric-action-gap.schema.json", "examples/synthetic/rhetoric-action-gap.json"),
+    "narrative_gap": ("schemas/narrative-gap.schema.json", "examples/synthetic/narrative-gap.json"),
+    "hypothesis_assessment": ("schemas/hypothesis-assessment.schema.json", "examples/synthetic/hypothesis-assessment.json"),
+    "structural_delta": ("schemas/structural-delta.schema.json", "examples/synthetic/structural-delta.json"),
 }
 
 def load(path):
@@ -140,6 +146,55 @@ def semantic_errors(name, obj):
             errors.append("non-material assessment must contain only non_material_update")
         if "priority_change" in obj["change_types"] and obj["priority_from"] == obj["priority_to"]:
             errors.append("priority_change requires different from/to values")
+    elif name == "costly_signal_assessment":
+        if not obj["eligible"] and obj["strength"] != "NOT_APPLICABLE":
+            errors.append("ineligible costly signal must be NOT_APPLICABLE")
+        if obj["strength"] == "STRONG" and not obj["resource_commitment_present"]:
+            errors.append("STRONG costly signal requires resource commitment")
+    elif name == "rhetoric_action_gap":
+        if obj["gap_direction"] == "aligned" and obj["rhetoric_direction"] != obj["behavior_direction"]:
+            errors.append("aligned gap requires matching directions")
+    elif name == "narrative_gap":
+        if obj["gap_type"] == "NARRATIVE_ONLY":
+            if obj["material_fact_disagreement"] or not obj["narrative_only_divergence"]:
+                errors.append("NARRATIVE_ONLY requires narrative divergence without material fact disagreement")
+        if obj["gap_type"] == "FACT_DISPUTE" and not obj["material_fact_disagreement"]:
+            errors.append("FACT_DISPUTE requires material_fact_disagreement=true")
+    elif name == "hypothesis_assessment":
+        if obj["falsification_status"] == "triggered" and obj["posterior_direction"] != "falsified":
+            errors.append("triggered falsification requires posterior_direction=falsified")
+        if obj["posterior_direction"] == "falsified" and obj["falsification_status"] != "triggered":
+            errors.append("posterior_direction=falsified requires triggered falsification")
+    elif name == "structural_delta":
+        h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
+        c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}
+        b_order = {"B0": 0, "B1": 1, "B2": 2, "B3": 3}
+        for edge in obj["edge_changes"]:
+            f, t, d = edge["from_state"], edge["to_state"], edge["direction"]
+            expected = "unchanged" if f == t else (
+                "falsified" if t == "Hx" else (
+                    "recovered" if f == "Hx" else (
+                        "strengthened" if h_order[t] > h_order[f] else "weakened"
+                    )
+                )
+            )
+            if d != expected:
+                errors.append(f"edge delta {f}->{t} must be {expected}")
+        coupling = obj["coupling_change"]
+        cf, ct = coupling["from_band"], coupling["to_band"]
+        c_expected = "unchanged" if cf == ct else ("denser" if c_order[ct] > c_order[cf] else "sparser")
+        if coupling["direction"] != c_expected:
+            errors.append(f"coupling delta {cf}->{ct} must be {c_expected}")
+        buffer = obj["buffer_change"]
+        bf, bt = buffer["from_band"], buffer["to_band"]
+        if bf == bt:
+            b_expected = "unchanged"
+        elif "BU" in {bf, bt}:
+            b_expected = "unknown"
+        else:
+            b_expected = "depleted" if b_order[bt] > b_order[bf] else "restored"
+        if buffer["direction"] != b_expected:
+            errors.append(f"buffer delta {bf}->{bt} must be {b_expected}")
     return errors
 
 def main():
