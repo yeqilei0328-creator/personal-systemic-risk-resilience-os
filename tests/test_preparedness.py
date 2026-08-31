@@ -62,6 +62,17 @@ class PreparednessSnapshotTests(unittest.TestCase):
         self.assertEqual(result["first_failure_capability_id"], "cap-energy")
         self.assertEqual(result["first_failure_domain"], "energy")
 
+    def test_unavailable_with_unknown_autonomy_still_sets_zero(self):
+        result = preparedness_snapshot(
+            [
+                audit("cap-water", "water", autonomy=40),
+                audit("cap-energy", "energy", availability="unavailable", autonomy=None),
+            ],
+            ["water", "energy"],
+        )
+        self.assertEqual(result["state"], "DEGRADED")
+        self.assertEqual(result["base_autonomy_days"], 0.0)
+
     def test_unavailable_critical_capability_sets_zero(self):
         result = preparedness_snapshot(
             [
@@ -100,7 +111,7 @@ class PreparednessSnapshotTests(unittest.TestCase):
             ["water"],
         )
         self.assertEqual(result["confirmed_domains"], [])
-        self.assertEqual(result["unknown_domains"], ["water"])
+        self.assertEqual(result["unverified_domains"], ["water"])
 
 
 if __name__ == "__main__":
