@@ -113,8 +113,10 @@ class SnapshotTests(unittest.TestCase):
         rows = all_assessments()
         rows[0]["h_state"] = "H2"
         rows[0]["epistemic_counts"]["causality"] = 1
+        rows[0]["supporting_evidence_ids"] = ["evd-chain-synthetic"]
         rows[2]["h_state"] = "H2"
         rows[2]["epistemic_counts"]["causality"] = 1
+        rows[2]["supporting_evidence_ids"] = ["evd-chain-synthetic"]
         result = build_chain_snapshot(d, rows)
         self.assertEqual(result["chain_state"], "FRAGMENTED")
         self.assertEqual(result["longest_contiguous_supported_path"], 1)
@@ -125,6 +127,7 @@ class SnapshotTests(unittest.TestCase):
         for idx in (1, 2):
             rows[idx]["h_state"] = "H2"
             rows[idx]["epistemic_counts"]["causality"] = 1
+            rows[idx]["supporting_evidence_ids"] = ["evd-chain-synthetic"]
             rows[idx]["direction"] = "strengthening"
         result = build_chain_snapshot(d, rows)
         self.assertEqual(result["chain_state"], "BUILDING")
@@ -141,6 +144,7 @@ class SnapshotTests(unittest.TestCase):
         current_rows = all_assessments()
         current_rows[0]["h_state"] = "H2"
         current_rows[0]["epistemic_counts"]["causality"] = 1
+        current_rows[0]["supporting_evidence_ids"] = ["evd-chain-synthetic"]
         current_rows[0]["direction"] = "weakening"
         current_rows[1]["direction"] = "weakening"
         result = build_chain_snapshot(
