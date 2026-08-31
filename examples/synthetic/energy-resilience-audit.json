@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1.0",
+  "energy_audit_id": "era-synthetic-001",
+  "capability_id": "cap-synthetic-energy",
+  "service_scope": "critical_loads",
+  "grid": {
+    "connection_status": "connected",
+    "normal_operation_depends_on_grid": true
+  },
+  "generation": {
+    "pv_present": true,
+    "pv_nameplate_kwp": 100,
+    "pv_measured_peak_kw": 75,
+    "generator_present": false,
+    "generator_rated_kw": null,
+    "generator_measured_runtime_hours": null
+  },
+  "storage": {
+    "battery_present": true,
+    "nameplate_kwh": 120,
+    "usable_kwh": 100,
+    "max_continuous_output_kw": 40
+  },
+  "conversion": {
+    "inverter_present": true,
+    "islanding_status": "tested_pass",
+    "black_start_status": "tested_pass",
+    "transfer_path_status": "tested_pass"
+  },
+  "loads": {
+    "critical_loads_mapped": true,
+    "critical_peak_kw": 20,
+    "critical_energy_kwh_per_day": 50,
+    "essential_circuits_tested": true
+  },
+  "outage_test": {
+    "status": "pass",
+    "duration_hours": 24,
+    "minimum_load_served_kw": 10,
+    "energy_served_kwh": 45
+  },
+  "dependencies": [
+    {
+      "dependency_id": "critical-inverter",
+      "kind": "inverter",
+      "critical": true,
+      "backup_status": "ready"
+    }
+  ],
+  "single_points_of_failure": [],
+  "maintenance_status": "current",
+  "independent_review_completed": false,
+  "evidence_refs": [
+    "synthetic-meter",
+    "synthetic-outage"
+  ],
+  "updated_at": "2026-08-31T00:00:00Z",
+  "data_sensitivity": "public"
+}

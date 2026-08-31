@@ -1,3 +1,4 @@
+from .energy import assess_energy_verification
 from .water import assess_water_verification
 from .preparedness import preparedness_snapshot
 from .quantification import (
@@ -10,6 +11,7 @@ from .quantification import (
 )
 
 __all__ = [
+    "assess_energy_verification",
     "assess_water_verification",
     "preparedness_snapshot",
     "buffer_floor_days",
