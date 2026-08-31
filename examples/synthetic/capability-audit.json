@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "audit_id": "cpa-synthetic-water",
+  "capability_id": "cap-synthetic-water",
+  "domain": "water",
+  "criticality": 5,
+  "verification_status": "field_tested",
+  "availability_status": "available",
+  "autonomy_days": 14,
+  "dependencies": [
+    {
+      "dependency_id": "synthetic-power",
+      "kind": "power",
+      "critical": true,
+      "backup_status": "ready"
+    }
+  ],
+  "single_points_of_failure": [],
+  "maintenance_status": "current",
+  "replenishment_status": "available",
+  "conversion_latency_hours": 1,
+  "last_verified_at": "2026-08-31T02:00:00Z",
+  "next_test_due": null,
+  "evidence_refs": [
+    "synthetic-test-record"
+  ],
+  "notes": "Synthetic only.",
+  "data_sensitivity": "public"
+}
