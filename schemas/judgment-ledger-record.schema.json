@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/judgment-ledger-record.schema.json",
+  "title": "Judgment Ledger Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "judgment_id",
+    "created_at",
+    "subject_refs",
+    "initial_claim_grade",
+    "event_priority",
+    "system_state_refs",
+    "current_finding",
+    "predicted_paths",
+    "tail_risk",
+    "watch_signals",
+    "source_observation_ids",
+    "source_limitations",
+    "outcome_status",
+    "later_result",
+    "error_types",
+    "posterior_revision_ids",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "judgment_id": {
+      "type": "string",
+      "pattern": "^jdg-[A-Za-z0-9._-]+$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subject_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_ids",
+        "claim_ids",
+        "edge_ids",
+        "scenario_ids"
+      ],
+      "properties": {
+        "event_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^evt-[A-Za-z0-9._-]+$"
+          }
+        },
+        "claim_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^clm-[A-Za-z0-9._-]+$"
+          }
+        },
+        "edge_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^edge-[A-Za-z0-9._-]+$"
+          }
+        },
+        "scenario_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^scn-[A-Za-z0-9._-]+$"
+          }
+        }
+      }
+    },
+    "initial_claim_grade": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        null
+      ]
+    },
+    "event_priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        null
+      ]
+    },
+    "system_state_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "current_finding": {
+      "type": "string",
+      "minLength": 1
+    },
+    "predicted_paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path_id",
+          "description",
+          "likelihood_band"
+        ],
+        "properties": {
+          "path_id": {
+            "type": "string",
+            "pattern": "^path-[A-Za-z0-9._-]+$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "likelihood_band": {
+            "enum": [
+              "remote",
+              "possible",
+              "plausible",
+              "likely",
+              "unknown"
+            ]
+          }
+        }
+      }
+    },
+    "tail_risk": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "watch_signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signal_id",
+          "description",
+          "role"
+        ],
+        "properties": {
+          "signal_id": {
+            "type": "string",
+            "pattern": "^watch-[A-Za-z0-9._-]+$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "enum": [
+              "upgrade",
+              "downgrade",
+              "falsification",
+              "timing",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "source_observation_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sob-[A-Za-z0-9._-]+$"
+      }
+    },
+    "source_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "outcome_status": {
+      "enum": [
+        "unresolved",
+        "partially_resolved",
+        "resolved"
+      ]
+    },
+    "later_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "error_types": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "none",
+          "source_error",
+          "overreaction",
+          "underreaction",
+          "timing_error",
+          "omitted_variable",
+          "correlation_as_causality",
+          "rhetoric_overweight",
+          "technology_maturity_overestimate",
+          "execution_delay",
+          "unknown"
+        ]
+      }
+    },
+    "posterior_revision_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^prv-[A-Za-z0-9._-]+$"
+      }
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
