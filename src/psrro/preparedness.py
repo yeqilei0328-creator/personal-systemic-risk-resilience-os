@@ -74,6 +74,11 @@ def preparedness_snapshot(
             "critical capabilities with unknown availability/autonomy: "
             + ", ".join(a["capability_id"] for a in critical_unknown)
         )
+    if critical_unavailable:
+        readiness_gaps.append(
+            "critical capabilities unavailable: "
+            + ", ".join(a["capability_id"] for a in critical_unavailable)
+        )
     if not critical:
         readiness_gaps.append("no critical capabilities designated")
     if critical_single_points:
@@ -96,10 +101,6 @@ def preparedness_snapshot(
         first_failure_domain = first["domain"]
     elif critical_unknown or not critical:
         state = "UNKNOWN"
-        base_autonomy_days = 0.0
-        first = sorted(critical_unavailable, key=lambda a: a["capability_id"])[0]
-        first_failure_capability_id = first["capability_id"]
-        first_failure_domain = first["domain"]
     else:
         state = "AUDITED"
         first = min(
