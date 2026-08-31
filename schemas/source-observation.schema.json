@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/source-observation.schema.json",
+  "title": "Source Observation / Claim Provenance Hook",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "observation_id",
+    "source_id",
+    "claim_ref",
+    "published_at",
+    "retrieved_at",
+    "access_status",
+    "source_role",
+    "evidence_type",
+    "lineage",
+    "anonymous_source",
+    "provenance",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "observation_id": {
+      "type": "string",
+      "pattern": "^sob-[A-Za-z0-9._-]+$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^src-[A-Za-z0-9._-]+$"
+    },
+    "claim_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque future Claim Store reference."
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "access_status": {
+      "enum": [
+        "full_access",
+        "partial",
+        "paywall",
+        "robots_blocked",
+        "unavailable",
+        "metadata_only",
+        "unknown"
+      ]
+    },
+    "access_limit_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_role": {
+      "enum": [
+        "original_report",
+        "original_document",
+        "official_statement",
+        "derivative_report",
+        "aggregated_result",
+        "technical_primary",
+        "field_evidence",
+        "data_observation",
+        "narrative_signal",
+        "other"
+      ]
+    },
+    "evidence_type": {
+      "enum": [
+        "document",
+        "database",
+        "interview",
+        "anonymous_interview",
+        "video",
+        "image",
+        "satellite",
+        "geolocation",
+        "hardware_evidence",
+        "market_data",
+        "shipping_data",
+        "sensor_data",
+        "technical_paper",
+        "source_code",
+        "official_statement",
+        "social_post",
+        "other"
+      ]
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relation",
+        "origin_observation_id",
+        "independence_group_id"
+      ],
+      "properties": {
+        "relation": {
+          "enum": [
+            "original",
+            "independent",
+            "repost",
+            "syndication",
+            "shared_press_release",
+            "shared_anonymous_origin",
+            "unknown"
+          ]
+        },
+        "origin_observation_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "independence_group_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "shared_origin_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "anonymous_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "present",
+        "origin_group_id"
+      ],
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "origin_group_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Group shared anonymous-origin claims where known."
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "full_text_verified",
+        "primary_material_accessed",
+        "source_locator"
+      ],
+      "properties": {
+        "full_text_verified": {
+          "type": "boolean"
+        },
+        "primary_material_accessed": {
+          "type": "boolean"
+        },
+        "source_locator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lineage": {
+            "properties": {
+              "relation": {
+                "enum": [
+                  "repost",
+                  "syndication",
+                  "shared_press_release",
+                  "shared_anonymous_origin"
+                ]
+              }
+            },
+            "required": [
+              "relation"
+            ]
+          }
+        },
+        "required": [
+          "lineage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "lineage": {
+            "properties": {
+              "origin_observation_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "origin_observation_id"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "full_text_verified": {
+                "const": true
+              }
+            },
+            "required": [
+              "full_text_verified"
+            ]
+          }
+        },
+        "required": [
+          "provenance"
+        ]
+      },
+      "then": {
+        "properties": {
+          "access_status": {
+            "const": "full_access"
+          }
+        }
+      }
+    }
+  ]
+}
