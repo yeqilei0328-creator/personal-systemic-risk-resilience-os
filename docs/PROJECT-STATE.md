@@ -14,7 +14,7 @@ Current completed stages:
 | Phase 1 — Core Data Model v0.1 | COMPLETE | Event / Evidence / Edge / Scenario / Exposure / Capability / Alert schemas, synthetic examples, validation |
 | Phase 2 — Quantification v0.1 | COMPLETE | Coupling C0-C3, Buffer BU/B0-B3, H-state recommendation, R0-R5 action gates, deterministic tests |
 | Phase 3A — Baseline Audit Framework | COMPLETE | Capability audit, Preparedness Snapshot, Base Autonomy / First Failure Point, SPOF detection, private-state integration contract |
-| Phase 3B — Private Operational State Bootstrap | BLOCKED / NEXT | Requires a separate private operational-state repository or equivalent private data layer |
+| Phase 3B — Private Operational State Bootstrap | COMPLETE | Separate private operational-state layer established, pinned to public method version, validated fail-closed |
 | Phase 4 — Playbooks | NOT STARTED | Scenario-to-action playbooks |
 | Phase 5 — Red Team & V1.0 Gate | NOT STARTED | Historical calibration, false-positive/false-negative review, action-cost audit, V1.0 approval |
 
@@ -100,20 +100,12 @@ Principle:
 
 ## Next engineering node
 
-### Phase 3B — Private Operational State Bootstrap
+### Phase 3C — Capability Verification & Baseline Completion
 
-Required before a real personal/base Preparedness Snapshot can be trusted.
+Phase 3B has established a separate private operational-state layer and validated it against a pinned public method version.
 
-The private state layer will hold real:
+The next task is to move private capabilities from `stated` toward `measured` / `field_tested` / `audited`, fill missing required domains, identify real single points of failure, and only then derive defensible Base Autonomy / First Failure Point.
 
-- capability audits
-- exposures
-- finance and asset state
-- site/resource state
-- communications state
-- food/medical state
-- people/network state
+Public `main` must continue to contain methods and aggregate status only. Real private values remain outside this repository.
 
-Every private assessment must pin the public schema/model version used to interpret it.
-
-Until Phase 3B exists, the public repository can define how to measure readiness but must not claim a real Base Autonomy Days or real personal R-Level from incomplete operational data.
+Until sufficient private coverage exists, the system must keep real Base Autonomy and Personal R-Level fail-closed rather than inventing certainty.
