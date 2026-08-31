@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/alert-history-record.schema.json",
+  "title": "Alert History Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "alert_history_id",
+    "candidate_id",
+    "decision_id",
+    "delivery_mode",
+    "outcome",
+    "trigger_codes",
+    "suppression_codes",
+    "state_signature",
+    "decided_at",
+    "recorded_at",
+    "related_prior_alert_id",
+    "later_evaluation",
+    "transport_status",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "alert_history_id": {
+      "type": "string",
+      "pattern": "^ahs-[A-Za-z0-9._-]+$"
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^ogc-[A-Za-z0-9._-]+$"
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^ogd-[A-Za-z0-9._-]+$"
+    },
+    "delivery_mode": {
+      "enum": [
+        "scheduled_brief",
+        "interrupt_alert"
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "EMIT",
+        "SUPPRESS"
+      ]
+    },
+    "trigger_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "SCHEDULED_MATERIAL_ITEM",
+          "P0_MATERIAL",
+          "TRIGGER_A_RESONANCE",
+          "TRIGGER_B_MAJOR_EVENT",
+          "TRIGGER_C_NEW_STRONG_EDGE",
+          "HYPOTHESIS_FALSIFIED",
+          "LEAD_TIME_COMPRESSION",
+          "GLOBAL_STAGE_CHANGE",
+          "PERSONAL_ACTION_CHANGE"
+        ]
+      }
+    },
+    "suppression_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "P3_SILENT",
+          "NO_SUBSTANTIVE_CHANGE",
+          "DUPLICATE_STATE",
+          "NO_TRIGGER",
+          "COOLDOWN",
+          "HYSTERESIS"
+        ]
+      }
+    },
+    "state_signature": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "related_prior_alert_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^ahs-[A-Za-z0-9._-]+$"
+    },
+    "later_evaluation": {
+      "enum": [
+        "unreviewed",
+        "appropriate",
+        "false_positive",
+        "missed_signal",
+        "too_early",
+        "too_late",
+        "unknown"
+      ]
+    },
+    "transport_status": {
+      "enum": [
+        "not_applicable",
+        "not_sent",
+        "sent",
+        "unknown"
+      ]
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
