@@ -44,17 +44,22 @@ def preparedness_snapshot(
         for domain in required
         if any(_is_confirmed(a) for a in by_domain.get(domain, []))
     )
-    unknown_domains = sorted(
+    unverified_domains = sorted(
         domain
         for domain in required
         if domain in by_domain
         and not any(_is_confirmed(a) for a in by_domain[domain])
+        and not all(a.get("availability_status") == "unavailable" for a in by_domain[domain])
     )
 
     critical = [a for a in audits if int(a.get("criticality", 0)) >= 4]
     critical_unknown = [
         a for a in critical
-        if a.get("availability_status") == "unknown" or a.get("autonomy_days") is None
+        if a.get("availability_status") == "unknown"
+        or (
+            a.get("autonomy_days") is None
+            and a.get("availability_status") != "unavailable"
+        )
     ]
     critical_unavailable = [
         a for a in critical if a.get("availability_status") == "unavailable"
@@ -83,10 +88,14 @@ def preparedness_snapshot(
 
     if missing:
         state = "INCOMPLETE"
-    elif critical_unknown or not critical:
-        state = "UNKNOWN"
     elif critical_unavailable:
         state = "DEGRADED"
+        base_autonomy_days = 0.0
+        first = sorted(critical_unavailable, key=lambda a: a["capability_id"])[0]
+        first_failure_capability_id = first["capability_id"]
+        first_failure_domain = first["domain"]
+    elif critical_unknown or not critical:
+        state = "UNKNOWN"
         base_autonomy_days = 0.0
         first = sorted(critical_unavailable, key=lambda a: a["capability_id"])[0]
         first_failure_capability_id = first["capability_id"]
@@ -109,7 +118,7 @@ def preparedness_snapshot(
         "covered_domains": covered,
         "missing_domains": missing,
         "confirmed_domains": confirmed,
-        "unknown_domains": unknown_domains,
+        "unverified_domains": unverified_domains,
         "critical_capability_count": len(critical),
         "critical_unknown_count": len(critical_unknown),
         "critical_unavailable_count": len(critical_unavailable),
