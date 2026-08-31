@@ -120,7 +120,7 @@ Private audit domains:
 - [~] 光伏 / 储能 / 离网能力 — public verification method + private baseline complete; field evidence pending
 - [ ] 车辆 / 机动
 - [ ] Physical AI / 防御性感知与巡检
-- [ ] 网络 / 通信 / 离线计算 — NEXT ENGINEERING DOMAIN
+- [~] 网络 / 通信 / 离线计算 — PUBLIC METHOD IMPLEMENTATION CURRENT
 - [ ] 食品 / 农业转换
 - [ ] 医疗 / 卫生
 - [ ] 工具 / 备件 / 维修
