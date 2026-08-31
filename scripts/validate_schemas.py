@@ -48,6 +48,8 @@ PAIRS = {
     "chain_definition": ("schemas/chain-definition.schema.json", "chains/climate-food-energy-inflation-ai.json"),
     "chain_link_assessment": ("schemas/chain-link-assessment.schema.json", "examples/synthetic/chain-link-assessment.json"),
     "chain_watch_snapshot": ("schemas/chain-watch-snapshot.schema.json", "examples/synthetic/chain-watch-snapshot.json"),
+    "replay_step_result": ("schemas/replay-step-result.schema.json", "examples/synthetic/replay-step-result.json"),
+    "replay_suite_summary": ("schemas/replay-suite-summary.schema.json", "examples/synthetic/replay-suite-summary.json"),
 }
 
 def load(path):
@@ -286,6 +288,45 @@ def semantic_errors(name, obj):
         if obj["chain_state"] == "FRAGMENTED":
             if obj["supported_link_count"] == 0 or obj["longest_contiguous_supported_path"] > 1:
                 errors.append("FRAGMENTED requires isolated supported links")
+    elif name == "replay_step_result":
+        expected_notify = obj["expected_notify"]
+        actual_notify = obj["actual_notify"]
+        expected_code = obj["expected_code"]
+        actual_codes = set(obj["actual_trigger_codes"]) | set(obj["actual_suppression_codes"])
+        if expected_notify and not actual_notify:
+            expected_error = "FALSE_NEGATIVE"
+        elif not expected_notify and actual_notify:
+            expected_error = "FALSE_POSITIVE"
+        elif expected_code is not None and expected_code not in actual_codes:
+            expected_error = "CODE_MISMATCH"
+        else:
+            expected_error = "NONE"
+        if obj["error_class"] != expected_error:
+            errors.append(f"replay error_class must be {expected_error}")
+        if obj["passed"] != (expected_error == "NONE"):
+            errors.append("replay passed must match error_class")
+    elif name == "replay_suite_summary":
+        if obj["passed_steps"] + obj["failed_steps"] != obj["total_steps"]:
+            errors.append("replay passed_steps + failed_steps must equal total_steps")
+        if len(obj["result_ids"]) != obj["total_steps"]:
+            errors.append("replay result_ids length must equal total_steps")
+        if obj["false_positive_count"] > obj["failed_steps"]:
+            errors.append("false_positive_count cannot exceed failed_steps")
+        if obj["false_negative_count"] > obj["failed_steps"]:
+            errors.append("false_negative_count cannot exceed failed_steps")
+        if obj["code_mismatch_count"] > obj["failed_steps"]:
+            errors.append("code_mismatch_count cannot exceed failed_steps")
+        classified_failures = (
+            obj["false_positive_count"]
+            + obj["false_negative_count"]
+            + obj["code_mismatch_count"]
+        )
+        if classified_failures != obj["failed_steps"]:
+            errors.append("all replay failed_steps must be classified as FP/FN/code mismatch")
+        if obj["duplicate_control_failure_count"] > obj["failed_steps"]:
+            errors.append("duplicate_control_failure_count cannot exceed failed_steps")
+        if obj["deescalation_falsification_failure_count"] > obj["failed_steps"]:
+            errors.append("deescalation/falsification failures cannot exceed failed_steps")
     elif name == "structural_delta":
         h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
         c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}
