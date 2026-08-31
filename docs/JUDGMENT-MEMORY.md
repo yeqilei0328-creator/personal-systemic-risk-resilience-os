@@ -25,7 +25,15 @@ They must not be silently rewritten after outcomes become known.
 It rejects:
 - same ID + changed content.
 
-Posterior revisions and Alert History use the same rule.
+Judgment Outcome, Posterior Revision and Alert History use the same rule.
+
+This creates a deliberate split:
+
+- **Judgment Record** = what the system believed at that time.
+- **Judgment Outcome Record** = what later evidence showed.
+- **Posterior Revision** = why the belief changed.
+
+This preserves the V0.3 `later_result / error_type / posterior_update` semantics without mutating the original historical judgment.
 
 ## 2. Judgment Ledger
 
@@ -40,13 +48,26 @@ A record captures the V0.3 concepts:
 - tail risk;
 - watch / falsification signals;
 - source set;
-- source limitations;
-- later result;
-- outcome status;
-- error types;
-- posterior revision refs.
+- source limitations.
 
-`later_result` does not replace `current_finding`.
+The original record stops there. It is immutable.
+
+### Judgment Outcome Record
+
+Later evaluation is appended separately:
+
+- outcome_status;
+- later_result;
+- error_types;
+- posterior revision refs;
+- previous outcome ref;
+- evaluated_at.
+
+A judgment may evolve:
+
+`unresolved → partially_resolved → resolved`
+
+without rewriting its original finding.
 
 ## 3. Predicted paths
 
@@ -110,9 +131,11 @@ Transport status is separate because R4/R5 do not implement notification deliver
 
 ## 7. Calibration
 
-`summarize_judgment_calibration` counts:
+`summarize_judgment_calibration` selects the latest Outcome Record for each Judgment, then counts:
 - resolved / partially resolved / unresolved;
 - error types.
+
+All historical Outcome Records remain stored for replay; the current calibration does not double-count one Judgment merely because it had several evaluation updates.
 
 Supported error examples:
 - source_error
