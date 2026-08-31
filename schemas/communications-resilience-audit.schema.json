@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/communications-resilience-audit.schema.json",
+  "title": "Communications Resilience Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "communications_audit_id",
+    "capability_id",
+    "service_scope",
+    "power",
+    "internal_network",
+    "external_links",
+    "offline_compute",
+    "dependencies",
+    "single_points_of_failure",
+    "maintenance_status",
+    "independent_review_completed",
+    "evidence_refs",
+    "updated_at",
+    "data_sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "communications_audit_id": {
+      "type": "string",
+      "pattern": "^cra-[A-Za-z0-9._-]+$"
+    },
+    "capability_id": {
+      "type": "string",
+      "pattern": "^cap-[A-Za-z0-9._-]+$"
+    },
+    "service_scope": {
+      "enum": [
+        "unknown",
+        "internal_network",
+        "external_communications",
+        "full_resilient_stack"
+      ]
+    },
+    "power": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "critical_power_path_mapped",
+        "backup_power_status",
+        "power_outage_test",
+        "tested_runtime_hours"
+      ],
+      "properties": {
+        "critical_power_path_mapped": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "backup_power_status": {
+          "enum": [
+            "unknown",
+            "none",
+            "partial",
+            "ready",
+            "not_required"
+          ]
+        },
+        "power_outage_test": {
+          "enum": [
+            "not_run",
+            "pass",
+            "partial",
+            "fail",
+            "not_required"
+          ]
+        },
+        "tested_runtime_hours": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "internal_network": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topology_mapped",
+        "critical_backbone_medium",
+        "local_lan_status",
+        "internet_loss_test",
+        "local_control_path_without_internet"
+      ],
+      "properties": {
+        "topology_mapped": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "critical_backbone_medium": {
+          "enum": [
+            "unknown",
+            "wired",
+            "wireless",
+            "mixed",
+            "other"
+          ]
+        },
+        "local_lan_status": {
+          "enum": [
+            "unknown",
+            "present_unverified",
+            "tested_pass",
+            "tested_fail",
+            "not_capable"
+          ]
+        },
+        "internet_loss_test": {
+          "enum": [
+            "not_run",
+            "pass",
+            "partial",
+            "fail"
+          ]
+        },
+        "local_control_path_without_internet": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "external_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "link_id",
+          "medium",
+          "independence_group_id",
+          "status",
+          "bidirectional",
+          "test_runtime_hours",
+          "critical"
+        ],
+        "properties": {
+          "link_id": {
+            "type": "string",
+            "pattern": "^comlink-[A-Za-z0-9._-]+$"
+          },
+          "medium": {
+            "enum": [
+              "fiber",
+              "cellular",
+              "satellite",
+              "radio",
+              "other"
+            ]
+          },
+          "independence_group_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "unknown",
+              "present_unverified",
+              "tested_pass",
+              "tested_fail"
+            ]
+          },
+          "bidirectional": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "test_runtime_hours": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "critical": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "offline_compute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "local_compute_present",
+        "critical_workloads_identified",
+        "local_runtime_status",
+        "cloud_dependency_status",
+        "offline_data_status"
+      ],
+      "properties": {
+        "local_compute_present": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "critical_workloads_identified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "local_runtime_status": {
+          "enum": [
+            "unknown",
+            "present_unverified",
+            "tested_pass",
+            "tested_fail",
+            "not_required"
+          ]
+        },
+        "cloud_dependency_status": {
+          "enum": [
+            "unknown",
+            "none",
+            "partial",
+            "critical"
+          ]
+        },
+        "offline_data_status": {
+          "enum": [
+            "unknown",
+            "absent",
+            "present_unverified",
+            "tested_access",
+            "not_required"
+          ]
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dependency_id",
+          "kind",
+          "critical",
+          "backup_status"
+        ],
+        "properties": {
+          "dependency_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "power",
+              "upstream_provider",
+              "router_switch",
+              "wifi",
+              "local_server",
+              "time_dns_auth",
+              "satellite_service",
+              "radio",
+              "personnel",
+              "spares",
+              "other"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "backup_status": {
+            "enum": [
+              "none",
+              "partial",
+              "ready",
+              "unknown",
+              "not_required"
+            ]
+          }
+        }
+      }
+    },
+    "single_points_of_failure": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "maintenance_status": {
+      "enum": [
+        "current",
+        "due",
+        "overdue",
+        "unknown"
+      ]
+    },
+    "independent_review_completed": {
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
