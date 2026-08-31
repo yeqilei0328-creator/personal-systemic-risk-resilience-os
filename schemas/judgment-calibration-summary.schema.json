@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/judgment-calibration-summary.schema.json",
+  "title": "Judgment Calibration Summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "summary_id",
+    "judgment_ids",
+    "total_count",
+    "resolved_count",
+    "partially_resolved_count",
+    "unresolved_count",
+    "error_type_counts",
+    "generated_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "summary_id": {
+      "type": "string",
+      "pattern": "^jcs-[A-Za-z0-9._-]+$"
+    },
+    "judgment_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^jdg-[A-Za-z0-9._-]+$"
+      }
+    },
+    "total_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "resolved_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "partially_resolved_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unresolved_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "error_type_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "none",
+        "source_error",
+        "overreaction",
+        "underreaction",
+        "timing_error",
+        "omitted_variable",
+        "correlation_as_causality",
+        "rhetoric_overweight",
+        "technology_maturity_overestimate",
+        "execution_delay",
+        "unknown"
+      ],
+      "properties": {
+        "none": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_error": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "overreaction": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "underreaction": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timing_error": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "omitted_variable": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "correlation_as_causality": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rhetoric_overweight": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "technology_maturity_overestimate": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "execution_delay": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknown": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
