@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/energy-verification-assessment.schema.json",
+  "title": "Energy Verification Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "energy_audit_id",
+    "recommended_verification_status",
+    "islanding_gate_passed",
+    "black_start_gate_passed",
+    "critical_load_gate_passed",
+    "storage_autonomy_days",
+    "minimum_demonstrated_continuity_days",
+    "renewable_sustaining_candidate",
+    "backup_generation_candidate",
+    "blockers",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^eva-[A-Za-z0-9._-]+$"
+    },
+    "energy_audit_id": {
+      "type": "string",
+      "pattern": "^era-[A-Za-z0-9._-]+$"
+    },
+    "recommended_verification_status": {
+      "enum": [
+        "stated",
+        "measured",
+        "field_tested",
+        "audited"
+      ]
+    },
+    "islanding_gate_passed": {
+      "type": "boolean"
+    },
+    "black_start_gate_passed": {
+      "type": "boolean"
+    },
+    "critical_load_gate_passed": {
+      "type": "boolean"
+    },
+    "storage_autonomy_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "minimum_demonstrated_continuity_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "renewable_sustaining_candidate": {
+      "type": "boolean"
+    },
+    "backup_generation_candidate": {
+      "type": "boolean"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
