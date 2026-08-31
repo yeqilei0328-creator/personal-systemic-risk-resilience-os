@@ -91,6 +91,7 @@ def build_chain_snapshot(
     supported_count = sum(supported)
     h3_count = sum(a["h_state"] == "H3" and is_chain_supported_link(a) for a in ordered)
     forecast_only_count = sum(is_forecast_only(a) for a in ordered)
+    falsified_count = sum(a["h_state"] == "Hx" for a in ordered)
     falsified_required_count = sum(
         link["required"] and assessment_map[link["link_id"]]["h_state"] == "Hx"
         for link in definition["links"]
@@ -104,6 +105,8 @@ def build_chain_snapshot(
     required_links = [
         link["link_id"] for link in definition["links"] if link["required"]
     ]
+    if not required_links:
+        raise ValueError("chain definition must contain at least one required link")
     full_chain_supported = all(
         is_chain_supported_link(assessment_map[link_id])
         for link_id in required_links
@@ -136,10 +139,12 @@ def build_chain_snapshot(
         "as_of": as_of,
         "ordered_link_assessment_ids": [a["assessment_id"] for a in ordered],
         "total_link_count": len(ordered),
+        "required_link_count": len(required_links),
         "supported_link_count": supported_count,
         "h3_link_count": h3_count,
         "forecast_only_link_count": forecast_only_count,
-        "falsified_link_count": falsified_required_count,
+        "falsified_link_count": falsified_count,
+        "falsified_required_link_count": falsified_required_count,
         "strengthening_link_count": strengthening_count,
         "weakening_link_count": weakening_count,
         "material_link_count": material_count,
