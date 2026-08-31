@@ -37,6 +37,9 @@ PAIRS = {
     "narrative_gap": ("schemas/narrative-gap.schema.json", "examples/synthetic/narrative-gap.json"),
     "hypothesis_assessment": ("schemas/hypothesis-assessment.schema.json", "examples/synthetic/hypothesis-assessment.json"),
     "structural_delta": ("schemas/structural-delta.schema.json", "examples/synthetic/structural-delta.json"),
+    "intelligence_output_candidate": ("schemas/intelligence-output-candidate.schema.json", "examples/synthetic/intelligence-output-candidate.json"),
+    "intelligence_output_gate_context": ("schemas/intelligence-output-gate-context.schema.json", "examples/synthetic/intelligence-output-gate-context.json"),
+    "intelligence_output_decision": ("schemas/intelligence-output-decision.schema.json", "examples/synthetic/intelligence-output-decision.json"),
 }
 
 def load(path):
@@ -165,6 +168,15 @@ def semantic_errors(name, obj):
             errors.append("triggered falsification requires posterior_direction=falsified")
         if obj["posterior_direction"] == "falsified" and obj["falsification_status"] != "triggered":
             errors.append("posterior_direction=falsified requires triggered falsification")
+    elif name == "intelligence_output_decision":
+        if obj["notify"] != (obj["outcome"] == "EMIT"):
+            errors.append("notify must match outcome")
+        if obj["notify"] and obj["suppression_codes"]:
+            errors.append("EMIT decision cannot contain suppression codes")
+        if not obj["notify"] and not obj["suppression_codes"]:
+            errors.append("SUPPRESS decision requires a suppression code")
+        if obj["next_eligible_at"] is not None and "COOLDOWN" not in obj["suppression_codes"]:
+            errors.append("next_eligible_at is only valid for cooldown suppression")
     elif name == "structural_delta":
         h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
         c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}
