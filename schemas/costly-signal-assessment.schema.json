@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/costly-signal-assessment.schema.json",
+  "title": "Costly Signal Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "behavior_id",
+    "eligible",
+    "strength",
+    "resource_commitment_present",
+    "persistence_gate",
+    "reversibility_gate",
+    "reasons",
+    "assessed_at",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^csa-[A-Za-z0-9._-]+$"
+    },
+    "behavior_id": {
+      "type": "string",
+      "pattern": "^beh-[A-Za-z0-9._-]+$"
+    },
+    "eligible": {
+      "type": "boolean"
+    },
+    "strength": {
+      "enum": [
+        "NOT_APPLICABLE",
+        "UNKNOWN",
+        "WEAK",
+        "MODERATE",
+        "STRONG"
+      ]
+    },
+    "resource_commitment_present": {
+      "type": "boolean"
+    },
+    "persistence_gate": {
+      "type": "boolean"
+    },
+    "reversibility_gate": {
+      "type": "boolean"
+    },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "assessed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
