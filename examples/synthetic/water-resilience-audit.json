@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1.0",
+  "water_audit_id": "wra-synthetic-001",
+  "capability_id": "cap-synthetic-water",
+  "service_scope": "potable",
+  "source": {
+    "source_type": "well",
+    "presence_confirmed": true,
+    "source_verification": "measured",
+    "notes": "Synthetic only."
+  },
+  "hydraulics": {
+    "flow_test": {
+      "method": "metered",
+      "duration_minutes": 60,
+      "sustained_flow_lpm": 8,
+      "recovery_minutes": null,
+      "notes": "Synthetic."
+    },
+    "usable_storage_liters": 1200
+  },
+  "power": {
+    "extraction_requires_power": true,
+    "primary_power": "grid",
+    "backup_power_status": "ready",
+    "outage_extraction_test": "pass"
+  },
+  "treatment": {
+    "required": true,
+    "system_status": "operational_tested"
+  },
+  "quality": {
+    "potability_status": "lab_verified",
+    "evidence_date": "2026-08-30",
+    "evidence_ref": "synthetic-lab",
+    "consumer_sensor_only": false
+  },
+  "continuity": {
+    "daily_demand_liters": 120,
+    "outage_test": "pass",
+    "field_test_duration_hours": 24
+  },
+  "dependencies": [
+    {
+      "dependency_id": "backup-power",
+      "kind": "power",
+      "critical": true,
+      "backup_status": "ready"
+    }
+  ],
+  "single_points_of_failure": [],
+  "maintenance_status": "current",
+  "independent_review_completed": false,
+  "evidence_refs": [
+    "synthetic-flow",
+    "synthetic-lab",
+    "synthetic-outage"
+  ],
+  "updated_at": "2026-08-31T00:00:00Z",
+  "data_sensitivity": "public"
+}
