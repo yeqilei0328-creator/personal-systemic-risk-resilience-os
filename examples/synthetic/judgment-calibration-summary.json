@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "summary_id": "jcs-synthetic-r5-001",
+  "judgment_ids": [
+    "jdg-synthetic-r5-001"
+  ],
+  "total_count": 1,
+  "resolved_count": 0,
+  "partially_resolved_count": 0,
+  "unresolved_count": 1,
+  "error_type_counts": {
+    "none": 1,
+    "source_error": 0,
+    "overreaction": 0,
+    "underreaction": 0,
+    "timing_error": 0,
+    "omitted_variable": 0,
+    "correlation_as_causality": 0,
+    "rhetoric_overweight": 0,
+    "technology_maturity_overestimate": 0,
+    "execution_delay": 0,
+    "unknown": 0
+  },
+  "generated_at": "2026-08-31T05:10:00Z",
+  "sensitivity": "public"
+}
