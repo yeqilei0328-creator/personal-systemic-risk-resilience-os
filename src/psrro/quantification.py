@@ -85,13 +85,14 @@ def coupling_snapshot(
     independent_pair_count = len(independent_pairs)
     active_count = len(active_variables)
     strong_count = len(strong)
+    strong_independent_cross_count = sum(e.get("state") == "H3" for e in independent)
     persistent_count = len(persistent)
 
     if (
         independent_pair_count >= 6
         and active_count == 4
         and persistent_count >= 4
-        and strong_count >= 2
+        and strong_independent_cross_count >= 2
         and max_path >= 3
     ):
         band = "C3"
@@ -113,6 +114,7 @@ def coupling_snapshot(
         "supported_edge_count": len(supported),
         "validated_edge_count": len(validated),
         "strong_edge_count": strong_count,
+        "strong_independent_cross_edge_count": strong_independent_cross_count,
         "validated_cross_variable_edge_count": len(cross_validated),
         "unique_validated_directed_pairs": len(raw_pairs),
         "independent_validated_directed_pairs": independent_pair_count,
@@ -171,7 +173,9 @@ def buffer_snapshot(
     floor_days = [d for d in floor_days if d is not None]
     earliest_floor = min(floor_days) if floor_days else None
 
-    if min_remaining <= 0.10 or below_25 >= 2:
+    if coverage_gap:
+        band = "BU"
+    elif min_remaining <= 0.10 or below_25 >= 2:
         band = "B3"
     elif min_remaining < 0.50 or below_50 >= 2:
         band = "B2"
