@@ -207,7 +207,8 @@
           "velocity_to",
           "lead_time_min_days_delta",
           "lead_time_max_days_delta",
-          "direction"
+          "direction",
+          "reasons"
         ],
         "properties": {
           "scenario_id": {
@@ -250,6 +251,13 @@
               "unchanged",
               "uncertain"
             ]
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
           }
         }
       }
