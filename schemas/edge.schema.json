@@ -294,6 +294,41 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "common_cause": {
+            "properties": {
+              "present": {
+                "const": true
+              }
+            },
+            "required": [
+              "present"
+            ]
+          }
+        },
+        "required": [
+          "common_cause"
+        ]
+      },
+      "then": {
+        "properties": {
+          "common_cause": {
+            "required": [
+              "present",
+              "cause_id"
+            ],
+            "properties": {
+              "cause_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
     }
   ]
 }
