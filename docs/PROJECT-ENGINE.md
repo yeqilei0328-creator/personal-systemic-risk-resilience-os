@@ -136,8 +136,45 @@ Before writing code/state, recover:
 - blockers
 - field evidence deferred
 - next exact action
+- Technology Radar trigger state
 
 Do not start by trusting the last conversation summary.
+
+---
+
+## 4A. Permanent Technology Radar Gate
+
+Technology Radar is a permanent Project Engine control. It is not a project phase and cannot be considered “completed” for the life of the project.
+
+Canonical contract: `docs/TECHNOLOGY-RADAR-GATE.md`.
+
+Every substantial engineering path must check two triggers:
+
+### Trigger A — Major Decision
+
+Before materially committing to or changing architecture, technical direction, hardware/platform family, protocol, algorithm/model family, foundational dependency, deployment approach, or a substantial custom implementation that may have mature prior art.
+
+### Trigger B — Major Blocker
+
+When a material engineering path is blocked, repeatedly failing, behaving unexpectedly, or likely to have relevant prior art, before continuing speculative custom fixes.
+
+### Mandatory triggered workflow
+
+`trigger → stop affected path → exact problem contract → bounded external reality/prior-art scan → evidence/reuse map → REUSE / ADAPT / EXTEND / BUILD → explicit decision → resume engineering`
+
+The external scan should use the sources appropriate to the problem, including official documentation, GitHub repositories/issues/PRs, standards, papers, hardware/software ecosystems, credible deployments, independent reproductions, security advisories and community failure reports where useful.
+
+Decision order is mandatory:
+
+`REUSE → ADAPT → EXTEND → BUILD`
+
+**No silent BUILD.** A material BUILD decision must explain why REUSE, ADAPT and EXTEND are insufficient.
+
+The Radar is bounded: stop when credible candidate families and relevant primary evidence are covered and additional searching is unlikely to change the engineering decision materially. Record uncertainty rather than turning research into an infinite ritual.
+
+Radar research/decision is evidence, not execution authority. It does not by itself authorize installation, production changes, private-state writes, credentials, device connection or physical control.
+
+A triggered Radar gate without a durable decision/evidence record is an incomplete Project Engine state.
 
 ---
 
@@ -153,11 +190,12 @@ Trigger:
 
 Sequence:
 
-`Issue → branch → schema → logic → synthetic example → tests → docs → validator → PR → final-head CI → review → merge`
+`Issue → branch → Fresh Read → Technology Radar trigger check/gate when required → schema → logic → synthetic example → tests → docs → validator → PR → final-head CI → review → merge`
 
 Exit:
 - method exists on PUBLIC `main`;
 - deterministic tests pass;
+- triggered Technology Radar decisions are durable;
 - method can be vendored.
 
 ### Stage B — PRIVATE state transaction
@@ -410,9 +448,9 @@ Diversity matters.
 
 ## 12. Radar-to-Preparedness handoff
 
-The Radar and Preparedness engines are coupled but not the same state.
+The systemic-risk Radar and Preparedness engines are coupled but not the same state. The Technology Radar in §4A is a separate engineering control.
 
-Radar:
+Systemic-risk Radar:
 - detects material world change;
 - updates risk variables/edges/chain/scenario/lead time.
 
@@ -429,7 +467,7 @@ to G0-G4.
 
 Every state transition needs its own explicit rule.
 
-The user-facing news conversation remains the presentation layer for the Radar.
+The user-facing news conversation remains the presentation layer for the systemic-risk Radar.
 
 ---
 
@@ -444,6 +482,7 @@ A PR should state:
 - scope;
 - invariants;
 - evidence boundary;
+- Technology Radar trigger/decision state when applicable;
 - non-goals;
 - acceptance criteria.
 
@@ -460,6 +499,8 @@ Classify first:
 - state inconsistency;
 - pin drift;
 - test bug.
+
+If the failure becomes a Major Blocker, invoke the Technology Radar Blocker Escape Gate before repeated speculative fixes.
 
 Do not weaken evidence/safety logic just to make CI green.
 
@@ -478,6 +519,7 @@ A long-lived feature branch can become unsafe even when its domain logic is corr
 
 Reconciliation is mandatory when `main` has advanced after branch creation with changes to any foundational file/class such as:
 - Project Engine / AGENTS;
+- Technology Radar contract;
 - validator;
 - state manifest;
 - security boundary;
@@ -540,7 +582,7 @@ Defensive/non-weaponized only:
 
 ## 15. Decision-quality engine
 
-The project must resist three forms of self-deception.
+The project must resist four forms of self-deception.
 
 ### Doom bias
 Always preserve:
@@ -557,6 +599,9 @@ Do not treat assets as resilience until tested.
 A document/Issue/schema is not completion.
 
 Completion means the relevant exit gate is satisfied and current `main` says so.
+
+### Closed-world engineering bias
+Do not assume the repository's current ideas are the best available answer. Major decisions and blockers must reconnect the project to external engineering reality through the Technology Radar Gate.
 
 ---
 
@@ -577,6 +622,7 @@ Every significant session should leave GitHub in a state where a new agent can c
 - current CI state
 - current PRIVATE method pin
 - field evidence deferred
+- Technology Radar trigger/decision state and reconsideration trigger when applicable
 - next exact action
 - explicit safety/security boundary
 
@@ -597,8 +643,9 @@ At Project Engine v0.1.2:
 - Communications public/private baseline exists; field evidence deferred.
 - U1 Water/Energy/Communications field artifacts are prepared but execution is deliberately deferred.
 - Current modelling priority is the **Survival Core 4**.
-- Food is the next engineering domain.
-- After Survival Core modelling, continue the **Continuity** domains: Mobility → Sanitation → Medical.
+- Food public/private baseline exists; field evidence deferred.
+- Mobility public method exists; private Mobility baseline is the current engineering node.
+- After Mobility, continue the **Continuity** domains: Sanitation → Medical.
 
 ### Survival Core 4
 
@@ -630,8 +677,8 @@ However:
 The user may deliberately defer field execution while the critical-domain model is extended.
 
 Current next action:
-1. complete Food public method + private baseline;
-2. continue Mobility → Sanitation → Medical;
+1. complete private Mobility baseline;
+2. continue Sanitation → Medical;
 3. present the Survival Core preparation map to the user;
 4. allow gradual procurement/build-out;
 5. perform coordinated field verification when the modelling wave is mature and the user is ready.
@@ -649,6 +696,10 @@ Current next action:
 > Internet Down ≠ System Down.
 
 > 云端可增强，本地可独立降级运行。
+
+> Build last. Reuse first.
+
+> REUSE → ADAPT → EXTEND → BUILD.
 
 > 准备越便宜、越通用、越可逆，越早做；准备越昂贵、越极端、越不可逆，触发门槛越高。
 
