@@ -1,0 +1,112 @@
+{
+  "engine_version": "0.1.0",
+  "engine_name": "Personal Systemic Risk & Resilience OS Project Engine",
+  "repositories": {
+    "public_method": {
+      "full_name": "yeqilei0328-creator/personal-systemic-risk-resilience-os",
+      "visibility": "public",
+      "authority": [
+        "architecture",
+        "schemas",
+        "algorithms",
+        "verification_methods",
+        "risk_logic",
+        "project_engine",
+        "public_safe_examples"
+      ]
+    },
+    "private_state": {
+      "full_name": "yeqilei0328-creator/personal-systemic-risk-resilience-state",
+      "visibility": "private",
+      "authority": [
+        "real_capability_state",
+        "real_evidence",
+        "measurements",
+        "dependencies",
+        "spofs",
+        "preparedness",
+        "autonomy_when_defensible"
+      ]
+    }
+  },
+  "startup": {
+    "fresh_read_required": true,
+    "chat_memory_authoritative": false,
+    "required_public_files": [
+      "AGENTS.md",
+      "docs/PROJECT-ENGINE.md",
+      "docs/PROJECT-STATE.md",
+      "docs/ROADMAP.md"
+    ],
+    "required_private_files": [
+      "AGENTS.md",
+      "docs/STATE-OPERATING-MODEL.md",
+      "state-manifest.json",
+      "vendor/method-pin.json",
+      "preparedness/current.json"
+    ]
+  },
+  "invariants": {
+    "open_methodology_private_exposure": true,
+    "private_method_must_be_pinned": true,
+    "stored_private_assessments_must_recompute": true,
+    "unknown_fail_closed": true,
+    "final_head_ci_required": true,
+    "no_secrets_in_git": true,
+    "physical_ai_defensive_only": true
+  },
+  "execution_loop": [
+    "public_method",
+    "private_baseline",
+    "dependency_and_spof_inference",
+    "measurement_plan",
+    "continue_current_modeling_wave",
+    "consolidated_field_validation",
+    "private_evidence_update",
+    "deterministic_recompute",
+    "preparedness_recompute"
+  ],
+  "field_validation": {
+    "doctrine": "model_first_batch_field_later",
+    "current_wave_id": "U1",
+    "current_wave_domains": [
+      "water",
+      "energy",
+      "communications"
+    ],
+    "consolidated_work_order": "FIELD-AUDIT-WAVE-U1.md",
+    "cross_domain_checks": [
+      "water_energy",
+      "communications_energy",
+      "offline_compute_energy",
+      "physical_ai_communications",
+      "offline_knowledge_local_compute"
+    ]
+  },
+  "next_physical_sequence": [
+    "food",
+    "mobility",
+    "sanitation",
+    "medical",
+    "tools_spares",
+    "offline_knowledge",
+    "industrial_space",
+    "land",
+    "physical_ai",
+    "people_network"
+  ],
+  "required_handoff": [
+    "public_main_sha",
+    "private_main_sha",
+    "engine_version",
+    "phase",
+    "domain",
+    "last_merged_pr",
+    "open_prs",
+    "open_issues",
+    "ci_state",
+    "private_method_pin",
+    "deferred_field_evidence",
+    "next_exact_action"
+  ]
+}

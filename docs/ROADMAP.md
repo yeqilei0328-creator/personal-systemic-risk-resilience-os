@@ -1,5 +1,14 @@
 # Roadmap — Pre-V1.0
 
+## Project Engine v0.1 — COMPLETE
+- [x] Canonical dual-repo workflow
+- [x] Mandatory AGENTS.md startup contract
+- [x] Machine-readable engine config
+- [x] Model First → Batch Field Validation doctrine
+- [x] ChatGPT/Codex handoff contract
+- [x] Public/private method-pin transaction rules
+
+
 ## Phase 0 — Architecture Baseline — COMPLETE
 - [x] 总体架构
 - [x] 四元多边模型
