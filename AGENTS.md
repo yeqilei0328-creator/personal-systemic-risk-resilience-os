@@ -155,6 +155,27 @@ when required evidence is missing.
 - Never weaken a safety/evidence rule solely to make CI green.
 - Update Project State/Roadmap only when the implementation state is true.
 
+## 7A. Stale branch reconciliation
+
+If `main` advances with foundational changes after a feature branch was created, do not merge the stale branch blindly.
+
+Foundational changes include:
+- Project Engine / AGENTS
+- validators
+- state-manifest contracts
+- security rules
+- method-pin / schema contracts
+
+Before merge:
+1. fresh-read current `main`;
+2. compare the branch base against current `main`;
+3. identify overlapping files;
+4. reconcile on top of current `main` or rebuild a clean replacement branch;
+5. mark the old branch superseded if replaced;
+6. rerun final-head CI.
+
+A branch being mergeable is not proof that it preserves newer controls.
+
 ## 8. Security boundary
 
 PUBLIC repository must not contain:

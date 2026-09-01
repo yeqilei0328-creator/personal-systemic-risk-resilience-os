@@ -1,5 +1,5 @@
 {
-  "engine_version": "0.1.0",
+  "engine_version": "0.1.1",
   "engine_name": "Personal Systemic Risk & Resilience OS Project Engine",
   "repositories": {
     "public_method": {
@@ -53,7 +53,8 @@
     "unknown_fail_closed": true,
     "final_head_ci_required": true,
     "no_secrets_in_git": true,
-    "physical_ai_defensive_only": true
+    "physical_ai_defensive_only": true,
+    "stale_branch_reconciliation_required": true
   },
   "execution_loop": [
     "public_method",
@@ -81,7 +82,9 @@
       "offline_compute_energy",
       "physical_ai_communications",
       "offline_knowledge_local_compute"
-    ]
+    ],
+    "current_wave_status": "ready_for_field_review",
+    "next_action": "execute coordinated U1 field audit and persist evidence"
   },
   "next_physical_sequence": [
     "food",
@@ -107,6 +110,8 @@
     "ci_state",
     "private_method_pin",
     "deferred_field_evidence",
-    "next_exact_action"
+    "next_exact_action",
+    "branch_base_sha",
+    "branch_reconciliation_status"
   ]
 }

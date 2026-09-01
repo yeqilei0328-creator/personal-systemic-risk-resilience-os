@@ -1,12 +1,14 @@
 # Roadmap — Pre-V1.0
 
-## Project Engine v0.1 — COMPLETE
+## Project Engine v0.1.1 — COMPLETE
 - [x] Canonical dual-repo workflow
 - [x] Mandatory AGENTS.md startup contract
 - [x] Machine-readable engine config
 - [x] Model First → Batch Field Validation doctrine
 - [x] ChatGPT/Codex handoff contract
 - [x] Public/private method-pin transaction rules
+- [x] Stale branch reconciliation rule
+- [x] U1 field-ready checkpoint
 
 
 ## Phase 0 — Architecture Baseline — COMPLETE
@@ -129,7 +131,7 @@ Private audit domains:
 - [~] 光伏 / 储能 / 离网能力 — public verification method + private baseline complete; field evidence pending
 - [ ] 车辆 / 机动
 - [ ] Physical AI / 防御性感知与巡检
-- [~] 网络 / 通信 / 离线计算 — PUBLIC METHOD COMPLETE; PRIVATE BASELINE NEXT
+- [~] 网络 / 通信 / 离线计算 — PUBLIC + PRIVATE BASELINE COMPLETE; U1 FIELD EVIDENCE NEXT
 - [ ] 食品 / 农业转换
 - [ ] 医疗 / 卫生
 - [ ] 工具 / 备件 / 维修

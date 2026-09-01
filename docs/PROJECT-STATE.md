@@ -110,7 +110,9 @@ Current aggregate checkpoint:
 - no Water/Energy autonomy claim is permitted yet;
 - Preparedness remains fail-closed until required domains and critical capabilities are sufficiently verified;
 - Communications / Network / Offline Compute public verification method v0.1: **COMPLETE**;
-- next engineering node: **private Communications baseline instantiation**.
+- private Communications baseline: **COMPLETE / stated**;
+- Field Wave U1 model-first stage: **COMPLETE**;
+- next engineering node: **coordinated U1 field evidence execution**.
 
 The public repository remains method-only. Real operational values stay in the separate private state layer.
 
@@ -187,7 +189,7 @@ The existing user-facing news-push conversation remains the presentation layer; 
 
 ## Project Engine
 
-Canonical cross-repository workflow: **Project Engine v0.1**.
+Canonical cross-repository workflow: **Project Engine v0.1.1**.
 
 Durable entry points:
 - `AGENTS.md`
@@ -209,3 +211,10 @@ Current field doctrine:
 `Water + Energy + Communications modelling → consolidated Field Wave U1 → coordinated site verification`
 
 Do not interrupt the modelling wave with repeated one-off field checks unless a safety-critical blocker makes modelling impossible.
+
+
+### Engine v0.1.1 execution lesson
+
+Stale branch reconciliation is mandatory after foundational main changes.
+
+A domain branch created before newer Engine/validator/manifest/security controls must be reconciled against current main before merge. Mergeability alone is insufficient.
