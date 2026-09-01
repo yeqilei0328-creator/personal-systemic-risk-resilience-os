@@ -120,8 +120,10 @@ Default workflow:
 8. update PRIVATE evidence/state;
 9. recompute assessments and Preparedness.
 
-Current first field wave:
-**Water + Energy + Communications / Network / Offline Compute.**
+Current survival modelling priority:
+**Water + Energy + Communications / Network / Offline Compute + Food.**
+
+Prepared U1 field work may remain deferred while Food, Mobility, Sanitation and Medical are modelled.
 
 Field work is not complete until cross-domain dependencies are tested together, especially:
 - Water pump ↔ Energy
