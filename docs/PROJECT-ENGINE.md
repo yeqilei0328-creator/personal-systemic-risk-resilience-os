@@ -470,6 +470,38 @@ After merge, fresh-read `main` again.
 
 ---
 
+## 13A. Stale branch reconciliation
+
+A long-lived feature branch can become unsafe even when its domain logic is correct.
+
+### Trigger
+
+Reconciliation is mandatory when `main` has advanced after branch creation with changes to any foundational file/class such as:
+- Project Engine / AGENTS;
+- validator;
+- state manifest;
+- security boundary;
+- method-pin protocol;
+- shared schema/contract.
+
+### Procedure
+
+1. Fresh-read current `main`.
+2. Record the feature branch base SHA and current main SHA.
+3. Identify files changed in both the stale branch and newer main.
+4. Do not allow the stale version to overwrite newer controls.
+5. Prefer a clean reconciliation branch from current main when overlap is non-trivial.
+6. Reapply only the intended domain changes.
+7. Mark the old branch as superseded for merge purposes.
+8. Run final-head CI again.
+9. Merge only the reconciled branch.
+
+### Lesson
+
+`mergeable=true` is not a sufficient governance gate.
+
+The branch must also preserve all newer foundational controls.
+
 ## 14. Security engine
 
 ### PUBLIC never stores
@@ -556,21 +588,23 @@ If a future ChatGPT/Codex cannot answer “what do I do next?” after reading t
 
 ## 17. Current execution doctrine
 
-At Project Engine v0.1:
+At Project Engine v0.1.1:
 
 - Phase 3R Radar Precision Upgrade is engineering-complete.
 - Phase 3C Capability Verification is active.
 - Water public/private baseline exists; field evidence deferred.
 - Energy public/private baseline exists; field evidence deferred.
-- Communications public method exists; private baseline is the current transaction.
-- Field Wave U1 should be executed only after Water + Energy + Communications modelling/baselines/plans are complete.
+- Communications public/private baseline exists; field evidence deferred.
+- Field Wave U1 model-first stage is complete.
+- PRIVATE state contains the integrated U1 preliminary model, consolidated field work order and evidence template.
+- U1 field execution is the current next action.
 
-After U1 modelling:
-1. produce one consolidated field-audit work order;
-2. review it with the user;
-3. collect site evidence;
-4. update PRIVATE state;
-5. recompute cross-domain dependencies and Preparedness;
+After U1 field execution:
+1. persist evidence;
+2. recompute Water / Energy / Communications;
+3. update dependencies and confirmed SPOFs;
+4. recompute Preparedness;
+5. derive First Failure Point / Base Autonomy only if evidence permits;
 6. continue to Food and the next physical-capability wave.
 
 ---
