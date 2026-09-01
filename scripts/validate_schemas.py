@@ -54,6 +54,8 @@ PAIRS = {
     "communications_verification_assessment": ("schemas/communications-verification-assessment.schema.json", "examples/synthetic/communications-verification-assessment.json"),
     "food_resilience_audit": ("schemas/food-resilience-audit.schema.json", "examples/synthetic/food-resilience-audit.json"),
     "food_verification_assessment": ("schemas/food-verification-assessment.schema.json", "examples/synthetic/food-verification-assessment.json"),
+    "mobility_resilience_audit": ("schemas/mobility-resilience-audit.schema.json", "examples/synthetic/mobility-resilience-audit.json"),
+    "mobility_verification_assessment": ("schemas/mobility-verification-assessment.schema.json", "examples/synthetic/mobility-verification-assessment.json"),
 }
 
 def load(path):
@@ -397,6 +399,31 @@ def semantic_errors(name, obj):
             errors.append("shelf-stable buffer days cannot exceed total buffer days")
         if obj["production_support_candidate"] and obj["recommended_verification_status"] == "stated":
             errors.append("production support candidate cannot coexist with stated-only verification")
+    elif name == "mobility_resilience_audit":
+        vehicle_ids = [row["vehicle_id"] for row in obj["vehicles"]]
+        energy_ids = [row["path_id"] for row in obj["energy_paths"]]
+        route_ids = [row["route_id"] for row in obj["routes"]]
+        if len(vehicle_ids) != len(set(vehicle_ids)):
+            errors.append("mobility vehicle_id values must be unique")
+        if len(energy_ids) != len(set(energy_ids)):
+            errors.append("mobility energy path_id values must be unique")
+        if len(route_ids) != len(set(route_ids)):
+            errors.append("mobility route_id values must be unique")
+        for path in obj["energy_paths"]:
+            if path["status"] == "tested_available" and not path["independence_group_id"]:
+                errors.append(f"{path['path_id']}: tested energy path requires independence_group_id")
+        for route in obj["routes"]:
+            if route["status"] == "tested_pass" and not route["independence_group_id"]:
+                errors.append(f"{route['route_id']}: tested route requires independence_group_id")
+        mt = obj["mission_test"]
+        if mt["status"] == "pass":
+            if mt["distance_km"] is None or mt["distance_km"] <= 0:
+                errors.append("passed mobility mission test requires positive distance")
+            if mt["people_count"] is None or mt["cargo_kg"] is None:
+                errors.append("passed mobility mission test requires people/cargo observations")
+    elif name == "mobility_verification_assessment":
+        if obj["minimum_demonstrated_mission_km"] is not None and not obj["vehicle_gate_passed"]:
+            errors.append("demonstrated mission distance requires vehicle gate")
     elif name == "structural_delta":
         h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
         c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}
