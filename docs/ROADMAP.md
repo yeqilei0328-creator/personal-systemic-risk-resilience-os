@@ -1,6 +1,6 @@
 # Roadmap — Pre-V1.0
 
-## Project Engine v0.1.2 — CURRENT UPDATE
+## Project Engine v0.1.2 — COMPLETE
 - [x] Canonical dual-repo workflow
 - [x] Mandatory AGENTS.md startup contract
 - [x] Machine-readable engine config
