@@ -183,3 +183,29 @@ These results validate the encoded engineering contracts only. They do not estab
 Real dated-event calibration, false-positive/false-negative estimation on historical evidence, and threshold tuning remain Phase 5 work.
 
 The existing user-facing news-push conversation remains the presentation layer; Phase 3R upgraded the backend precision/state/memory contracts without replacing that presentation workflow.
+
+
+## Project Engine
+
+Canonical cross-repository workflow: **Project Engine v0.1**.
+
+Durable entry points:
+- `AGENTS.md`
+- `docs/PROJECT-ENGINE.md`
+- `config/project-engine.json`
+
+The engine defines:
+- PUBLIC method vs PRIVATE operational-state authority;
+- mandatory Fresh Read for every ChatGPT/Codex handoff;
+- method-pin / vendoring transaction discipline;
+- deterministic private assessment recomputation;
+- fail-closed unknown handling;
+- branch / PR / final-head CI merge discipline;
+- security boundary;
+- Model First → Batch Field Validation.
+
+Current field doctrine:
+
+`Water + Energy + Communications modelling → consolidated Field Wave U1 → coordinated site verification`
+
+Do not interrupt the modelling wave with repeated one-off field checks unless a safety-critical blocker makes modelling impossible.
