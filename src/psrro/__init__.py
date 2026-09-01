@@ -1,3 +1,4 @@
+from .mobility import assess_mobility_verification
 from .food import assess_food_verification
 from .communications import assess_communications_verification
 from .intelligence_replay import (
@@ -52,6 +53,7 @@ from .quantification import (
 )
 
 __all__ = [
+    "assess_mobility_verification",
     "assess_food_verification",
     "assess_communications_verification",
     "evaluate_replay_step",
