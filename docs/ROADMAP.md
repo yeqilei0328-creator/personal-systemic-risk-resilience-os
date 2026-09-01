@@ -132,7 +132,7 @@ Private audit domains:
 - [ ] Physical AI / 防御性感知与巡检
 - [~] 网络 / 通信 / 离线计算 — PUBLIC + PRIVATE BASELINE COMPLETE; FIELD EVIDENCE DEFERRED
 - [~] 食品 / 农业转换 — PUBLIC METHOD COMPLETE; PRIVATE BASELINE NEXT
-- [ ] 车辆 / 机动 — CONTINUITY NEXT
+- [~] 车辆 / 机动 — PUBLIC METHOD IMPLEMENTATION CURRENT
 - [ ] 卫生 / 排污 / 废弃物 — CONTINUITY
 - [ ] 医疗 / 急救 — CONTINUITY
 - [ ] 工具 / 备件 / 维修
