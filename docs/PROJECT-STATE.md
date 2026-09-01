@@ -114,7 +114,9 @@ Current aggregate checkpoint:
 - Field Wave U1 model-first stage: **COMPLETE**;
 - U1 field work order: **READY BUT DEFERRED**;
 - Food Resilience Verification v0.1 public method: **COMPLETE**;
-- current engineering node: **private Food baseline instantiation**;
+- Food private baseline: **COMPLETE / stated**;
+- Mobility Resilience Verification v0.1 public method: **COMPLETE**;
+- current engineering node: **private Mobility baseline instantiation**;
 - next after Food: **Mobility → Sanitation → Medical**.
 
 The public repository remains method-only. Real operational values stay in the separate private state layer.

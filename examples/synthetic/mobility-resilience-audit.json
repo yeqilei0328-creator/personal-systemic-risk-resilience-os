@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.1.0",
+  "mobility_audit_id": "mra-synthetic-full",
+  "capability_id": "cap-mobility-synthetic",
+  "service_scope": "evacuation_and_logistics",
+  "mission": {
+    "people_capacity_required": 4,
+    "cargo_capacity_kg_required": 100,
+    "target_distance_km": 200,
+    "route_requirements_mapped": true
+  },
+  "vehicles": [
+    {
+      "vehicle_id": "vehicle-synthetic",
+      "availability": "tested_ready",
+      "energy_type": "plug_in_hybrid",
+      "demonstrated_range_km": 500,
+      "people_capacity": 5,
+      "cargo_capacity_kg": 300,
+      "degraded_mission_test": "pass",
+      "critical": true
+    }
+  ],
+  "energy_paths": [
+    {
+      "path_id": "mobenergy-synthetic-a",
+      "kind": "grid_charging",
+      "independence_group_id": "energy-a",
+      "status": "tested_available",
+      "critical": true
+    },
+    {
+      "path_id": "mobenergy-synthetic-b",
+      "kind": "fuel_station",
+      "independence_group_id": "energy-b",
+      "status": "tested_available",
+      "critical": true
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "route-synthetic-a",
+      "independence_group_id": "route-a",
+      "status": "tested_pass",
+      "critical": true
+    },
+    {
+      "route_id": "route-synthetic-b",
+      "independence_group_id": "route-b",
+      "status": "tested_pass",
+      "critical": true
+    }
+  ],
+  "maintenance": {
+    "status": "current",
+    "tires_checked": true,
+    "critical_spares_mapped": true,
+    "repair_tools_ready": true,
+    "service_dependency_mapped": true
+  },
+  "navigation": {
+    "online_dependency": "partial",
+    "offline_maps_status": "tested_access"
+  },
+  "mission_test": {
+    "status": "pass",
+    "distance_km": 250,
+    "people_count": 4,
+    "cargo_kg": 100
+  },
+  "dependencies": [],
+  "single_points_of_failure": [],
+  "independent_review_completed": false,
+  "evidence_refs": [
+    "evidence/synthetic-mobility.md"
+  ],
+  "updated_at": "2026-09-01T00:00:00Z",
+  "data_sensitivity": "public"
+}

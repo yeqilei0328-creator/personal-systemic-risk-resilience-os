@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/mobility-verification-assessment.schema.json",
+  "title": "Mobility Verification Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "mobility_audit_id",
+    "recommended_verification_status",
+    "mission_gate_passed",
+    "vehicle_gate_passed",
+    "energy_replenishment_gate_passed",
+    "route_gate_passed",
+    "maintenance_gate_passed",
+    "offline_navigation_gate_passed",
+    "tested_ready_vehicle_count",
+    "independent_energy_path_count",
+    "independent_route_count",
+    "minimum_demonstrated_mission_km",
+    "blockers",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^mva-[A-Za-z0-9._-]+$"
+    },
+    "mobility_audit_id": {
+      "type": "string",
+      "pattern": "^mra-[A-Za-z0-9._-]+$"
+    },
+    "recommended_verification_status": {
+      "enum": [
+        "stated",
+        "measured",
+        "field_tested",
+        "audited"
+      ]
+    },
+    "mission_gate_passed": {
+      "type": "boolean"
+    },
+    "vehicle_gate_passed": {
+      "type": "boolean"
+    },
+    "energy_replenishment_gate_passed": {
+      "type": "boolean"
+    },
+    "route_gate_passed": {
+      "type": "boolean"
+    },
+    "maintenance_gate_passed": {
+      "type": "boolean"
+    },
+    "offline_navigation_gate_passed": {
+      "type": "boolean"
+    },
+    "tested_ready_vehicle_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "independent_energy_path_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "independent_route_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "minimum_demonstrated_mission_km": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
