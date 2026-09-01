@@ -1,0 +1,428 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/mobility-resilience-audit.schema.json",
+  "title": "Mobility Resilience Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mobility_audit_id",
+    "capability_id",
+    "service_scope",
+    "mission",
+    "vehicles",
+    "energy_paths",
+    "routes",
+    "maintenance",
+    "navigation",
+    "mission_test",
+    "dependencies",
+    "single_points_of_failure",
+    "independent_review_completed",
+    "evidence_refs",
+    "updated_at",
+    "data_sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "mobility_audit_id": {
+      "type": "string",
+      "pattern": "^mra-[A-Za-z0-9._-]+$"
+    },
+    "capability_id": {
+      "type": "string",
+      "pattern": "^cap-[A-Za-z0-9._-]+$"
+    },
+    "service_scope": {
+      "enum": [
+        "unknown",
+        "local_continuity",
+        "evacuation_and_logistics"
+      ]
+    },
+    "mission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "people_capacity_required",
+        "cargo_capacity_kg_required",
+        "target_distance_km",
+        "route_requirements_mapped"
+      ],
+      "properties": {
+        "people_capacity_required": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "cargo_capacity_kg_required": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "target_distance_km": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "route_requirements_mapped": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "vehicles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "vehicle_id",
+          "availability",
+          "energy_type",
+          "demonstrated_range_km",
+          "people_capacity",
+          "cargo_capacity_kg",
+          "degraded_mission_test",
+          "critical"
+        ],
+        "properties": {
+          "vehicle_id": {
+            "type": "string",
+            "pattern": "^vehicle-[A-Za-z0-9._-]+$"
+          },
+          "availability": {
+            "enum": [
+              "unknown",
+              "present_unverified",
+              "tested_ready",
+              "unavailable"
+            ]
+          },
+          "energy_type": {
+            "enum": [
+              "unknown",
+              "electric",
+              "liquid_fuel",
+              "plug_in_hybrid",
+              "hybrid",
+              "other"
+            ]
+          },
+          "demonstrated_range_km": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "people_capacity": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "cargo_capacity_kg": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "degraded_mission_test": {
+            "enum": [
+              "not_run",
+              "pass",
+              "partial",
+              "fail"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "energy_paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path_id",
+          "kind",
+          "independence_group_id",
+          "status",
+          "critical"
+        ],
+        "properties": {
+          "path_id": {
+            "type": "string",
+            "pattern": "^mobenergy-[A-Za-z0-9._-]+$"
+          },
+          "kind": {
+            "enum": [
+              "grid_charging",
+              "offgrid_charging",
+              "fuel_station",
+              "stored_fuel",
+              "other"
+            ]
+          },
+          "independence_group_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "unknown",
+              "identified_unverified",
+              "tested_available",
+              "unavailable"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "route_id",
+          "independence_group_id",
+          "status",
+          "critical"
+        ],
+        "properties": {
+          "route_id": {
+            "type": "string",
+            "pattern": "^route-[A-Za-z0-9._-]+$"
+          },
+          "independence_group_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "unknown",
+              "mapped_unverified",
+              "tested_pass",
+              "tested_fail"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "maintenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "tires_checked",
+        "critical_spares_mapped",
+        "repair_tools_ready",
+        "service_dependency_mapped"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "current",
+            "due",
+            "overdue",
+            "unknown"
+          ]
+        },
+        "tires_checked": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "critical_spares_mapped": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "repair_tools_ready": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "service_dependency_mapped": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "navigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "online_dependency",
+        "offline_maps_status"
+      ],
+      "properties": {
+        "online_dependency": {
+          "enum": [
+            "unknown",
+            "none",
+            "partial",
+            "critical"
+          ]
+        },
+        "offline_maps_status": {
+          "enum": [
+            "unknown",
+            "absent",
+            "present_unverified",
+            "tested_access",
+            "not_required"
+          ]
+        }
+      }
+    },
+    "mission_test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "distance_km",
+        "people_count",
+        "cargo_kg"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_run",
+            "pass",
+            "partial",
+            "fail"
+          ]
+        },
+        "distance_km": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "people_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "cargo_kg": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dependency_id",
+          "kind",
+          "critical",
+          "backup_status"
+        ],
+        "properties": {
+          "dependency_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "energy",
+              "road",
+              "network",
+              "logistics",
+              "maintenance",
+              "personnel",
+              "other"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "backup_status": {
+            "enum": [
+              "none",
+              "partial",
+              "ready",
+              "unknown",
+              "not_required"
+            ]
+          }
+        }
+      }
+    },
+    "single_points_of_failure": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "independent_review_completed": {
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}
