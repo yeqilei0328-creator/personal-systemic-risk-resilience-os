@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.1.0",
+  "food_audit_id": "fra-synthetic-full",
+  "capability_id": "cap-food-synthetic",
+  "service_scope": "sustained_resilience",
+  "demand": {
+    "people_count": 4,
+    "daily_calorie_demand_kcal": 8000,
+    "special_requirements_mapped": true
+  },
+  "inventory": {
+    "inventory_count_status": "measured",
+    "usable_calories_kcal": 240000,
+    "shelf_stable_calories_kcal": 160000,
+    "rotation_status": "routine"
+  },
+  "nutrition": {
+    "plan_status": "reviewed",
+    "protein_sources_mapped": true,
+    "fat_sources_mapped": true,
+    "micronutrient_strategy_mapped": true,
+    "dietary_constraints_mapped": true
+  },
+  "storage": {
+    "dry_storage_status": "inspected_pass",
+    "pest_moisture_control_status": "adequate",
+    "cold_chain_dependency": "partial",
+    "cold_chain_outage_test": "not_run"
+  },
+  "cooking": {
+    "primary_path": "mixed",
+    "backup_path_status": "tested_pass",
+    "outage_cooking_test": "pass"
+  },
+  "replenishment": {
+    "supply_paths": [
+      {
+        "path_id": "foodpath-synthetic-a",
+        "independence_group_id": "group-a",
+        "status": "verified_available",
+        "critical": true
+      },
+      {
+        "path_id": "foodpath-synthetic-b",
+        "independence_group_id": "group-b",
+        "status": "verified_available",
+        "critical": true
+      }
+    ],
+    "local_production_status": "possible_unverified",
+    "production_daily_calorie_equivalent": null,
+    "production_inputs_mapped": null
+  },
+  "dependencies": [
+    {
+      "dependency_id": "synthetic-water",
+      "kind": "water",
+      "critical": true,
+      "backup_status": "ready"
+    }
+  ],
+  "single_points_of_failure": [],
+  "maintenance_status": "unknown",
+  "independent_review_completed": false,
+  "evidence_refs": [
+    "evidence/synthetic-food.md"
+  ],
+  "updated_at": "2026-09-01T00:00:00Z",
+  "data_sensitivity": "public"
+}

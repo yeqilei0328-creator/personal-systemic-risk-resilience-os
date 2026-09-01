@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/food-verification-assessment.schema.json",
+  "title": "Food Verification Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "food_audit_id",
+    "recommended_verification_status",
+    "inventory_gate_passed",
+    "nutrition_gate_passed",
+    "storage_gate_passed",
+    "cooking_gate_passed",
+    "replenishment_gate_passed",
+    "buffer_autonomy_days",
+    "shelf_stable_buffer_days",
+    "independent_replenishment_path_count",
+    "production_support_candidate",
+    "blockers",
+    "as_of",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^fva-[A-Za-z0-9._-]+$"
+    },
+    "food_audit_id": {
+      "type": "string",
+      "pattern": "^fra-[A-Za-z0-9._-]+$"
+    },
+    "recommended_verification_status": {
+      "enum": [
+        "stated",
+        "measured",
+        "field_tested",
+        "audited"
+      ]
+    },
+    "inventory_gate_passed": {
+      "type": "boolean"
+    },
+    "nutrition_gate_passed": {
+      "type": "boolean"
+    },
+    "storage_gate_passed": {
+      "type": "boolean"
+    },
+    "cooking_gate_passed": {
+      "type": "boolean"
+    },
+    "replenishment_gate_passed": {
+      "type": "boolean"
+    },
+    "buffer_autonomy_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "shelf_stable_buffer_days": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "independent_replenishment_path_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "production_support_candidate": {
+      "type": "boolean"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    }
+  }
+}

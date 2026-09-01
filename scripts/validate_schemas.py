@@ -52,6 +52,8 @@ PAIRS = {
     "replay_suite_summary": ("schemas/replay-suite-summary.schema.json", "examples/synthetic/replay-suite-summary.json"),
     "communications_resilience_audit": ("schemas/communications-resilience-audit.schema.json", "examples/synthetic/communications-resilience-audit.json"),
     "communications_verification_assessment": ("schemas/communications-verification-assessment.schema.json", "examples/synthetic/communications-verification-assessment.json"),
+    "food_resilience_audit": ("schemas/food-resilience-audit.schema.json", "examples/synthetic/food-resilience-audit.json"),
+    "food_verification_assessment": ("schemas/food-verification-assessment.schema.json", "examples/synthetic/food-verification-assessment.json"),
 }
 
 def load(path):
@@ -361,6 +363,40 @@ def semantic_errors(name, obj):
             and obj["power_gate_passed"]
         ):
             errors.append("degraded local candidate requires internal + offline compute + power gates")
+    elif name == "food_resilience_audit":
+        inv = obj["inventory"]
+        demand = obj["demand"]
+        if (
+            inv["shelf_stable_calories_kcal"] is not None
+            and inv["usable_calories_kcal"] is not None
+            and inv["shelf_stable_calories_kcal"] > inv["usable_calories_kcal"]
+        ):
+            errors.append("shelf-stable calories cannot exceed total usable calories")
+        if inv["inventory_count_status"] == "measured" and inv["usable_calories_kcal"] is None:
+            errors.append("measured food inventory requires usable_calories_kcal")
+        if demand["daily_calorie_demand_kcal"] is not None and demand["people_count"] is None:
+            errors.append("daily calorie demand requires people_count context")
+        path_ids = [path["path_id"] for path in obj["replenishment"]["supply_paths"]]
+        if len(path_ids) != len(set(path_ids)):
+            errors.append("food replenishment path_id values must be unique")
+        for path in obj["replenishment"]["supply_paths"]:
+            if path["status"] == "verified_available" and not path["independence_group_id"]:
+                errors.append(f"{path['path_id']}: verified food path requires independence_group_id")
+        repl = obj["replenishment"]
+        if repl["local_production_status"] in {"measured_output", "field_tested"}:
+            if repl["production_daily_calorie_equivalent"] is None or repl["production_daily_calorie_equivalent"] <= 0:
+                errors.append("measured/field-tested food production requires positive calorie-equivalent output")
+            if repl["production_inputs_mapped"] is not True:
+                errors.append("measured/field-tested food production requires mapped inputs")
+    elif name == "food_verification_assessment":
+        if (
+            obj["buffer_autonomy_days"] is not None
+            and obj["shelf_stable_buffer_days"] is not None
+            and obj["shelf_stable_buffer_days"] > obj["buffer_autonomy_days"]
+        ):
+            errors.append("shelf-stable buffer days cannot exceed total buffer days")
+        if obj["production_support_candidate"] and obj["recommended_verification_status"] == "stated":
+            errors.append("production support candidate cannot coexist with stated-only verification")
     elif name == "structural_delta":
         h_order = {"H0": 0, "H1": 1, "H2": 2, "H3": 3}
         c_order = {"C0": 0, "C1": 1, "C2": 2, "C3": 3}
