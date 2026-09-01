@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "mva-synthetic-full",
+  "mobility_audit_id": "mra-synthetic-full",
+  "recommended_verification_status": "field_tested",
+  "mission_gate_passed": true,
+  "vehicle_gate_passed": true,
+  "energy_replenishment_gate_passed": true,
+  "route_gate_passed": true,
+  "maintenance_gate_passed": true,
+  "offline_navigation_gate_passed": true,
+  "tested_ready_vehicle_count": 1,
+  "independent_energy_path_count": 2,
+  "independent_route_count": 2,
+  "minimum_demonstrated_mission_km": 250,
+  "blockers": [],
+  "as_of": "2026-09-01T00:00:00Z",
+  "sensitivity": "public"
+}
