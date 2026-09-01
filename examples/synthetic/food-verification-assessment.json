@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "fva-synthetic-full",
+  "food_audit_id": "fra-synthetic-full",
+  "recommended_verification_status": "field_tested",
+  "inventory_gate_passed": true,
+  "nutrition_gate_passed": true,
+  "storage_gate_passed": true,
+  "cooking_gate_passed": true,
+  "replenishment_gate_passed": true,
+  "buffer_autonomy_days": 30,
+  "shelf_stable_buffer_days": 20,
+  "independent_replenishment_path_count": 2,
+  "production_support_candidate": false,
+  "blockers": [],
+  "as_of": "2026-09-01T00:00:00Z",
+  "sensitivity": "public"
+}
