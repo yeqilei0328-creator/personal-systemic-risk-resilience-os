@@ -588,24 +588,53 @@ If a future ChatGPT/Codex cannot answer “what do I do next?” after reading t
 
 ## 17. Current execution doctrine
 
-At Project Engine v0.1.1:
+At Project Engine v0.1.2:
 
 - Phase 3R Radar Precision Upgrade is engineering-complete.
 - Phase 3C Capability Verification is active.
 - Water public/private baseline exists; field evidence deferred.
 - Energy public/private baseline exists; field evidence deferred.
 - Communications public/private baseline exists; field evidence deferred.
-- Field Wave U1 model-first stage is complete.
-- PRIVATE state contains the integrated U1 preliminary model, consolidated field work order and evidence template.
-- U1 field execution is the current next action.
+- U1 Water/Energy/Communications field artifacts are prepared but execution is deliberately deferred.
+- Current modelling priority is the **Survival Core 4**.
+- Food is the next engineering domain.
+- After Survival Core modelling, continue the **Continuity** domains: Mobility → Sanitation → Medical.
 
-After U1 field execution:
-1. persist evidence;
-2. recompute Water / Energy / Communications;
-3. update dependencies and confirmed SPOFs;
-4. recompute Preparedness;
-5. derive First Failure Point / Base Autonomy only if evidence permits;
-6. continue to Food and the next physical-capability wave.
+### Survival Core 4
+
+1. Water
+2. Energy
+3. Communications / Network / Offline Compute
+4. Food
+
+These four domains provide the minimum sustaining substrate for people and for continued operation/maintenance of Physical AI.
+
+Physical AI does not replace the Survival Core. It depends on it.
+
+### Continuity layer
+
+After the Survival Core is modelled:
+
+1. Mobility
+2. Sanitation
+3. Medical
+
+### Field execution doctrine
+
+The existing U1 field work order remains valid.
+
+However:
+
+`ready_for_field_review ≠ must execute field work next`
+
+The user may deliberately defer field execution while the critical-domain model is extended.
+
+Current next action:
+1. complete Food public method + private baseline;
+2. continue Mobility → Sanitation → Medical;
+3. present the Survival Core preparation map to the user;
+4. allow gradual procurement/build-out;
+5. perform coordinated field verification when the modelling wave is mature and the user is ready.
 
 ---
 
