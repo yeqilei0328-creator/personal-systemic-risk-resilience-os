@@ -44,6 +44,8 @@ Before implementation:
    - current blockers
    - next exact engineering action
 
+4. Run the Technology Radar trigger check defined in `docs/PROJECT-ENGINE.md` before substantial implementation. A triggered Radar gate is mandatory and cannot be silently skipped.
+
 Do not ask the user to repeat repository state that can be recovered from GitHub.
 
 ## 2. Authority boundary
@@ -90,7 +92,7 @@ For each capability domain:
 
 ### A. Public method
 If a verification method is missing:
-Issue → branch → schema → deterministic logic → synthetic examples → tests → docs → unified validator → PR → CI → review → merge.
+Issue → branch → Technology Radar trigger check → schema → deterministic logic → synthetic examples → tests → docs → unified validator → PR → CI → review → merge.
 
 ### B. Private baseline
 After public method merge:
@@ -104,6 +106,26 @@ Ownership is not autonomy.
 Unknown remains unknown.
 
 Stored assessments must equal deterministic derivation from the pinned method.
+
+### D. Permanent Technology Radar discipline
+
+Technology Radar is a permanent Project Engine control, not a project phase or optional research note.
+
+Mandatory triggers:
+- **Major Decision Trigger** — before a material architecture, design, technology, hardware, algorithm, dependency, deployment, or strategic-direction commitment/change.
+- **Major Blocker Trigger** — when substantial engineering is blocked, repeatedly failing, or likely to have relevant prior art before further custom attempts.
+
+When triggered:
+1. stop the affected implementation path;
+2. define the exact engineering question/failure;
+3. scan appropriate external reality: official documentation, GitHub repositories/issues/PRs, standards, papers, hardware/software ecosystems, credible deployments and community evidence as appropriate;
+4. record reusable prior art, limitations and evidence quality;
+5. decide in this order: `REUSE → ADAPT → EXTEND → BUILD`;
+6. resume engineering only after the decision is explicit.
+
+**No silent BUILD.** For a material custom implementation, explain why REUSE, ADAPT and EXTEND are insufficient.
+
+Research does not itself authorize installation, production changes, private-state writes, credentials, device connection, or physical control.
 
 ## 5. Model First → Batch Field Validation
 
@@ -205,6 +227,7 @@ Before ending a significant engineering session, ensure durable state records:
 - private evidence still missing
 - next exact action
 - whether field work is deferred
+- Technology Radar gate/decision when triggered, including unresolved external evidence or reconsideration trigger
 
 The next agent should be able to continue from GitHub without reconstructing the project from conversation history.
 
