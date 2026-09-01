@@ -112,7 +112,9 @@ Current aggregate checkpoint:
 - Communications / Network / Offline Compute public verification method v0.1: **COMPLETE**;
 - private Communications baseline: **COMPLETE / stated**;
 - Field Wave U1 model-first stage: **COMPLETE**;
-- next engineering node: **coordinated U1 field evidence execution**.
+- U1 field work order: **READY BUT DEFERRED**;
+- current engineering node: **Food Resilience Verification / Survival Core 4 completion**;
+- next after Food: **Mobility → Sanitation → Medical**.
 
 The public repository remains method-only. Real operational values stay in the separate private state layer.
 
@@ -189,7 +191,7 @@ The existing user-facing news-push conversation remains the presentation layer; 
 
 ## Project Engine
 
-Canonical cross-repository workflow: **Project Engine v0.1.1**.
+Canonical cross-repository workflow: **Project Engine v0.1.2**.
 
 Durable entry points:
 - `AGENTS.md`
@@ -208,7 +210,7 @@ The engine defines:
 
 Current field doctrine:
 
-`Water + Energy + Communications modelling → consolidated Field Wave U1 → coordinated site verification`
+`Water + Energy + Communications + Food modelling → Mobility → Sanitation → Medical → coordinated field verification when ready`
 
 Do not interrupt the modelling wave with repeated one-off field checks unless a safety-critical blocker makes modelling impossible.
 
@@ -218,3 +220,20 @@ Do not interrupt the modelling wave with repeated one-off field checks unless a 
 Stale branch reconciliation is mandatory after foundational main changes.
 
 A domain branch created before newer Engine/validator/manifest/security controls must be reconciled against current main before merge. Mergeability alone is insufficient.
+
+
+### Survival Core 4 checkpoint
+
+The core sustaining model is now explicitly:
+- Water
+- Energy
+- Communications / Network / Offline Compute
+- Food
+
+Water, Energy and Communications already have public/private baseline structures.
+
+Food is the current missing core method/baseline.
+
+Physical AI depends on the Survival Core and should be designed to degrade locally rather than treated as an independent survival resource.
+
+The prepared U1 field work order remains durable but is intentionally deferred while modelling continues.

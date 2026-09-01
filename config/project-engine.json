@@ -1,5 +1,5 @@
 {
-  "engine_version": "0.1.1",
+  "engine_version": "0.1.2",
   "engine_name": "Personal Systemic Risk & Resilience OS Project Engine",
   "repositories": {
     "public_method": {
@@ -83,8 +83,9 @@
       "physical_ai_communications",
       "offline_knowledge_local_compute"
     ],
-    "current_wave_status": "ready_for_field_review",
-    "next_action": "execute coordinated U1 field audit and persist evidence"
+    "current_wave_status": "prepared_but_deferred",
+    "next_action": "continue Survival Core and Continuity modelling before coordinated field execution",
+    "execution_deferred_by_user": true
   },
   "next_physical_sequence": [
     "food",
@@ -113,5 +114,24 @@
     "next_exact_action",
     "branch_base_sha",
     "branch_reconciliation_status"
-  ]
+  ],
+  "modeling_priority": {
+    "survival_core_4": [
+      "water",
+      "energy",
+      "communications",
+      "food"
+    ],
+    "continuity": [
+      "mobility",
+      "sanitation",
+      "medical"
+    ],
+    "physical_ai_dependency": [
+      "energy",
+      "communications",
+      "water",
+      "food"
+    ]
+  }
 }
