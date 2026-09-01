@@ -129,7 +129,6 @@ Private audit domains:
 - [ ] 土地 / 转换能力
 - [~] 水源 / 净化 / 储水 — private baseline established; field evidence pending
 - [~] 光伏 / 储能 / 离网能力 — public verification method + private baseline complete; field evidence pending
-- [ ] 车辆 / 机动
 - [ ] Physical AI / 防御性感知与巡检
 - [~] 网络 / 通信 / 离线计算 — PUBLIC + PRIVATE BASELINE COMPLETE; FIELD EVIDENCE DEFERRED
 - [~] 食品 / 农业转换 — CURRENT SURVIVAL CORE DOMAIN
