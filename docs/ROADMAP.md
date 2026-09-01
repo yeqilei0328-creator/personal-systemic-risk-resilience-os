@@ -131,7 +131,7 @@ Private audit domains:
 - [~] 光伏 / 储能 / 离网能力 — public verification method + private baseline complete; field evidence pending
 - [ ] Physical AI / 防御性感知与巡检
 - [~] 网络 / 通信 / 离线计算 — PUBLIC + PRIVATE BASELINE COMPLETE; FIELD EVIDENCE DEFERRED
-- [~] 食品 / 农业转换 — CURRENT SURVIVAL CORE DOMAIN
+- [~] 食品 / 农业转换 — PUBLIC METHOD IMPLEMENTATION CURRENT
 - [ ] 车辆 / 机动 — CONTINUITY NEXT
 - [ ] 卫生 / 排污 / 废弃物 — CONTINUITY
 - [ ] 医疗 / 急救 — CONTINUITY
