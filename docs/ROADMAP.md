@@ -1,6 +1,6 @@
 # Roadmap — Pre-V1.0
 
-## Project Engine v0.1.1 — COMPLETE
+## Project Engine v0.1.2 — CURRENT UPDATE
 - [x] Canonical dual-repo workflow
 - [x] Mandatory AGENTS.md startup contract
 - [x] Machine-readable engine config
@@ -131,9 +131,11 @@ Private audit domains:
 - [~] 光伏 / 储能 / 离网能力 — public verification method + private baseline complete; field evidence pending
 - [ ] 车辆 / 机动
 - [ ] Physical AI / 防御性感知与巡检
-- [~] 网络 / 通信 / 离线计算 — PUBLIC + PRIVATE BASELINE COMPLETE; U1 FIELD EVIDENCE NEXT
-- [ ] 食品 / 农业转换
-- [ ] 医疗 / 卫生
+- [~] 网络 / 通信 / 离线计算 — PUBLIC + PRIVATE BASELINE COMPLETE; FIELD EVIDENCE DEFERRED
+- [~] 食品 / 农业转换 — CURRENT SURVIVAL CORE DOMAIN
+- [ ] 车辆 / 机动 — CONTINUITY NEXT
+- [ ] 卫生 / 排污 / 废弃物 — CONTINUITY
+- [ ] 医疗 / 急救 — CONTINUITY
 - [ ] 工具 / 备件 / 维修
 - [ ] 离线知识库
 - [ ] 人员 / 技能 / 可信网络
