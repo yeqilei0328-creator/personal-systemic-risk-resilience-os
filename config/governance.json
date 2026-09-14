@@ -1,0 +1,189 @@
+{
+  "governance_version": "1.0.0",
+  "source_of_truth": {
+    "engineering": "github_main",
+    "chat_memory_authoritative": false,
+    "fail_closed_states": [
+      "UNKNOWN",
+      "MISSING",
+      "DRIFTED",
+      "STALE",
+      "UNVERIFIED",
+      "UNAUTHORIZED",
+      "CONFLICTING_EVIDENCE"
+    ]
+  },
+  "authority_router": {
+    "levels": [
+      "GREEN",
+      "AMBER",
+      "RED"
+    ],
+    "green_flags": [
+      "read_only",
+      "local_test",
+      "deterministic_edit",
+      "branch_creation",
+      "report_generation",
+      "dry_run",
+      "simulation",
+      "read_only_api",
+      "ci_diagnosis"
+    ],
+    "amber_flags": [
+      "governance_change",
+      "workflow_change",
+      "critical_schema_change",
+      "permission_router_change",
+      "dependency_widening",
+      "architecture_widening",
+      "security_boundary_change",
+      "method_pin_change"
+    ],
+    "red_flags": [
+      "production_write",
+      "private_raw_evidence_write",
+      "credential_or_account",
+      "payment_or_procurement",
+      "device_access_or_control",
+      "physical_dispatch",
+      "destructive_action"
+    ],
+    "red_requires_fresh_owner_authorization": true,
+    "red_granted_not_equal_consumed": true,
+    "red_one_shot_automatic_retry": 0,
+    "precedence": [
+      "RED",
+      "AMBER",
+      "GREEN"
+    ]
+  },
+  "execution_router": {
+    "routes": [
+      "GPT_ONLY",
+      "GPT_DESKTOP",
+      "GPT_DESKTOP_CODEX"
+    ],
+    "models": [
+      "LUNA",
+      "TERRA",
+      "SOL",
+      "ASTRA"
+    ],
+    "reasoning_effort": [
+      "LIGHT",
+      "MEDIUM",
+      "HIGH",
+      "EXTREME"
+    ],
+    "codex_escalation_triggers": [
+      "substantial_multi_file_code",
+      "complex_feature",
+      "new_test_design",
+      "complex_refactor",
+      "ci_failure_investigation",
+      "runtime_sdk_dependency_bug",
+      "root_cause_uncertain",
+      "failed_disciplined_fix",
+      "same_blocker_repeated_twice",
+      "cross_module_behavior",
+      "architecture_sensitive_implementation",
+      "long_autonomous_fix_loop",
+      "conversational_patch_over_two"
+    ]
+  },
+  "radar_router": {
+    "verdicts": [
+      "NO_RADAR",
+      "TECH_RADAR_BLOCKER",
+      "TECH_RADAR_DECISION",
+      "COMMERCIAL_RADAR_DISCOVERY",
+      "COMMERCIAL_RADAR_VALIDATION",
+      "DUAL_RADAR_MAJOR_DECISION"
+    ],
+    "tech_blocker_triggers": [
+      "failed_disciplined_fix",
+      "repeated_failure_class",
+      "third_party_runtime_framework_sdk_or_platform",
+      "low_or_unknown_root_cause_confidence",
+      "critical_path_delay"
+    ],
+    "tech_decision_triggers": [
+      "proposed_architecture_widening",
+      "proposed_dependency_widening",
+      "proposed_scope_widening",
+      "proposed_security_widening"
+    ],
+    "commercial_discovery_triggers": [
+      "market_assumption_change",
+      "commercial_debt_change"
+    ],
+    "commercial_validation_triggers": [
+      "commercial_evidence_change",
+      "customer_zero_evidence_change",
+      "external_m2_or_higher_evidence_change",
+      "commercial_thesis_contradiction"
+    ],
+    "dual_radar_triggers": [
+      "major_product_decision",
+      "major_architecture_decision",
+      "next_major_technical_iteration",
+      "critical_path_rebaseline",
+      "new_capability_family",
+      "new_industry_pack"
+    ],
+    "authority_widened": false,
+    "triggered_disposition": "STOP_LOCAL_SPECULATION_ALLOW_READONLY_EVIDENCE",
+    "resume_condition": "RADAR_RESULT_RECONCILED_BY_GPT_CONTROL_PLANE"
+  },
+  "reality_first": {
+    "namespace": "RL",
+    "levels": [
+      "RL0",
+      "RL1",
+      "RL2",
+      "RL3",
+      "RL4",
+      "RL5",
+      "RL6"
+    ],
+    "personal_action_namespace_reserved": "R0-R5",
+    "default_reality_spike_max_attempts": 3
+  },
+  "strategic_capture": {
+    "same_failure_class_before_capture": 2,
+    "default_max_reality_spikes": 3,
+    "red_retry_after_consumption": 0
+  },
+  "evidence": {
+    "fingerprint": "sha256(canonical_json)",
+    "exact_head_fields": [
+      "tested_head",
+      "pr_head",
+      "origin_main",
+      "merge_base"
+    ],
+    "post_merge_verify_required": true
+  },
+  "required_docs": [
+    "AGENTS.md",
+    "WORKFLOW.md",
+    "docs/PROJECT-ENGINE.md",
+    "docs/ENGINEERING-AUTONOMY-GOVERNANCE.md",
+    "docs/EXECUTION-ROUTER.md",
+    "docs/TECHNOLOGY-RADAR-GATE.md",
+    "docs/COMMERCIAL-RADAR.md",
+    "docs/REALITY-FIRST.md",
+    "docs/STRATEGIC-CAPTURE.md",
+    "docs/PHYSICAL-AUTHORITY.md",
+    "docs/GOVERNANCE-EVIDENCE.md",
+    "docs/PROJECT-STATE.md"
+  ],
+  "taxonomy_guards": {
+    "personal_action": "R0-R5",
+    "reality": "RL0-RL6",
+    "systemic_risk_radar": "product_intelligence",
+    "technology_radar": "engineering_control",
+    "commercial_radar": "commercial_ecosystem_control"
+  }
+}
