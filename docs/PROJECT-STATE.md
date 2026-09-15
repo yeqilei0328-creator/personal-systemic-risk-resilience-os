@@ -117,7 +117,7 @@ Current aggregate checkpoint:
 - Food private baseline: **COMPLETE / stated**;
 - Mobility Resilience Verification v0.1 public method: **COMPLETE**;
 - current engineering node: **private Mobility baseline instantiation**;
-- next after Food: **Mobility → Sanitation → Medical**.
+- next sequence: **Mobility → Sanitation → Medical**.
 
 The public repository remains method-only. Real operational values stay in the separate private state layer.
 
@@ -194,20 +194,33 @@ The existing user-facing news-push conversation remains the presentation layer; 
 
 ## Project Engine
 
-Canonical cross-repository workflow: **Project Engine v0.1.2**.
+Canonical cross-repository workflow: **Project Engine v0.1.2 + Governance v1.0 control plane**.
 
 Durable entry points:
 - `AGENTS.md`
+- `WORKFLOW.md`
 - `docs/PROJECT-ENGINE.md`
+- `docs/ENGINEERING-AUTONOMY-GOVERNANCE.md`
+- `docs/EXECUTION-ROUTER.md`
+- `docs/TECHNOLOGY-RADAR-GATE.md`
+- `docs/REALITY-FIRST.md`
+- `docs/STRATEGIC-CAPTURE.md`
+- `docs/GOVERNANCE-EVIDENCE.md`
 - `config/project-engine.json`
+- `config/governance.json`
 
 The engine defines:
 - PUBLIC method vs PRIVATE operational-state authority;
 - mandatory Fresh Read for every ChatGPT/Codex handoff;
+- GREEN / AMBER / RED authority routing;
+- execution routing and escalation;
+- deterministic Technology / Commercial-Ecosystem Radar routing;
+- Reality-First / Strategic Capture stop-loss;
 - method-pin / vendoring transaction discipline;
 - deterministic private assessment recomputation;
 - fail-closed unknown handling;
-- branch / PR / final-head CI merge discipline;
+- branch / PR / exact-head CI merge discipline;
+- mandatory post-merge verification;
 - security boundary;
 - Model First → Batch Field Validation.
 
@@ -233,9 +246,9 @@ The core sustaining model is now explicitly:
 - Communications / Network / Offline Compute
 - Food
 
-Water, Energy and Communications already have public/private baseline structures.
+Water, Energy, Communications and Food already have public/private baseline structures.
 
-Food is the current missing core method/baseline.
+Mobility public verification method v0.1 is complete. The current engineering node is **private Mobility baseline instantiation**, followed by **Sanitation → Medical**.
 
 Physical AI depends on the Survival Core and should be designed to degrade locally rather than treated as an independent survival resource.
 
