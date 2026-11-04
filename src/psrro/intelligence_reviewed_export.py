@@ -27,7 +27,7 @@ _SCHEMA_NAMES = {
     "observation": "source-observation.schema.json",
 }
 _REQUIRED = {
-    "packet_version", "review_mode", "reviewed_at", "review_notes",
+    "packet_version", "review_mode", "reviewer_type", "reviewed_at", "review_notes",
     "event_state", "claims", "material_change", "source_observations",
 }
 _PACKET_VERSION = "psrro-reviewed-public-event.v0.1"
@@ -96,8 +96,10 @@ def validate_reviewed_packet(packet: Mapping[str, Any]) -> dict[str, Any]:
     """Structural + cross-record validation, no automatic fact-claim judgement."""
     if not isinstance(packet, dict) or set(packet) != _REQUIRED:
         raise ValueError("packet_fields_invalid")
-    if packet["packet_version"] != _PACKET_VERSION or packet["review_mode"] != "human_reviewed_public_sources":
+    if packet["packet_version"] != _PACKET_VERSION or packet["review_mode"] != "reviewed_public_sources":
         raise ValueError("packet_version_or_review_mode_invalid")
+    if packet["reviewer_type"] not in ("ai_assistant", "human_operator"):
+        raise ValueError("reviewer_type_invalid")
     reviewed = _parse_time(packet["reviewed_at"], "reviewed_at")
     if not isinstance(packet["review_notes"], list) or not packet["review_notes"] or any(
         not isinstance(note, str) or not note.strip() for note in packet["review_notes"]
@@ -225,6 +227,7 @@ def export_reviewed_packet(packet: Mapping[str, Any], output_root: Path) -> dict
         manifest = {
             "export_contract": "psrro-native-reviewed-export.v0.1",
             "review_mode": packet["review_mode"],
+            "reviewer_type": packet["reviewer_type"],
             "upstream_contract_commit": _CONTRACT_SHA,
             "evidence_reviewed_at": packet["reviewed_at"],
             "packet_sha256": proof["packet_sha256"],
@@ -239,7 +242,7 @@ def export_reviewed_packet(packet: Mapping[str, Any], output_root: Path) -> dict
             ],
             "source_urls": sorted(obs["provenance"]["source_locator"] for obs in packet["source_observations"]),
             "limitations": [
-                "human_reviewed_not_automated_news_ingestion",
+                "reviewed_sources_not_automated_news_ingestion",
                 "source_locators_declared_evidence_not_independently_attested_by_exporter",
                 "first_discovery_not_global_systemic_transmission",
             ],

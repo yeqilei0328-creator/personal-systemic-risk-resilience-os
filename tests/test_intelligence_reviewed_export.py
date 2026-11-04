@@ -47,7 +47,8 @@ def fixture() -> dict:
     }
     return {
         "packet_version": "psrro-reviewed-public-event.v0.1",
-        "review_mode": "human_reviewed_public_sources",
+        "review_mode": "reviewed_public_sources",
+        "reviewer_type": "ai_assistant",
         "reviewed_at": "2026-08-31T02:00:00Z",
         "review_notes": ["Entirely synthetic test material"],
         "event_state": event,
@@ -78,7 +79,8 @@ class ReviewedExportTests(unittest.TestCase):
         for item in m["artifacts"]:
             p = self.destination / item["path"]
             self.assertEqual(item["sha256"], hashlib.sha256(p.read_bytes()).hexdigest())
-        self.assertIn("human_reviewed_not_automated_news_ingestion", m["limitations"])
+        self.assertIn("reviewed_sources_not_automated_news_ingestion", m["limitations"])
+        self.assertEqual(m["reviewer_type"], "ai_assistant")
 
     def test_no_overwrite(self):
         p = fixture()
@@ -156,6 +158,12 @@ class ReviewedExportTests(unittest.TestCase):
         p = fixture()
         p["material_change"]["material"] = False
         with self.assertRaisesRegex(ValueError, "new_event_assessment_inconsistent"):
+            export_reviewed_packet(p, self.destination)
+
+    def test_reject_untruthful_or_unknown_reviewer_type(self):
+        p = fixture()
+        p["reviewer_type"] = "unknown"
+        with self.assertRaisesRegex(ValueError, "reviewer_type_invalid"):
             export_reviewed_packet(p, self.destination)
 
     def test_reject_absent_review_notes(self):
