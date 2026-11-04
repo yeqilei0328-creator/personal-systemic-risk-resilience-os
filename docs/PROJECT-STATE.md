@@ -2,6 +2,18 @@
 
 > GitHub `main` is the authoritative engineering source. Always fresh-read current `main`, Issues, PRs and CI before continuing work. Do not rely on this file alone for commit SHA state.
 
+## World Intelligence reviewed public-event export — 2026-11-04
+
+- Work unit: PSRRO-WI-EXPORT01; Issue #53; exporter PR #54 MERGED as b6503dbe3e447cb170268e6e57d7e58d0f721401; reviewer provenance correction PR #55 MERGED as 7504def8486a455e1d91d4a7182bebb7469b3d2d.
+- Engineerings tests: 206/206 unit tests PASS, 51/51 existing JSON-schema/example fixtures PASS, governance PASS, merged-main CI SUCCESS.
+- Scope: a one-shot operator-curated PUBLIC evidence packet is schema-validated and converted into existing native event/claim/material/source state files in an isolated new scratch directory. No provider-class change, new database, crawler, scheduler, network fetch, alert delivery, private-state write or production deployment.
+- Real event demonstration: 2026-11-03 PBOC announcement of the planned 2026-11-15 increase in FX deposit reserve requirement ratio from 4% to 6%. Sources: Xinhua's republication of the central-bank statement and Reuters. Sources share a common originating policy decision, not independent policy votes.
+- Review/provenance: reviewer_type=ai_assistant, NOT human-signed or cryptographically authenticated. Public event packet SHA256 9a46f6b606c366b9341e82fed4979ce47e6e013292a95fd55f8f3d2628c97e69; review-manifest file SHA256 dc8ad486eab9c8db961e4977f4f0ce4e384a47b5a83c7b75ba1577601e5a0efb.
+- Downstream first real native shadow: RIOS Issue #57, feature PR #60 merged as c50ba0a5e723bb790d446b54d4085bb8bd83c44b, state PR #61 merged as d84018062f6ce5d2dcf17a0d51be3362940694d2. RIOS 258/258 PASS, SHADOW_VALIDATED_NATIVE, first CREATED then IDEMPOTENT, no source mutation, no prediction and no notification.
+- Maturity truth: ONE_SHOT_REAL_PUBLIC_REVIEWED_SHADOW_VERIFIED; AUTOMATED_NATIVE_EVENT_FEED_NOT_CONNECTED. This is a first real signal example, not repeatable RL5 or full independent source authentication.
+- Original PSRRO source-schema contract stays pinned to 574b17ade4ee52628ccf5806e0f129e8fd267b0e; subsequent exporter changes do not alter those core schemas.
+- Next work unit separately governed: replace one-shot reviewed packet preparation with a continuously generated, source-auditable native event feed; observe repeatability, false positives and missingness before any automated alert or RIOS forecast revision.
+
 ## Status
 
 Engineering status: **PRE-V1.0 / ACTIVE**
