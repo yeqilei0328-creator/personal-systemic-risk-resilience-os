@@ -4,9 +4,9 @@ Issue: https://github.com/yeqilei0328-creator/personal-systemic-risk-resilience-
 
 ## Scope
 
-One-shot, offline operator-reviewed PUBLIC evidence packet -> standard PSRRO EventClaimStateStore and SourceStateStore native files.
+One-shot, offline explicitly reviewer-attributed PUBLIC evidence packet -> standard PSRRO EventClaimStateStore and SourceStateStore native files.
 
-This is a small producer for RIOS World Intelligence Issue #57. It is not a web scraper, narrative-to-event extractor, external provider, live listener, or automated news production service. The producer neither contacts nor authenticates article URLs. A human reviewer must check the claims and source status before preparing the packet.
+This is a small producer for RIOS World Intelligence Issue #57. It is not a web scraper, narrative-to-event extractor, external provider, live listener, or automated news production service. The producer neither contacts nor authenticates article URLs. The claim reviewer must be identified as ai_assistant or human_operator. An AI-assisted review must never be labeled human-approved.
 
 Existing schemas and the existing library APIs are reused unchanged. The full JSON Schema validation uses the repository's existing development dependency jsonschema.
 
@@ -23,7 +23,7 @@ Existing schemas and the existing library APIs are reused unchanged. The full JS
 
 The operator-prepared JSON must contain:
 - packet_version = psrro-reviewed-public-event.v0.1;
-- review_mode = human_reviewed_public_sources; reviewed_at and review_notes;
+- review_mode = reviewed_public_sources; reviewer_type = ai_assistant or human_operator; reviewed_at and review_notes;
 - event_state, claims, source_observations and material_change using existing schemas.
 
 The exporter validates full upstream schemas, event fingerprint recomputation, event/claim/source relationships, reference uniqueness, timing, public sensitivity, HTTPS source locators, source access honesty and an initial-event assessment. Unsupported or conflicting inputs fail before writing.
@@ -38,7 +38,7 @@ Native files:
 - material-change/evt-*/mca-*.json;
 - observations/sob-*.json.
 
-An additional review-manifest.json records the packet's canonical SHA256, per-file SHA256, published source locators and a list of limitations. The manifest does not include copied news text, a claim of article-body preservation, or a source independence score. The output status is NATIVE_REVIEWED_EXPORTED (human-reviewed, one-shot).
+An additional review-manifest.json records the packet's canonical SHA256, per-file SHA256, published source locators and a list of limitations. The manifest does not include copied news text, a claim of article-body preservation, or a source independence score. The output status is NATIVE_REVIEWED_EXPORTED (reviewer type retained, one-shot).
 
 ## Usage
 
@@ -55,7 +55,7 @@ The 2026-11-03 PBOC announcement of the future 2026-11-15 FX deposit reserve req
 - Source 1: https://www.xinhuanet.com/fortune/20261103/80f848e7f7e547b2a7b72ef4c64c3262/c.html
 - Source 2: https://www.reuters.com/world/asia-pacific/china-raise-forex-deposit-reserve-ratio-6-starting-november-15-2026-11-03/
 
-The operator-curated packet was written to an external, untracked scratch file; it is not committed to this public method repository. The native export was read by RIOS and produced SHADOW_VALIDATED_NATIVE with first CREATED, then IDEMPOTENT, 5 source files hashed; forecast UNMATCHED, structural_delta_material false. The first observation is an actual public policy announcement, not a synthetic event, though its structured representation was manually produced.
+The ai_assistant-curated packet was written to an external, untracked scratch file; it is not committed to this public method repository. The native export was read by RIOS and produced SHADOW_VALIDATED_NATIVE with first CREATED, then IDEMPOTENT, 5 source files hashed; forecast UNMATCHED, structural_delta_material false. The first observation is an actual public policy announcement, not a synthetic event, though its structured representation was manually produced.
 
 ## Evidence and reality limits
 
