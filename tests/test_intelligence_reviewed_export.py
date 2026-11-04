@@ -9,8 +9,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from psrro.intelligence_events import event_fingerprint
-from psrro.intelligence_reviewed_export import export_reviewed_packet, read_packet, validate_reviewed_packet
+from src.psrro.intelligence_events import event_fingerprint
+from src.psrro.intelligence_reviewed_export import export_reviewed_packet, read_packet, validate_reviewed_packet
 
 ROOT = Path(__file__).resolve().parents[1]
 
