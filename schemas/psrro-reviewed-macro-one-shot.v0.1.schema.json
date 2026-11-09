@@ -1,0 +1,192 @@
+{
+  "$id": "https://psrro.local/schemas/psrro-reviewed-macro-one-shot.v0.1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Bounded AMBER versioned one-indicator sidecar; not a generic source provider, official signature, historical vintage or production/forecast approval.",
+  "properties": {
+    "automatic_source_fetch": {
+      "const": false
+    },
+    "contract_version": {
+      "const": "psrro-reviewed-macro-one-shot.v0.1"
+    },
+    "forecast_created": {
+      "const": false
+    },
+    "geography": {
+      "const": "CN"
+    },
+    "indicator_id": {
+      "const": "cn.pmi.manufacturing"
+    },
+    "measure": {
+      "const": "LEVEL"
+    },
+    "native_assessment_id": {
+      "pattern": "^mca-[A-Za-z0-9._-]+$",
+      "type": "string"
+    },
+    "native_claim_id": {
+      "pattern": "^clm-[A-Za-z0-9._-]+$",
+      "type": "string"
+    },
+    "native_event_id": {
+      "pattern": "^evt-[A-Za-z0-9._-]+$",
+      "type": "string"
+    },
+    "native_packet_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "native_review_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "native_source_observation_id": {
+      "pattern": "^sob-[A-Za-z0-9._-]+$",
+      "type": "string"
+    },
+    "original_release_time_independently_attested": {
+      "const": false
+    },
+    "original_source_http_attestation": {
+      "const": "HTTPS_200_OPERATOR_RECORDED_NOT_DIGITALLY_SIGNED"
+    },
+    "period_mode": {
+      "const": "MONTH"
+    },
+    "producer_method_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "producer_repository": {
+      "const": "yeqilei0328-creator/personal-systemic-risk-resilience-os"
+    },
+    "producer_review_mode": {
+      "const": "reviewed_public_sources"
+    },
+    "publisher": {
+      "const": "国家统计局"
+    },
+    "publisher_displayed_clock": {
+      "const": "09:30"
+    },
+    "publisher_release_date": {
+      "const": "2026-10-31"
+    },
+    "retrieval_time_attestation": {
+      "const": "OPERATOR_DECLARED_NOT_INDEPENDENTLY_TIMESTAMPED"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "reviewer_identity_attestation": {
+      "const": "DECLARED_NOT_INDEPENDENTLY_ATTESTED"
+    },
+    "reviewer_type": {
+      "enum": [
+        "ai_assistant",
+        "human_operator"
+      ]
+    },
+    "source_bytes_length": {
+      "maximum": 1000000,
+      "minimum": 100,
+      "type": "integer"
+    },
+    "source_bytes_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_contents_checked_against_bytes": {
+      "const": true
+    },
+    "source_independence_group": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_license_scope": {
+      "const": "ONE_SHOT_PUBLIC_RESEARCH_ONLY"
+    },
+    "source_retrieved_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "source_role": {
+      "const": "official_primary"
+    },
+    "source_url": {
+      "const": "https://www.stats.gov.cn/sj/zxfbhjd/202610/t20261031_1965718.html"
+    },
+    "source_writes": {
+      "const": 0
+    },
+    "statistical_period_end": {
+      "const": "2026-10-31"
+    },
+    "statistical_period_start": {
+      "const": "2026-10-01"
+    },
+    "supersedes_vintage": {
+      "const": null
+    },
+    "unit": {
+      "const": "percent"
+    },
+    "value": {
+      "const": "49.3"
+    },
+    "verified_historical_availability_timestamp": {
+      "const": null
+    },
+    "vintage_status": {
+      "const": "CURRENT_RETRIEVAL_ONLY_NO_HISTORICAL_VINTAGE"
+    }
+  },
+  "required": [
+    "automatic_source_fetch",
+    "contract_version",
+    "forecast_created",
+    "geography",
+    "indicator_id",
+    "measure",
+    "native_assessment_id",
+    "native_claim_id",
+    "native_event_id",
+    "native_packet_sha256",
+    "native_review_manifest_sha256",
+    "native_source_observation_id",
+    "original_release_time_independently_attested",
+    "original_source_http_attestation",
+    "period_mode",
+    "producer_method_commit",
+    "producer_repository",
+    "producer_review_mode",
+    "publisher",
+    "publisher_displayed_clock",
+    "publisher_release_date",
+    "retrieval_time_attestation",
+    "reviewed_at",
+    "reviewer_identity_attestation",
+    "reviewer_type",
+    "source_bytes_length",
+    "source_bytes_sha256",
+    "source_contents_checked_against_bytes",
+    "source_independence_group",
+    "source_license_scope",
+    "source_retrieved_at",
+    "source_role",
+    "source_url",
+    "source_writes",
+    "statistical_period_end",
+    "statistical_period_start",
+    "supersedes_vintage",
+    "unit",
+    "value",
+    "verified_historical_availability_timestamp",
+    "vintage_status"
+  ],
+  "title": "PSRRO One-Shot NBS 2026-10 Manufacturing PMI (reviewer original-bytes evidence, research only)",
+  "type": "object"
+}
