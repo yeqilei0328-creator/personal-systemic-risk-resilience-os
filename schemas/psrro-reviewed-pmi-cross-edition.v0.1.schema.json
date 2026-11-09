@@ -1,0 +1,449 @@
+{
+  "$id": "https://psrro.local/schemas/psrro-reviewed-pmi-cross-edition.v0.1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Strictly limited Sept/Oct 2026 NBS original-page retrospective evidence. Not historically first-available vintages, not cross-domain cycle evidence or a recurring provider.",
+  "properties": {
+    "asof_limit": {
+      "const": "BOTH_WEBPAGES_ONLY_RETRIEVED_2026_11_09"
+    },
+    "authoritative_macro_cycle_stage": {
+      "type": "null"
+    },
+    "chain_h_causality": {
+      "const": "UNKNOWN"
+    },
+    "contract_version": {
+      "const": "psrro-reviewed-pmi-cross-edition.v0.1"
+    },
+    "counterevidence": {
+      "additionalProperties": false,
+      "properties": {
+        "interpretation": {
+          "const": "large_manufacturers_above_50_despite_aggregate_below_50"
+        },
+        "october_large_enterprises_pmi": {
+          "const": "50.2"
+        },
+        "source_index": {
+          "const": 1
+        }
+      },
+      "required": [
+        "interpretation",
+        "october_large_enterprises_pmi",
+        "source_index"
+      ],
+      "type": "object"
+    },
+    "data_grain": {
+      "const": "monthly_diffusion_index_level_percent"
+    },
+    "descriptive_deltas_pp": {
+      "additionalProperties": false,
+      "properties": {
+        "manufacturing_pmi": {
+          "const": "-0.8"
+        },
+        "new_orders": {
+          "const": "-1.1"
+        },
+        "production": {
+          "const": "-1.9"
+        }
+      },
+      "required": [
+        "manufacturing_pmi",
+        "new_orders",
+        "production"
+      ],
+      "type": "object"
+    },
+    "forecasts_created": {
+      "const": 0
+    },
+    "historical_revision_lineage": {
+      "const": "NOT_ATTESTED"
+    },
+    "metric_ids": {
+      "items": false,
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "const": "cn.pmi.manufacturing"
+        },
+        {
+          "const": "cn.pmi.new_orders"
+        }
+      ],
+      "type": "array"
+    },
+    "prior_october_g1_record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "private_or_production_writes": {
+      "const": 0
+    },
+    "producer_method_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "producer_repository": {
+      "const": "yeqilei0328-creator/personal-systemic-risk-resilience-os"
+    },
+    "product_scope": {
+      "const": "R2_G2_G3_JOINT_RETROSPECTIVE_ONE_SHOT_ONLY"
+    },
+    "review_mode": {
+      "const": "reviewed_public_sources"
+    },
+    "same_period_202609_cross_editions": {
+      "additionalProperties": false,
+      "properties": {
+        "documented_true_numeric_revision_between_editions": {
+          "const": false
+        },
+        "first_release_reported": {
+          "additionalProperties": false,
+          "properties": {
+            "new_orders": {
+              "const": "50.5"
+            },
+            "pmi": {
+              "const": "50.1"
+            },
+            "production": {
+              "const": "51.7"
+            }
+          },
+          "required": [
+            "new_orders",
+            "pmi",
+            "production"
+          ],
+          "type": "object"
+        },
+        "historical_original_release_bytes_at_publication_time_attested": {
+          "const": false
+        },
+        "later_october_reprint": {
+          "additionalProperties": false,
+          "properties": {
+            "new_orders": {
+              "const": "50.5"
+            },
+            "pmi": {
+              "const": "50.1"
+            },
+            "production": {
+              "const": "51.7"
+            }
+          },
+          "required": [
+            "new_orders",
+            "pmi",
+            "production"
+          ],
+          "type": "object"
+        },
+        "reported_values_match": {
+          "const": true
+        },
+        "status": {
+          "const": "NO_CONFLICT_VISIBLE_IN_CURRENTLY_RETRIEVED_COPIES_NOT_PROOF_OF_NO_REVISION"
+        }
+      },
+      "required": [
+        "documented_true_numeric_revision_between_editions",
+        "first_release_reported",
+        "historical_original_release_bytes_at_publication_time_attested",
+        "later_october_reprint",
+        "reported_values_match",
+        "status"
+      ],
+      "type": "object"
+    },
+    "source_fetches_by_exporter": {
+      "const": 0
+    },
+    "sources": {
+      "items": false,
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "measure": {
+              "const": "LEVEL"
+            },
+            "native_assessment_id": {
+              "pattern": "^mca-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "native_claim_id": {
+              "pattern": "^clm-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "native_event_id": {
+              "pattern": "^evt-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "native_packet_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "native_review_manifest_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "native_source_observation_id": {
+              "pattern": "^sob-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "new_orders": {
+              "const": "50.5"
+            },
+            "period": {
+              "const": "2026-09"
+            },
+            "pmi": {
+              "const": "50.1"
+            },
+            "production": {
+              "const": "51.7"
+            },
+            "publisher_displayed_release_clock": {
+              "const": "09:30"
+            },
+            "publisher_release_date": {
+              "const": "2026-09-30"
+            },
+            "reviewed_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "reviewer_type": {
+              "enum": [
+                "ai_assistant",
+                "human_operator"
+              ]
+            },
+            "source_bytes_length": {
+              "maximum": 1000000,
+              "minimum": 100,
+              "type": "integer"
+            },
+            "source_bytes_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "source_independence_group": {
+              "pattern": "^ind-nbs-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "source_retrieved_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "source_url": {
+              "const": "https://www.stats.gov.cn/zwfwck/sjfb/202609/t20260930_1965449.html"
+            },
+            "source_vintage": {
+              "const": "CURRENT_RETRIEVAL_ONLY_NOT_HISTORICAL_ORIGINAL"
+            },
+            "statistical_period_end": {
+              "const": "2026-09-30"
+            },
+            "statistical_period_start": {
+              "const": "2026-09-01"
+            },
+            "unit": {
+              "const": "percent"
+            },
+            "verified_historical_release_at": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "measure",
+            "native_assessment_id",
+            "native_claim_id",
+            "native_event_id",
+            "native_packet_sha256",
+            "native_review_manifest_sha256",
+            "native_source_observation_id",
+            "new_orders",
+            "period",
+            "pmi",
+            "production",
+            "publisher_displayed_release_clock",
+            "publisher_release_date",
+            "reviewed_at",
+            "reviewer_type",
+            "source_bytes_length",
+            "source_bytes_sha256",
+            "source_independence_group",
+            "source_retrieved_at",
+            "source_url",
+            "source_vintage",
+            "statistical_period_end",
+            "statistical_period_start",
+            "unit",
+            "verified_historical_release_at"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "measure": {
+              "const": "LEVEL"
+            },
+            "native_assessment_id": {
+              "pattern": "^mca-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "native_claim_id": {
+              "pattern": "^clm-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "native_event_id": {
+              "pattern": "^evt-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "native_packet_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "native_review_manifest_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "native_source_observation_id": {
+              "pattern": "^sob-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "new_orders": {
+              "const": "49.4"
+            },
+            "period": {
+              "const": "2026-10"
+            },
+            "pmi": {
+              "const": "49.3"
+            },
+            "production": {
+              "const": "49.8"
+            },
+            "publisher_displayed_release_clock": {
+              "const": "09:30"
+            },
+            "publisher_release_date": {
+              "const": "2026-10-31"
+            },
+            "reviewed_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "reviewer_type": {
+              "enum": [
+                "ai_assistant",
+                "human_operator"
+              ]
+            },
+            "source_bytes_length": {
+              "maximum": 1000000,
+              "minimum": 100,
+              "type": "integer"
+            },
+            "source_bytes_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "source_independence_group": {
+              "pattern": "^ind-nbs-[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "source_retrieved_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "source_url": {
+              "const": "https://www.stats.gov.cn/sj/zxfbhjd/202610/t20261031_1965718.html"
+            },
+            "source_vintage": {
+              "const": "CURRENT_RETRIEVAL_ONLY_NOT_HISTORICAL_ORIGINAL"
+            },
+            "statistical_period_end": {
+              "const": "2026-10-31"
+            },
+            "statistical_period_start": {
+              "const": "2026-10-01"
+            },
+            "unit": {
+              "const": "percent"
+            },
+            "verified_historical_release_at": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "measure",
+            "native_assessment_id",
+            "native_claim_id",
+            "native_event_id",
+            "native_packet_sha256",
+            "native_review_manifest_sha256",
+            "native_source_observation_id",
+            "new_orders",
+            "period",
+            "pmi",
+            "production",
+            "publisher_displayed_release_clock",
+            "publisher_release_date",
+            "reviewed_at",
+            "reviewer_type",
+            "source_bytes_length",
+            "source_bytes_sha256",
+            "source_independence_group",
+            "source_retrieved_at",
+            "source_url",
+            "source_vintage",
+            "statistical_period_end",
+            "statistical_period_start",
+            "unit",
+            "verified_historical_release_at"
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "array"
+    }
+  },
+  "required": [
+    "asof_limit",
+    "authoritative_macro_cycle_stage",
+    "chain_h_causality",
+    "contract_version",
+    "counterevidence",
+    "data_grain",
+    "descriptive_deltas_pp",
+    "forecasts_created",
+    "historical_revision_lineage",
+    "metric_ids",
+    "prior_october_g1_record_sha256",
+    "private_or_production_writes",
+    "producer_method_commit",
+    "producer_repository",
+    "product_scope",
+    "review_mode",
+    "same_period_202609_cross_editions",
+    "source_fetches_by_exporter",
+    "sources"
+  ],
+  "title": "PSRRO two reviewed official NBS PMI editions, one-shot current-capture evidence",
+  "type": "object"
+}
