@@ -26,7 +26,7 @@ The operator-prepared JSON must contain:
 - review_mode = reviewed_public_sources; reviewer_type = ai_assistant or human_operator; reviewed_at and review_notes;
 - event_state, claims, source_observations and material_change using existing schemas.
 
-The exporter validates full upstream schemas, event fingerprint recomputation, event/claim/source relationships, reference uniqueness, timing, public sensitivity, HTTPS source locators, source access honesty and an initial-event assessment. Unsupported or conflicting inputs fail before writing.
+The exporter validates full upstream schemas, event fingerprint recomputation, event/claim/source relationships, reference uniqueness, timing, public sensitivity, HTTPS source locators, source access honesty and an initial-event assessment. Unsupported or conflicting inputs fail before writing. Claim supersession reference-integrity is separately enforced across the packet: a superseded Claim must point to another present Claim, no cycle/self-link is permitted, and a non-superseded Claim must have a null successor. This is structural validation only, not independent verification that the superseding statement is factually true.
 
 ## Output and safety
 

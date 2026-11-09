@@ -151,6 +151,31 @@ def validate_reviewed_packet(packet: Mapping[str, Any]) -> dict[str, Any]:
         if _parse_time(claim["grade_updated_at"], "claim_grade_updated") > reviewed:
             raise ValueError("claim_grade_updated_after_review")
 
+    # Cross-record successor integrity belongs to authoritative PSRRO.
+    # Schema syntax alone cannot reject a validly shaped dangling reference.
+    # No semantic opinion about whether a historical Claim is factually true.
+    claim_by_id = {claim["claim_id"]: claim for claim in claims}
+    for claim in claims:
+        cid = claim["claim_id"]
+        successor = claim["superseded_by_claim_id"]
+        if claim["status"] != "superseded":
+            if successor is not None:
+                raise ValueError("non_superseded_claim_with_successor")
+            continue
+        if successor == cid:
+            raise ValueError("self_supersession_denied")
+        if successor not in claim_by_id:
+            raise ValueError("supersession_successor_not_in_packet")
+    for claim in claims:
+        visited: set[str] = set()
+        cursor = claim
+        while cursor["status"] == "superseded":
+            cid = cursor["claim_id"]
+            if cid in visited:
+                raise ValueError("supersession_cycle_denied")
+            visited.add(cid)
+            cursor = claim_by_id[cursor["superseded_by_claim_id"]]
+
     observation_ids: set[str] = set()
     for obs in observations:
         oid = _safe_id(obs["observation_id"], "observation_id", "sob-")

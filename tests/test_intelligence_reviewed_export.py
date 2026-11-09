@@ -148,6 +148,77 @@ class ReviewedExportTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "invalid_source_locator"):
             export_reviewed_packet(p, self.destination)
 
+    @staticmethod
+    def _with_claims(count: int) -> dict:
+        packet = fixture()
+        base_claim = packet["claims"][0]
+        base_obs = packet["source_observations"][0]
+        claims, observations = [], []
+        for index in range(count):
+            claim = copy.deepcopy(base_claim)
+            obs = copy.deepcopy(base_obs)
+            claim["claim_id"] = f"clm-reviewed-{index}"
+            obs["observation_id"] = f"sob-reviewed-{index}"
+            obs["claim_ref"] = claim["claim_id"]
+            claim["source_observation_ids"] = [obs["observation_id"]]
+            claims.append(claim)
+            observations.append(obs)
+        packet["claims"] = claims
+        packet["source_observations"] = observations
+        packet["event_state"]["claim_ids"] = [c["claim_id"] for c in claims]
+        packet["event_state"]["source_observation_ids"] = [o["observation_id"] for o in observations]
+        packet["material_change"]["changed_claim_ids"] = [c["claim_id"] for c in claims]
+        return packet
+
+    def test_superseded_claim_must_point_to_existing_claim(self):
+        p = self._with_claims(2)
+        p["claims"][0]["status"] = "superseded"
+        p["claims"][0]["superseded_by_claim_id"] = "clm-not-in-packet"
+        with self.assertRaisesRegex(ValueError, "supersession_successor_not_in_packet"):
+            export_reviewed_packet(p, self.destination)
+        self.assertFalse(self.destination.exists())
+
+    def test_superseded_claim_cannot_point_to_self(self):
+        p = self._with_claims(2)
+        p["claims"][0]["status"] = "superseded"
+        p["claims"][0]["superseded_by_claim_id"] = p["claims"][0]["claim_id"]
+        with self.assertRaisesRegex(ValueError, "self_supersession_denied"):
+            validate_reviewed_packet(p)
+
+    def test_supersession_cycle_denied(self):
+        p = self._with_claims(2)
+        for i, j in ((0, 1), (1, 0)):
+            p["claims"][i]["status"] = "superseded"
+            p["claims"][i]["superseded_by_claim_id"] = p["claims"][j]["claim_id"]
+        with self.assertRaisesRegex(ValueError, "supersession_cycle_denied"):
+            validate_reviewed_packet(p)
+
+    def test_accepted_claim_cannot_have_successor(self):
+        p = self._with_claims(2)
+        p["claims"][0]["status"] = "accepted"
+        p["claims"][0]["superseded_by_claim_id"] = p["claims"][1]["claim_id"]
+        with self.assertRaisesRegex(ValueError, "non_superseded_claim_with_successor"):
+            validate_reviewed_packet(p)
+
+    def test_valid_multi_version_chain_is_allowed(self):
+        p = self._with_claims(3)
+        for i in (0, 1):
+            p["claims"][i]["status"] = "superseded"
+            p["claims"][i]["superseded_by_claim_id"] = p["claims"][i + 1]["claim_id"]
+        p["claims"][2]["status"] = "accepted"
+        proof = validate_reviewed_packet(p)
+        self.assertEqual(proof["claim_count"], 3)
+        result = export_reviewed_packet(p, self.destination)
+        self.assertEqual(result["status"], "NATIVE_REVIEWED_EXPORTED")
+
+    def test_valid_convergent_supersession_chain_allowed(self):
+        p = self._with_claims(3)
+        for i in (0, 1):
+            p["claims"][i]["status"] = "superseded"
+            p["claims"][i]["superseded_by_claim_id"] = p["claims"][2]["claim_id"]
+        p["claims"][2]["status"] = "accepted"
+        self.assertEqual(validate_reviewed_packet(p)["claim_count"], 3)
+
     def test_reject_unknown_schema_key(self):
         p = fixture()
         p["event_state"]["unknown"] = "not allowed"
