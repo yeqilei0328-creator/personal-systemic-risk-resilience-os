@@ -1,0 +1,423 @@
+{
+  "$id": "https://psrro.local/schemas/psrro-r1-macro03-source-provenance.v0.1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "R1 PUBLIC raw official bytes and reviewed original source bundles; no generic perpetual provider or historical first-availability attestation",
+  "properties": {
+    "automatic_source_fetches_by_this_method": {
+      "const": 0
+    },
+    "contract_version": {
+      "const": "psrro-r1-macro03-source-provenance.v0.1"
+    },
+    "core_metrics": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "geography": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "historical_first_availability_timestamp_attested": {
+            "const": false
+          },
+          "indicator_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "measure": {
+            "const": "YOY"
+          },
+          "original_primary_source_url": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "original_source_bytes_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "period_mode": {
+            "enum": [
+              "MONTH",
+              "YTD"
+            ]
+          },
+          "publisher": {
+            "enum": [
+              "国家统计局",
+              "财政部"
+            ]
+          },
+          "publisher_release_date_displayed": {
+            "format": "date",
+            "type": "string"
+          },
+          "reviewed_native_claim_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "reviewed_native_event_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "reviewed_native_manifest_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "source_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "source_retrieved_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "statistical_period_end": {
+            "format": "date",
+            "type": "string"
+          },
+          "statistical_period_start": {
+            "format": "date",
+            "type": "string"
+          },
+          "unit": {
+            "const": "percent"
+          },
+          "value": {
+            "pattern": "^-?[0-9]+(?:\\.[0-9]+)?$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "geography",
+          "historical_first_availability_timestamp_attested",
+          "indicator_id",
+          "measure",
+          "original_primary_source_url",
+          "original_source_bytes_sha256",
+          "period_mode",
+          "publisher",
+          "publisher_release_date_displayed",
+          "reviewed_native_claim_id",
+          "reviewed_native_event_id",
+          "reviewed_native_manifest_sha256",
+          "source_id",
+          "source_retrieved_at",
+          "statistical_period_end",
+          "statistical_period_start",
+          "unit",
+          "value"
+        ],
+        "type": "object"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "type": "array"
+    },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "downstream_r2_acceptance": {
+          "const": "NOT_AUTO_GRANTED_FROM_R1_REVIEW"
+        },
+        "existing_separate_pmi_core_ids": {
+          "const": [
+            "cn.pmi.manufacturing",
+            "cn.pmi.new_orders"
+          ]
+        },
+        "expected_core_universe_count": {
+          "const": 12
+        },
+        "new_nine_official_primary_original_values": {
+          "const": 9
+        },
+        "not_provided_primary_id": {
+          "const": "cn.credit.afre_stock.yoy"
+        },
+        "reference_only_possible_combined_count": {
+          "const": 11
+        }
+      },
+      "required": [
+        "downstream_r2_acceptance",
+        "existing_separate_pmi_core_ids",
+        "expected_core_universe_count",
+        "new_nine_official_primary_original_values",
+        "not_provided_primary_id",
+        "reference_only_possible_combined_count"
+      ],
+      "type": "object"
+    },
+    "credit_reason": {
+      "const": "NO_VERIFIED_CURRENT_PERIOD_FIRST_PARTY_PBOC_ORIGINAL_SOURCE"
+    },
+    "current_source_versions_only_as_retrieved": {
+      "const": "2026-11-10"
+    },
+    "forecasts_created": {
+      "const": 0
+    },
+    "gdp_revision": {
+      "additionalProperties": false,
+      "properties": {
+        "final_original_page_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "final_original_url": {
+          "const": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202512/t20251226_1962144.html"
+        },
+        "final_publisher_date_displayed": {
+          "const": "2025-12-26"
+        },
+        "historical_asof_value_eligibility": {
+          "const": "BLOCKED_UNATTESTED_ONLINE_FIRST_AVAILABILITY"
+        },
+        "indicator_id": {
+          "const": "cn.gdp.annual.nominal"
+        },
+        "initial_publisher_date_displayed": {
+          "const": "2025-01-18"
+        },
+        "initial_value": {
+          "const": "1349084"
+        },
+        "measure": {
+          "const": "NOMINAL_LEVEL"
+        },
+        "not_a_pmi_revision": {
+          "const": true
+        },
+        "official_declared_revision_delta": {
+          "const": "-1018"
+        },
+        "official_final_value": {
+          "const": "1348066"
+        },
+        "original_first_release_bytes_at_historical_time_attested": {
+          "const": false
+        },
+        "preliminary_original_page_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "preliminary_original_url": {
+          "const": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202501/t20250118_1958363.html"
+        },
+        "revision_kind": {
+          "const": "OFFICIAL_PRELIMINARY_TO_FINAL_SAME_PERIOD_NUMERIC_REVISION"
+        },
+        "statistical_period_end": {
+          "const": "2024-12-31"
+        },
+        "statistical_period_start": {
+          "const": "2024-01-01"
+        },
+        "unit": {
+          "const": "亿元"
+        },
+        "verified_same_official_statistical_period": {
+          "const": true
+        }
+      },
+      "required": [
+        "final_original_page_sha256",
+        "final_original_url",
+        "final_publisher_date_displayed",
+        "historical_asof_value_eligibility",
+        "indicator_id",
+        "initial_publisher_date_displayed",
+        "initial_value",
+        "measure",
+        "not_a_pmi_revision",
+        "official_declared_revision_delta",
+        "official_final_value",
+        "original_first_release_bytes_at_historical_time_attested",
+        "preliminary_original_page_sha256",
+        "preliminary_original_url",
+        "revision_kind",
+        "statistical_period_end",
+        "statistical_period_start",
+        "unit",
+        "verified_same_official_statistical_period"
+      ],
+      "type": "object"
+    },
+    "historical_asof_backtest_authorized": {
+      "const": false
+    },
+    "new_core_metric_count": {
+      "const": 9
+    },
+    "not_verified_r1_source_indicator": {
+      "const": "cn.credit.afre_stock.yoy"
+    },
+    "official_same_period_revised_numeric_record": {
+      "const": "GOVERNMENT_2024_ANNUAL_GDP_PRELIMINARY_TO_FINAL"
+    },
+    "pmi_historical_revision_proof": {
+      "const": false
+    },
+    "private_or_production_writes": {
+      "const": 0
+    },
+    "producer_method_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "producer_repository": {
+      "const": "yeqilei0328-creator/personal-systemic-risk-resilience-os"
+    },
+    "product_scope": {
+      "const": "R1_ONE_SHOT_PUBLIC_MACRO_GAP_AND_REAL_GDP_REVISION_RESEARCH_ONLY"
+    },
+    "reviewer_identity_attestation": {
+      "const": "DECLARED_NOT_INDEPENDENTLY_ATTESTED"
+    },
+    "reviewer_type": {
+      "const": "ai_assistant"
+    },
+    "source_original_pages_acquired_once": {
+      "const": 10
+    },
+    "source_review_mode": {
+      "const": "reviewed_public_sources"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "claim_id": {
+            "maxLength": 120,
+            "minLength": 3,
+            "type": "string"
+          },
+          "event_id": {
+            "maxLength": 120,
+            "minLength": 3,
+            "type": "string"
+          },
+          "historical_source_first_seen_independently_attested": {
+            "const": false
+          },
+          "local_retrieved_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "native_manifest_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "native_packet_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "publisher": {
+            "enum": [
+              "国家统计局",
+              "财政部"
+            ]
+          },
+          "publisher_displayed_release_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "reviewer_identity_declared": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "source_bytes_length": {
+            "maximum": 1000000,
+            "minimum": 5000,
+            "type": "integer"
+          },
+          "source_file_still_exists_in_scratch": {
+            "const": true
+          },
+          "source_id": {
+            "maxLength": 120,
+            "minLength": 3,
+            "type": "string"
+          },
+          "source_independence_group": {
+            "minLength": 6,
+            "type": "string"
+          },
+          "source_observation_id": {
+            "maxLength": 120,
+            "minLength": 3,
+            "type": "string"
+          },
+          "source_original_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "source_url": {
+            "pattern": "^https://(www\\.stats\\.gov\\.cn|gks\\.mof\\.gov\\.cn)/",
+            "type": "string"
+          }
+        },
+        "required": [
+          "claim_id",
+          "event_id",
+          "historical_source_first_seen_independently_attested",
+          "local_retrieved_at",
+          "native_manifest_sha256",
+          "native_packet_sha256",
+          "publisher",
+          "publisher_displayed_release_date",
+          "reviewer_identity_declared",
+          "source_bytes_length",
+          "source_file_still_exists_in_scratch",
+          "source_id",
+          "source_independence_group",
+          "source_observation_id",
+          "source_original_sha256",
+          "source_url"
+        ],
+        "type": "object"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "type": "array"
+    },
+    "target_core_count": {
+      "const": 12
+    }
+  },
+  "required": [
+    "automatic_source_fetches_by_this_method",
+    "contract_version",
+    "core_metrics",
+    "coverage",
+    "credit_reason",
+    "current_source_versions_only_as_retrieved",
+    "forecasts_created",
+    "gdp_revision",
+    "historical_asof_backtest_authorized",
+    "new_core_metric_count",
+    "not_verified_r1_source_indicator",
+    "official_same_period_revised_numeric_record",
+    "pmi_historical_revision_proof",
+    "private_or_production_writes",
+    "producer_method_commit",
+    "producer_repository",
+    "product_scope",
+    "reviewer_identity_attestation",
+    "reviewer_type",
+    "source_original_pages_acquired_once",
+    "source_review_mode",
+    "sources",
+    "target_core_count"
+  ],
+  "title": "One-shot R1 official macro source certificate and real GDP revision",
+  "type": "object"
+}
