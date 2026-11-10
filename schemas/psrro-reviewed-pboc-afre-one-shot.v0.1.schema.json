@@ -1,0 +1,223 @@
+{
+  "$id": "https://psrro.local/schemas/psrro-reviewed-pboc-afre-one-shot.v0.1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Pinned original source SHA; not first-release archive, recurring provider or verified multi-domain cycle",
+  "properties": {
+    "actual_source_retrieved_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "afre_flow_and_stock_not_interchangeable": {
+      "const": true
+    },
+    "contract_version": {
+      "const": "psrro-reviewed-pboc-afre-stock-one-shot.v0.1"
+    },
+    "forecast_created": {
+      "const": 0
+    },
+    "historical_asof_backtesting_authorized": {
+      "const": false
+    },
+    "historical_first_availability_attested": {
+      "const": false
+    },
+    "macro_cycle_stage": {
+      "const": null
+    },
+    "native_assessment_id": {
+      "maxLength": 128,
+      "minLength": 4,
+      "type": "string"
+    },
+    "native_claim_id": {
+      "maxLength": 128,
+      "minLength": 4,
+      "type": "string"
+    },
+    "native_event_id": {
+      "maxLength": 128,
+      "minLength": 4,
+      "type": "string"
+    },
+    "native_packet_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "native_review_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "native_reviewed_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "native_source_independence_group": {
+      "const": "ind-pboc-2026-afre-stock-original"
+    },
+    "native_source_observation_id": {
+      "maxLength": 128,
+      "minLength": 4,
+      "type": "string"
+    },
+    "original_source_bytes_length": {
+      "const": 57401
+    },
+    "original_source_fetched_by_this_exporter": {
+      "const": 0
+    },
+    "original_source_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "original_source_stored_in_git": {
+      "const": false
+    },
+    "private_or_production_writes": {
+      "const": 0
+    },
+    "producer_method_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "producer_repository": {
+      "const": "yeqilei0328-creator/personal-systemic-risk-resilience-os"
+    },
+    "product_scope": {
+      "const": "R1_ONE_OFF_PUBLIC_PBOC_AFRE_202609_SOURCE_REVIEW_ONLY"
+    },
+    "psrro_causal_H": {
+      "const": "UNKNOWN"
+    },
+    "publisher_document_filename_date_hint": {
+      "const": "2026-10-14"
+    },
+    "reviewer_identity": {
+      "const": "ai_assistant"
+    },
+    "reviewer_signature_verified": {
+      "const": false
+    },
+    "source_index_url": {
+      "const": "https://www.pbc.gov.cn/diaochatongjisi/116219/116319/2026ntjsj/shrzgm/index.html"
+    },
+    "source_publisher": {
+      "const": "中国人民银行"
+    },
+    "source_review_mode": {
+      "const": "reviewed_public_sources"
+    },
+    "source_role": {
+      "const": "original_document"
+    },
+    "source_url": {
+      "const": "https://www.pbc.gov.cn/diaochatongjisi/attachDir/2026/10/2026101417444554195.htm"
+    },
+    "source_vintage": {
+      "const": "CURRENT_RETRIEVAL_ON_NOV10_ONLY"
+    },
+    "verified_metric": {
+      "additionalProperties": false,
+      "properties": {
+        "geography": {
+          "const": "CN"
+        },
+        "indicator_id": {
+          "const": "cn.credit.afre_stock.yoy"
+        },
+        "measure": {
+          "const": "YOY"
+        },
+        "october_column_nonempty": {
+          "const": false
+        },
+        "period_mode": {
+          "const": "STOCK"
+        },
+        "previous_month": {
+          "const": "2026-08"
+        },
+        "previous_month_stock": {
+          "const": "464.80"
+        },
+        "previous_month_yoy": {
+          "const": "7.2"
+        },
+        "statistical_period_end": {
+          "const": "2026-09-30"
+        },
+        "statistical_period_start": {
+          "const": "2026-09-01"
+        },
+        "stock_amount": {
+          "const": "468.17"
+        },
+        "stock_amount_unit": {
+          "const": "万亿元"
+        },
+        "unit": {
+          "const": "percent"
+        },
+        "value": {
+          "const": "7.1"
+        }
+      },
+      "required": [
+        "geography",
+        "indicator_id",
+        "measure",
+        "october_column_nonempty",
+        "period_mode",
+        "previous_month",
+        "previous_month_stock",
+        "previous_month_yoy",
+        "statistical_period_end",
+        "statistical_period_start",
+        "stock_amount",
+        "stock_amount_unit",
+        "unit",
+        "value"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "actual_source_retrieved_at",
+    "afre_flow_and_stock_not_interchangeable",
+    "contract_version",
+    "forecast_created",
+    "historical_asof_backtesting_authorized",
+    "historical_first_availability_attested",
+    "macro_cycle_stage",
+    "native_assessment_id",
+    "native_claim_id",
+    "native_event_id",
+    "native_packet_sha256",
+    "native_review_manifest_sha256",
+    "native_reviewed_at",
+    "native_source_independence_group",
+    "native_source_observation_id",
+    "original_source_bytes_length",
+    "original_source_fetched_by_this_exporter",
+    "original_source_sha256",
+    "original_source_stored_in_git",
+    "private_or_production_writes",
+    "producer_method_commit",
+    "producer_repository",
+    "product_scope",
+    "psrro_causal_H",
+    "publisher_document_filename_date_hint",
+    "reviewer_identity",
+    "reviewer_signature_verified",
+    "source_index_url",
+    "source_publisher",
+    "source_review_mode",
+    "source_role",
+    "source_url",
+    "source_vintage",
+    "verified_metric"
+  ],
+  "title": "One-shot original PBOC September 2026 AFRE stock month and 7.1 percent yoy evidence",
+  "type": "object"
+}
