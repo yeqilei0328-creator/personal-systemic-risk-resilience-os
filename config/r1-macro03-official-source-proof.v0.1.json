@@ -1,0 +1,267 @@
+{
+  "already_proven_pmi_core_ids": [
+    "cn.pmi.manufacturing",
+    "cn.pmi.new_orders"
+  ],
+  "automated_source_fetch": false,
+  "core_target_count": 12,
+  "historical_first_availability_attested": false,
+  "producer": "PSRRO_PUBLIC",
+  "schema_version": "psrro-r1-macro03-source-proof-spec.v0.1",
+  "scope": "R1_ONE_SHOT_PUBLIC_ORIGINAL_BYTES_AND_GDP_REVISION_STUDY",
+  "sources": [
+    {
+      "claimed_publisher_release_date": "2026-11-09",
+      "publication_label_required": "2026-11-09 09:30",
+      "publisher": "国家统计局",
+      "source_bytes_length": 92849,
+      "source_id": "cpi_202610",
+      "source_original_sha256": "b4ada37792505f8698b0ac14a972dfde9aff0b9f721f806d2f04f76846957ef3",
+      "title_required": "2026年10月份居民消费价格同比上涨0.7%",
+      "url": "https://www.stats.gov.cn/zwfwck/sjfb/202611/t20261109_1965795.html",
+      "values": [
+        {
+          "indicator_id": "cn.cpi.yoy",
+          "measure": "YOY",
+          "negative_claim": false,
+          "original_text_regex": "2026年10月份，全国居民消费价格同比上涨(0\\.7)%",
+          "source_id": "cpi_202610",
+          "source_original_sha256": "b4ada37792505f8698b0ac14a972dfde9aff0b9f721f806d2f04f76846957ef3",
+          "statistical_period_end": "2026-10-31",
+          "statistical_period_start": "2026-10-01",
+          "unit": "percent",
+          "value": "0.7"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2026-11-09",
+      "publication_label_required": "2026-11-09 09:30",
+      "publisher": "国家统计局",
+      "source_bytes_length": 108340,
+      "source_id": "ppi_202610",
+      "source_original_sha256": "81ecc731e9ab31c52804e11d152b20a911f425f1d24c5d043a4b329e28a47bb0",
+      "title_required": "2026年10月份工业生产者出厂价格同比上涨5.7%",
+      "url": "https://www.stats.gov.cn/zwfwck/sjfb/202611/t20261109_1965794.html",
+      "values": [
+        {
+          "indicator_id": "cn.ppi.yoy",
+          "measure": "YOY",
+          "negative_claim": false,
+          "original_text_regex": "2026年10月份，全国工业生产者出厂价格同比上涨(5\\.7)%",
+          "source_id": "ppi_202610",
+          "source_original_sha256": "81ecc731e9ab31c52804e11d152b20a911f425f1d24c5d043a4b329e28a47bb0",
+          "statistical_period_end": "2026-10-31",
+          "statistical_period_start": "2026-10-01",
+          "unit": "percent",
+          "value": "5.7"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2026-10-19",
+      "publication_label_required": "2026-10-19 10:00",
+      "publisher": "国家统计局",
+      "source_bytes_length": 178152,
+      "source_id": "industrial_202609",
+      "source_original_sha256": "417efdbb5829bac8f8b92794ed3c9e375a536c7d580f549f80d8c227e2cb81ad",
+      "title_required": "2026年9月份规模以上工业增加值增长5.5%",
+      "url": "https://www.stats.gov.cn/zwfwck/sjfb/202610/t20261019_1965617.html",
+      "values": [
+        {
+          "indicator_id": "cn.industrial.va.yoy",
+          "measure": "YOY",
+          "negative_claim": false,
+          "original_text_regex": "9月份，规模以上工业增加值同比实际增长(5\\.5)%",
+          "source_id": "industrial_202609",
+          "source_original_sha256": "417efdbb5829bac8f8b92794ed3c9e375a536c7d580f549f80d8c227e2cb81ad",
+          "statistical_period_end": "2026-09-30",
+          "statistical_period_start": "2026-09-01",
+          "unit": "percent",
+          "value": "5.5"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2026-10-19",
+      "publication_label_required": "2026/10/19 10:00",
+      "publisher": "国家统计局",
+      "source_bytes_length": 246685,
+      "source_id": "retail_202609",
+      "source_original_sha256": "b27d0c8aa542541828c90f42953d0e2011eeb4e7552671f15aa1ada6202cb5b6",
+      "title_required": "2026年1—9月份社会消费品零售总额增长1.1%",
+      "url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261019_1965614.html",
+      "values": [
+        {
+          "indicator_id": "cn.retail.sales.yoy",
+          "measure": "YOY",
+          "negative_claim": false,
+          "original_text_regex": "9月份，社会消费品零售总额42433亿元，同比增长(1\\.1)%",
+          "source_id": "retail_202609",
+          "source_original_sha256": "b27d0c8aa542541828c90f42953d0e2011eeb4e7552671f15aa1ada6202cb5b6",
+          "statistical_period_end": "2026-09-30",
+          "statistical_period_start": "2026-09-01",
+          "unit": "percent",
+          "value": "1.1"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2026-10-19",
+      "publication_label_required": "2026/10/19 10:00",
+      "publisher": "国家统计局",
+      "source_bytes_length": 190726,
+      "source_id": "fai_2026ytd09",
+      "source_original_sha256": "37c4728269674ef5fb95696b58f94cadea66564ffa4e6baa7747bec71936205c",
+      "title_required": "2026年1—9月份全国固定资产投资基本情况",
+      "url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261019_1965616.html",
+      "values": [
+        {
+          "indicator_id": "cn.fai.ytd.yoy",
+          "measure": "YOY",
+          "negative_claim": true,
+          "original_text_regex": "1—9月份，全国固定资产投资（不含农户）334115亿元，同比下降(7\\.2)%",
+          "source_id": "fai_2026ytd09",
+          "source_original_sha256": "37c4728269674ef5fb95696b58f94cadea66564ffa4e6baa7747bec71936205c",
+          "statistical_period_end": "2026-09-30",
+          "statistical_period_start": "2026-01-01",
+          "unit": "percent",
+          "value": "-7.2"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2026-10-19",
+      "publication_label_required": "2026/10/19 10:00",
+      "publisher": "国家统计局",
+      "source_bytes_length": 250668,
+      "source_id": "realestate_2026ytd09",
+      "source_original_sha256": "af1856da1c5eaa7713800a0a1b88f91df1e546702cfc8a5d99e1008887015b8c",
+      "title_required": "2026年1—9月份全国房地产市场基本情况",
+      "url": "https://www.stats.gov.cn/sj/zxfbhjd/202610/t20261019_1965615.html",
+      "values": [
+        {
+          "indicator_id": "cn.realestate.investment.ytd.yoy",
+          "measure": "YOY",
+          "negative_claim": true,
+          "original_text_regex": "1—9月份，全国房地产开发投资53364亿元，同比下降(20\\.6)%",
+          "source_id": "realestate_2026ytd09",
+          "source_original_sha256": "af1856da1c5eaa7713800a0a1b88f91df1e546702cfc8a5d99e1008887015b8c",
+          "statistical_period_end": "2026-09-30",
+          "statistical_period_start": "2026-01-01",
+          "unit": "percent",
+          "value": "-20.6"
+        },
+        {
+          "indicator_id": "cn.realestate.sales_area.ytd.yoy",
+          "measure": "YOY",
+          "negative_claim": true,
+          "original_text_regex": "1—9月份，新建商品房销售面积56483万平方米，同比下降(13\\.2)%",
+          "source_id": "realestate_2026ytd09",
+          "source_original_sha256": "af1856da1c5eaa7713800a0a1b88f91df1e546702cfc8a5d99e1008887015b8c",
+          "statistical_period_end": "2026-09-30",
+          "statistical_period_start": "2026-01-01",
+          "unit": "percent",
+          "value": "-13.2"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2026-10-27",
+      "publication_label_required": "2026-10-27 09:30",
+      "publisher": "国家统计局",
+      "source_bytes_length": 223321,
+      "source_id": "industrial_profit_2026ytd09",
+      "source_original_sha256": "4e9c80ff0c5e6e7d6d7b4acf08bdb64f5f3f8d9462e48cc5d1d603ce9c5b6b35",
+      "title_required": "2026年1—9月份全国规模以上工业企业利润增长15.5%",
+      "url": "https://www.stats.gov.cn/zwfwck/sjfb/202610/t20261027_1965697.html",
+      "values": [
+        {
+          "indicator_id": "cn.industrial.profit.ytd.yoy",
+          "measure": "YOY",
+          "negative_claim": false,
+          "original_text_regex": "1—9月份，全国规模以上工业企业实现利润总额60337\\.4亿元，同比增长(15\\.5)%",
+          "source_id": "industrial_profit_2026ytd09",
+          "source_original_sha256": "4e9c80ff0c5e6e7d6d7b4acf08bdb64f5f3f8d9462e48cc5d1d603ce9c5b6b35",
+          "statistical_period_end": "2026-09-30",
+          "statistical_period_start": "2026-01-01",
+          "unit": "percent",
+          "value": "15.5"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2026-10-23",
+      "publication_label_required": "2026年10月23日",
+      "publisher": "财政部",
+      "source_bytes_length": 33909,
+      "source_id": "land_revenue_2026ytd09",
+      "source_original_sha256": "31e896382ce7ffc5ec4b31a43a4dc2b4b9fe616d8909247ddae489dcd8598b03",
+      "title_required": "2026年前三季度财政收支情况",
+      "url": "https://gks.mof.gov.cn/tongjishuju/202610/t20261023_4003380.htm",
+      "values": [
+        {
+          "indicator_id": "cn.fiscal.land_use_revenue.ytd.yoy",
+          "measure": "YOY",
+          "negative_claim": true,
+          "original_text_regex": "国有土地使用权出让收入16087亿元，同比下降(27\\.9)%",
+          "source_id": "land_revenue_2026ytd09",
+          "source_original_sha256": "31e896382ce7ffc5ec4b31a43a4dc2b4b9fe616d8909247ddae489dcd8598b03",
+          "statistical_period_end": "2026-09-30",
+          "statistical_period_start": "2026-01-01",
+          "unit": "percent",
+          "value": "-27.9"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2025-01-18",
+      "publication_label_required": "成文日期2025年01月18日",
+      "publisher": "国家统计局",
+      "source_bytes_length": 123341,
+      "source_id": "gdp2024_initial",
+      "source_original_sha256": "3313c8e100e9b7cc7ae9bea838e2148b6bdd13b8317f9e14ad01340d8b1e95dc",
+      "title_required": "2024年四季度和全年国内生产总值初步核算结果",
+      "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202501/t20250118_1958363.html",
+      "values": [
+        {
+          "indicator_id": "cn.gdp.annual.nominal",
+          "measure": "NOMINAL_LEVEL",
+          "negative_claim": false,
+          "original_text_regex": "GDP 373726 (1349084) 5\\.4 5\\.0",
+          "source_id": "gdp2024_initial",
+          "source_original_sha256": "3313c8e100e9b7cc7ae9bea838e2148b6bdd13b8317f9e14ad01340d8b1e95dc",
+          "statistical_period_end": "2024-12-31",
+          "statistical_period_start": "2024-01-01",
+          "unit": "亿元",
+          "value": "1349084"
+        }
+      ]
+    },
+    {
+      "claimed_publisher_release_date": "2025-12-26",
+      "publication_label_required": "成文日期2025年12月26日",
+      "publisher": "国家统计局",
+      "source_bytes_length": 69858,
+      "source_id": "gdp2024_final",
+      "source_original_sha256": "b6b6b5c74b9e044818a92eb3eec356fbcd9215c9649f760db9b91eb2a282233e",
+      "title_required": "国家统计局关于2024年国内生产总值最终核实的公告",
+      "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202512/t20251226_1962144.html",
+      "values": [
+        {
+          "indicator_id": "cn.gdp.annual.nominal",
+          "measure": "NOMINAL_LEVEL",
+          "negative_claim": false,
+          "original_text_regex": "GDP现价总量为(1348066)亿元，比初步核算数减少1018亿元",
+          "source_id": "gdp2024_final",
+          "source_original_sha256": "b6b6b5c74b9e044818a92eb3eec356fbcd9215c9649f760db9b91eb2a282233e",
+          "statistical_period_end": "2024-12-31",
+          "statistical_period_start": "2024-01-01",
+          "unit": "亿元",
+          "value": "1348066"
+        }
+      ]
+    }
+  ],
+  "unverified_credit_core_id": "cn.credit.afre_stock.yoy"
+}
